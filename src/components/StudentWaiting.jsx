@@ -124,24 +124,22 @@ function StudentWaiting({ participant, room, onLeave, supabase }) {
           {/* Link personal para volver */}
           <div className="personal-link-section">
             <p className="personal-link-title">🔗 Guarda este link para volver después:</p>
-            <div className="personal-link-box">
-              <input 
-                type="text" 
-                value={`${window.location.origin}?p=${participant.id}`}
-                readOnly
-                className="personal-link-input"
-                onClick={(e) => e.target.select()}
-              />
-              <button 
-                className="copy-link-btn"
-                onClick={() => {
-                  navigator.clipboard.writeText(`${window.location.origin}?p=${participant.id}`)
-                  alert('¡Link copiado! Guárdalo para volver después')
-                }}
-              >
-                📋 Copiar
-              </button>
-            </div>
+            <input 
+              type="text" 
+              value={`${window.location.origin}?p=${participant.id}`}
+              readOnly
+              className="personal-link-input"
+              onClick={(e) => e.target.select()}
+            />
+            <button 
+              className="copy-link-btn"
+              onClick={() => {
+                navigator.clipboard.writeText(`${window.location.origin}?p=${participant.id}`)
+                alert('¡Link copiado! Guárdalo para volver después')
+              }}
+            >
+              📋 Copiar link
+            </button>
             <small className="personal-link-hint">
               Con este link podrás ver tu resultado cuando quieras
             </small>

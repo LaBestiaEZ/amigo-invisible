@@ -143,14 +143,8 @@
   font-size: 0.95em;
 }
 
-.personal-link-box {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
 .personal-link-input {
-  flex: 1;
+  width: 100%;
   padding: 12px;
   border: 2px solid #667eea;
   border-radius: 8px;
@@ -158,6 +152,8 @@
   font-family: 'Courier New', monospace;
   background: white;
   color: #333;
+  margin-bottom: 10px;
+  box-sizing: border-box;
 }
 
 .personal-link-input:focus {
@@ -167,6 +163,7 @@
 }
 
 .copy-link-btn {
+  width: 100%;
   background: #667eea;
   color: white;
   border: none;
@@ -175,7 +172,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s;
-  white-space: nowrap;
+  font-size: 1em;
 }
 
 .copy-link-btn:hover {
@@ -193,7 +190,7 @@
   color: #666;
   font-size: 0.85em;
   text-align: center;
-  margin-top: 5px;
+  margin-top: 10px;
 }
 
 .waiting-message, .drawing-message, .completed-message {
