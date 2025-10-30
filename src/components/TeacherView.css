@@ -184,6 +184,39 @@
   align-items: center;
   gap: 10px;
   animation: avatarSlideIn 0.3s ease-out;
+  position: relative;
+}
+
+/* Botón para eliminar participante */
+.remove-participant-btn {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #ff4444;
+  color: white;
+  border: 2px solid white;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(255, 68, 68, 0.4);
+}
+
+.remove-participant-btn:hover {
+  background: #cc0000;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(255, 68, 68, 0.6);
+}
+
+.remove-participant-btn:active {
+  transform: scale(0.95);
 }
 
 @keyframes avatarSlideIn {

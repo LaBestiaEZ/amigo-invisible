@@ -333,6 +333,26 @@ function App() {
     }
   }
 
+  const removeParticipant = async (participantId) => {
+    try {
+      // Eliminar participante de la base de datos
+      const { error } = await supabase
+        .from('room_participants')
+        .delete()
+        .eq('id', participantId)
+
+      if (error) throw error
+
+      // Recargar lista de participantes
+      await loadParticipants(currentRoom.id)
+      
+      console.log('✅ Participante eliminado correctamente')
+    } catch (error) {
+      console.error('❌ Error eliminando participante:', error)
+      throw error
+    }
+  }
+
   const performDraw = async () => {
     if (participants.length < 2) {
       alert('Se necesitan al menos 2 participantes')
@@ -553,6 +573,7 @@ VITE_SUPABASE_ANON_KEY=tu-clave-anon-key
           onStartDraw={performDraw}
           onGoBack={goBack}
           onViewResults={handleViewResults}
+          onRemoveParticipant={removeParticipant}
         />
       )}
 

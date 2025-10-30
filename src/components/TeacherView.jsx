@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { QRCodeSVG } from 'qrcode.react'
 import './TeacherView.css'
 
-function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults }) {
+function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults, onRemoveParticipant }) {
   const [roomUrl, setRoomUrl] = useState('')
   const [showResults, setShowResults] = useState(false)
 
@@ -11,6 +11,25 @@ function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults 
     const url = `${window.location.origin}?code=${room.code}`
     setRoomUrl(url)
   }, [room.code])
+
+  const handleRemoveParticipant = async (participant) => {
+    if (room.status !== 'waiting') {
+      alert('No se pueden expulsar participantes después del sorteo')
+      return
+    }
+
+    const confirmRemove = window.confirm(
+      `¿Expulsar a ${participant.name}?\n\nPodrá volver a unirse si quiere.`
+    )
+
+    if (confirmRemove) {
+      try {
+        await onRemoveParticipant(participant.id)
+      } catch (error) {
+        alert('Error al expulsar: ' + error.message)
+      }
+    }
+  }
 
   // Función para ocultar parcialmente el email
   const maskEmail = (email) => {
@@ -100,6 +119,15 @@ function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults 
               <div className="avatars-grid">
                 {participants.map((participant, index) => (
                   <div key={participant.id} className="avatar-card">
+                    {room.status === 'waiting' && (
+                      <button
+                        className="remove-participant-btn"
+                        onClick={() => handleRemoveParticipant(participant)}
+                        title={`Expulsar a ${participant.name}`}
+                      >
+                        ✕
+                      </button>
+                    )}
                     <div 
                       className="avatar-circle"
                       style={{ backgroundColor: getAvatarColor(participant.name, index) }}
