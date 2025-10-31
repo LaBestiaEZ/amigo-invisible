@@ -1,13 +1,10 @@
 .teacher-auth {
   min-height: 100vh;
-  min-height: -webkit-fill-available;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px;
-  padding-top: max(10px, env(safe-area-inset-top, 0px));
-  padding-bottom: max(10px, env(safe-area-inset-bottom, 0px));
+  padding: 20px;
 }
 
 .auth-container {

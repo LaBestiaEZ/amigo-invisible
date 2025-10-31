@@ -17,38 +17,18 @@
 
 html {
   height: 100%;
-  height: -webkit-fill-available;
-  /* Background que coincide con el gradiente para evitar franjas en iOS */
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  /* Asegurar que el fondo cubra toda el área incluyendo notch */
-  background-attachment: fixed;
-  background-size: cover;
-}
-
-/* En modo oscuro, cambiar el gradiente del html también */
-@media (prefers-color-scheme: dark) {
-  html:not(.force-light) {
-    background: #2d3748;
-  }
-}
-
-html.dark-mode {
-  background: #2d3748;
 }
 
 body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  min-height: -webkit-fill-available;
   color: var(--text-primary);
-  background-color: transparent;
+  background-color: var(--bg-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
-  overflow-x: hidden;
 }
 
 #root {
   min-height: 100vh;
-  min-height: -webkit-fill-available;
-  background-color: transparent;
+  background-color: var(--bg-primary);
 }
