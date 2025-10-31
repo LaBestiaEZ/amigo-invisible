@@ -7,6 +7,13 @@
   padding: 20px;
 }
 
+/* En móviles, ocupar más altura */
+@media (max-width: 768px) {
+  .student-waiting {
+    min-height: 105vh;
+  }
+}
+
 .waiting-container {
   max-width: 600px;
   width: 100%;
