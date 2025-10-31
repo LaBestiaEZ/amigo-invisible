@@ -3,13 +3,20 @@
 @tailwind utilities;
 
 @layer base {
+  /* Ayuda a Safari a usar colores adecuados para barras/UI */
+  html { color-scheme: light dark; }
+
   html {
     height: 100%;
+    /* Color sólido de fondo para evitar destellos/blancos en iOS Safari */
+    background-color: #0f172a;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   }
 
   body {
     min-height: 100vh;
+    /* Fondo sólido también en body para overscroll/elastic scroll en iOS */
+    background-color: #0f172a;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.5;
   }
