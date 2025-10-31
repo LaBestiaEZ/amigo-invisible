@@ -11,7 +11,9 @@
   .teacher-view,
   .teacher-auth,
   .teacher-dashboard {
-    min-height: 140vh;
+    min-height: 100vh;
+    padding-top: max(15px, env(safe-area-inset-top));
+    padding-bottom: max(15px, env(safe-area-inset-bottom));
   }
 
   /* Reducir padding en móviles para aprovechar espacio */
@@ -19,11 +21,13 @@
   .student-view,
   .student-waiting,
   .teacher-auth {
-    padding: 15px;
+    padding-left: max(15px, env(safe-area-inset-left));
+    padding-right: max(15px, env(safe-area-inset-right));
   }
 
   .teacher-view {
-    padding: 15px;
+    padding-left: max(15px, env(safe-area-inset-left));
+    padding-right: max(15px, env(safe-area-inset-right));
   }
 
   /* Ajustes para contenedores */
@@ -46,7 +50,7 @@
     width: 45px;
     height: 45px;
     font-size: 1.3em;
-    top: 15px;
-    right: 15px;
+    top: max(15px, env(safe-area-inset-top));
+    right: max(15px, env(safe-area-inset-right));
   }
 }
