@@ -1,6 +1,5 @@
 .teacher-dashboard {
   min-height: 100vh;
-  min-height: -webkit-fill-available;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
