@@ -1,6 +1,22 @@
 # 📁 Estructura de Estilos CSS
 
+## Orden de Importación (main.jsx)
+
+1. `reset.css` - Reset CSS completo
+2. `index.css` - Estilos base
+3. `dark-mode.css` - Variables de color
+4. `dark-mode-overrides.css` - Overrides dark mode
+5. `common-layouts.css` - Layouts reutilizables
+6. `mobile-adjustments.css` - Ajustes móviles
+7. `landscape.css` - Orientación horizontal
+
 ## Archivos Globales (en `src/`)
+
+### `reset.css` ⭐ NUEVO
+- Reset CSS completo y moderno
+- Box-sizing, márgenes, padding
+- Estilos de formularios, imágenes, listas
+- Cross-browser consistency
 
 ### `index.css`
 - Reset básico y estilos base

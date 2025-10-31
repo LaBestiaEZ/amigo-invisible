@@ -1,5 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import './reset.css'
 import './index.css'
 import './dark-mode.css'
 import './dark-mode-overrides.css'
