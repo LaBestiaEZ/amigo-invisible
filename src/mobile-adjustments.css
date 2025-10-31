@@ -11,7 +11,7 @@
   .teacher-view,
   .teacher-auth,
   .teacher-dashboard {
-    min-height: 105vh;
+    min-height: 140vh;
   }
 
   /* Reducir padding en móviles para aprovechar espacio */
