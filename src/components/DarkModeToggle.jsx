@@ -34,9 +34,9 @@ function DarkModeToggle() {
 
   return (
     <button 
-      className="fixed top-4 right-4 z-[9999] bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm text-gray-800 dark:text-white p-3 rounded-full shadow-lg hover:shadow-xl hover:scale-110 active:scale-95 transition-all duration-300 border-2 border-gray-200 dark:border-gray-700" 
+      className="fixed bottom-4 right-4 z-[9999] bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm text-gray-800 dark:text-white p-3 rounded-full shadow-lg hover:shadow-xl hover:scale-110 active:scale-95 transition-all duration-300 border-2 border-gray-200 dark:border-gray-700" 
       style={{
-        top: 'max(1rem, env(safe-area-inset-top))',
+        bottom: 'max(1rem, env(safe-area-inset-bottom))',
         right: 'max(1rem, env(safe-area-inset-right))'
       }}
       onClick={toggleDarkMode}
