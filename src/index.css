@@ -1,96 +1,190 @@
-@tailwind base;/* ============================================
+@tailwind base;@tailwind base;/* ============================================
 
-@tailwind components;   🎨 BASE STYLES
+@tailwind components;
 
-@tailwind utilities;   Estilos base después del reset
+@tailwind utilities;@tailwind components;   🎨 BASE STYLES
 
-   ============================================ */
 
-/* Custom CSS mínimo para safe areas de iOS */
 
-@layer base {:root {
+/* Custom CSS mínimo para safe areas de iOS */@tailwind utilities;   Estilos base después del reset
 
-  html {  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+@layer base {
 
-    height: 100%;  line-height: 1.5;
+  html {   ============================================ */
 
-    @apply bg-gradient-to-br from-[#667eea] to-[#764ba2];  font-weight: 400;
+    height: 100%;
+
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);/* Custom CSS mínimo para safe areas de iOS */
 
   }
 
-  font-synthesis: none;
+@layer base {:root {
 
-  body {  text-rendering: optimizeLegibility;
+  body {
 
-    min-height: 100vh;  -webkit-font-smoothing: antialiased;
+    min-height: 100vh;  html {  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+
+  }
+
+    height: 100%;  line-height: 1.5;
+
+  /* Fondo para safe areas de iOS */
+
+  body::before {    @apply bg-gradient-to-br from-[#667eea] to-[#764ba2];  font-weight: 400;
+
+    content: "";
+
+    position: fixed;  }
+
+    top: 0;
+
+    left: 0;  font-synthesis: none;
+
+    right: 0;
+
+    bottom: 0;  body {  text-rendering: optimizeLegibility;
+
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+    z-index: -50;    min-height: 100vh;  -webkit-font-smoothing: antialiased;
+
+  }
 
     @apply text-gray-900 dark:text-gray-100;  -moz-osx-font-smoothing: grayscale;
 
-  }}
+  /* Dark mode body background */
 
+  .dark body::before {  }}
 
+    background: #1a202c;
+
+  }
+
+}
 
   /* Fondo para safe areas de iOS */html {
 
-  body::before {  height: 100%;
+/* Componentes reutilizables */
 
-    content: "";  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+@layer components {  body::before {  height: 100%;
+
+  .gradient-page {
+
+    @apply min-h-screen bg-gradient-to-br from-[#667eea] to-[#764ba2] flex items-center justify-center p-5;    content: "";  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+  }
 
     position: fixed;  background-attachment: fixed;
 
-    top: 0;}
+  .card-white {
+
+    @apply bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-10 animate-fade-in;    top: 0;}
+
+  }
 
     left: 0;
 
-    right: 0;/* Pseudo-elemento para forzar el fondo detrás de las safe areas de iOS */
+  .btn-primary {
 
-    bottom: 0;body::before {
+    @apply bg-[#667eea] hover:bg-[#5a6fd1] text-white font-semibold py-3 px-6 rounded-lg     right: 0;/* Pseudo-elemento para forzar el fondo detrás de las safe areas de iOS */
 
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);  content: "";
+           transition-all duration-300 hover:scale-105 active:scale-95;
 
-    z-index: -50;  position: fixed;
+  }    bottom: 0;body::before {
+
+
+
+  .btn-secondary {    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);  content: "";
+
+    @apply bg-[#764ba2] hover:bg-[#64408a] text-white font-semibold py-3 px-6 rounded-lg 
+
+           transition-all duration-300 hover:scale-105 active:scale-95;    z-index: -50;  position: fixed;
+
+  }
 
   }  top: 0;
 
-  left: 0;
+  .btn-danger {
 
-  /* Dark mode body background */  right: 0;
+    @apply bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-lg   left: 0;
 
-  .dark body::before {  bottom: 0;
+           transition-all duration-300 hover:scale-105 active:scale-95;
 
-    background: #1a202c;  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }  /* Dark mode body background */  right: 0;
+
+
+
+  .btn-success {  .dark body::before {  bottom: 0;
+
+    @apply bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg 
+
+           transition-all duration-300 hover:scale-105 active:scale-95;    background: #1a202c;  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+  }
 
   }  z-index: -9999;
 
-}}
+  .input-field {
 
+    @apply w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg }}
 
+           bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400
+
+           focus:outline-none focus:border-[#667eea] focus:ring-2 focus:ring-[#667eea]/20 transition-all;
+
+  }
 
 /* Componentes reutilizables */body {
 
-@layer components {  margin: 0;
+  @keyframes fade-in {
 
-  .gradient-page {  padding: 0;
+    from {@layer components {  margin: 0;
 
-    min-height: 100vh;  min-height: 100vh;
+      opacity: 0;
 
-    @apply bg-gradient-to-br from-[#667eea] to-[#764ba2] flex items-center justify-center p-5;  color: var(--text-primary);
+      transform: translateY(20px);  .gradient-page {  padding: 0;
 
-  }  background-color: transparent;
+    }
 
-  transition: background-color 0.3s ease, color 0.3s ease;
+    to {    min-height: 100vh;  min-height: 100vh;
 
-  .card-white {}
+      opacity: 1;
+
+      transform: translateY(0);    @apply bg-gradient-to-br from-[#667eea] to-[#764ba2] flex items-center justify-center p-5;  color: var(--text-primary);
+
+    }
+
+  }  }  background-color: transparent;
+
+
+
+  .animate-fade-in {  transition: background-color 0.3s ease, color 0.3s ease;
+
+    animation: fade-in 0.4s ease-out;
+
+  }  .card-white {}
+
+}
 
     @apply bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-10 animate-fade-in;
 
-  }#root {
+/* Utilidades para safe areas móviles */
 
-  min-height: 100vh;
+@layer utilities {  }#root {
 
-  .btn-primary {  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  .safe-area-padding {
 
-    @apply bg-[#667eea] hover:bg-[#5a6fd1] text-white font-semibold py-3 px-6 rounded-lg   position: relative;
+    padding-top: max(1.25rem, env(safe-area-inset-top));  min-height: 100vh;
+
+    padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+
+    padding-left: max(1.25rem, env(safe-area-inset-left));  .btn-primary {  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+    padding-right: max(1.25rem, env(safe-area-inset-right));
+
+  }    @apply bg-[#667eea] hover:bg-[#5a6fd1] text-white font-semibold py-3 px-6 rounded-lg   position: relative;
+
+}
 
            transition-all duration-300 hover:scale-105 active:scale-95;  z-index: 1;
 
