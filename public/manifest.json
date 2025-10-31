@@ -4,12 +4,9 @@
   "description": "Aplicación de Amigo Invisible estilo Kahoot para institutos",
   "start_url": "/",
   "display": "standalone",
-  "display_override": ["fullscreen", "standalone"],
   "background_color": "#667eea",
   "theme_color": "#667eea",
   "orientation": "portrait-primary",
-  "scope": "/",
-  "prefer_related_applications": false,
   "icons": [
     {
       "src": "/icon-192.png",

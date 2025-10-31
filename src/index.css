@@ -3,38 +3,15 @@
 @tailwind utilities;
 
 @layer base {
-  /* Reset para evitar conflictos con safe areas */
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
   html {
     height: 100%;
-    /* Altura ajustada para navegadores móviles */
-    height: -webkit-fill-available;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    /* Prevenir scroll bounce en iOS */
-    overscroll-behavior: none;
-    -webkit-overflow-scrolling: touch;
   }
 
   body {
     min-height: 100vh;
-    min-height: -webkit-fill-available;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.5;
-    /* Prevenir selección no deseada en iOS */
-    -webkit-user-select: none;
-    user-select: none;
-    -webkit-touch-callout: none;
-  }
-  
-  /* Permitir selección en inputs y textos específicos */
-  input, textarea, [contenteditable] {
-    -webkit-user-select: text;
-    user-select: text;
   }
 
   body::before {
@@ -46,21 +23,10 @@
     bottom: 0;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     z-index: -1;
-    /* Cubrir toda la pantalla incluyendo safe areas */
-    padding: 0;
-    margin: 0;
   }
 
   .dark body::before {
-    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-  }
-  
-  /* Root container ajustado para Dynamic Island */
-  #root {
-    min-height: 100vh;
-    min-height: -webkit-fill-available;
-    width: 100%;
-    position: relative;
+    background: #1a202c;
   }
 }
 
@@ -106,33 +72,10 @@
 }
 
 @layer utilities {
-  /* Safe areas para iPhone con Dynamic Island */
   .safe-area-padding {
     padding-top: max(1rem, env(safe-area-inset-top));
     padding-bottom: max(1rem, env(safe-area-inset-bottom));
     padding-left: max(1rem, env(safe-area-inset-left));
     padding-right: max(1rem, env(safe-area-inset-right));
-  }
-  
-  /* Safe area solo arriba (para headers) */
-  .safe-area-top {
-    padding-top: env(safe-area-inset-top);
-  }
-  
-  /* Safe area solo abajo (para footers/botones fijos) */
-  .safe-area-bottom {
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-  
-  /* Altura completa respetando safe areas */
-  .min-h-screen-safe {
-    min-height: 100vh;
-    min-height: -webkit-fill-available;
-    min-height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
-  }
-  
-  /* Prevenir zoom en inputs en iOS */
-  .no-zoom {
-    font-size: 16px !important;
   }
 }
