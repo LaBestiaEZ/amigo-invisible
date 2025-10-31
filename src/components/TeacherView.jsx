@@ -74,44 +74,50 @@ function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults,
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-500 to-purple-700 dark:from-gray-900 dark:to-gray-800 safe-area-padding">
-      {/* Header */}
+      {/* Header: Título + Botón Atrás */}
       <div className="bg-white dark:bg-gray-800 shadow-md">
-        <div className="max-w-7xl mx-auto px-4 py-4">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-800 dark:text-white">{room.name}</h1>
+            <p className="text-sm text-gray-600 dark:text-gray-400">Profesor: {room.teacher_name}</p>
+          </div>
           <button 
             onClick={onGoBack}
-            className="mb-2 px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg font-medium transition-colors"
+            className="px-6 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg font-medium transition-colors shadow-md hover:shadow-lg"
           >
-            ← Salir
+            ← Atrás
           </button>
-          <h1 className="text-2xl font-bold text-gray-800 dark:text-white">{room.name}</h1>
-          <p className="text-sm text-gray-600 dark:text-gray-400">Profesor: {room.teacher_name}</p>
         </div>
       </div>
 
       {/* Content */}
-      <div className="max-w-7xl mx-auto px-4 py-8 grid lg:grid-cols-2 gap-6">
-        {/* Join Panel */}
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
-          <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-4">Los estudiantes pueden unirse con:</h2>
+      <div className="max-w-7xl mx-auto px-4 py-8 space-y-6">
+        {/* QR Panel - Ancho completo */}
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 text-center">Los estudiantes pueden unirse</h2>
           
-          {/* Code Display */}
-          <div className="mb-6 p-4 bg-purple-50 dark:bg-purple-900/20 border-2 border-purple-300 dark:border-purple-700 rounded-lg">
-            <p className="text-sm font-medium text-purple-700 dark:text-purple-300 mb-2">Código de sala:</p>
-            <p className="text-4xl font-bold text-purple-600 dark:text-purple-400 tracking-wider font-mono">{room.code}</p>
-          </div>
-
-          {/* QR Code */}
-          <div className="text-center">
-            <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">O escanear este QR:</h3>
-            <div className="inline-block p-4 bg-white dark:bg-gray-700 rounded-xl shadow-md">
-              <QRCodeSVG 
-                value={roomUrl} 
-                size={200}
-                level="H"
-                includeMargin={true}
-              />
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            {/* Code Display */}
+            <div className="text-center md:text-left">
+              <p className="text-lg font-semibold text-purple-700 dark:text-purple-300 mb-3">Código de sala:</p>
+              <div className="p-6 bg-purple-50 dark:bg-purple-900/20 border-2 border-purple-300 dark:border-purple-700 rounded-xl">
+                <p className="text-5xl md:text-6xl font-bold text-purple-600 dark:text-purple-400 tracking-wider font-mono">{room.code}</p>
+              </div>
             </div>
-            <p className="mt-3 text-xs text-gray-500 dark:text-gray-400 break-all">{roomUrl}</p>
+
+            {/* QR Code */}
+            <div className="text-center">
+              <p className="text-lg font-semibold text-gray-800 dark:text-white mb-4">O escanear este QR:</p>
+              <div className="inline-block p-6 bg-white dark:bg-gray-700 rounded-xl shadow-lg">
+                <QRCodeSVG 
+                  value={roomUrl} 
+                  size={220}
+                  level="H"
+                  includeMargin={true}
+                />
+              </div>
+              <p className="mt-3 text-xs text-gray-500 dark:text-gray-400 break-all px-4">{roomUrl}</p>
+            </div>
           </div>
         </div>
 
