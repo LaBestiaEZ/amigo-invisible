@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './StudentView.css'
+import { HapticFeedback } from '../lib/haptic'
 
 function StudentView({ onJoinRoom, initialCode = '' }) {
   const [code, setCode] = useState(initialCode)
@@ -12,6 +13,7 @@ function StudentView({ onJoinRoom, initialCode = '' }) {
   const handleCodeSubmit = (e) => {
     e.preventDefault()
     if (code.trim()) {
+      HapticFeedback.light()
       setStep('form')
       setError('')
     }
@@ -21,10 +23,13 @@ function StudentView({ onJoinRoom, initialCode = '' }) {
     e.preventDefault()
     setLoading(true)
     setError('')
+    HapticFeedback.medium()
 
     try {
       await onJoinRoom(code.toUpperCase(), name.trim(), email.trim())
+      HapticFeedback.success()
     } catch (err) {
+      HapticFeedback.error()
       setError(err.message || 'Error al unirse a la sala')
       setLoading(false)
     }

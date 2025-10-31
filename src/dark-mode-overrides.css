@@ -1,0 +1,233 @@
+/* ============================================
+   🎨 DARK MODE - OVERRIDES GLOBALES
+   ============================================ */
+
+/* ====================================
+   MODO OSCURO - Aplicar a elementos
+   ==================================== */
+
+.dark-mode {
+  color-scheme: dark;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* Containers principales */
+.dark-mode .student-container,
+.dark-mode .waiting-content,
+.dark-mode .teacher-controls,
+.dark-mode .modal-content,
+.dark-mode .room-card,
+.dark-mode .auth-container,
+.dark-mode .dashboard-header,
+.dark-mode .dashboard-content {
+  background: var(--card-bg) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Inputs y forms */
+.dark-mode input:not([type="submit"]):not([type="button"]),
+.dark-mode textarea,
+.dark-mode select {
+  background: var(--input-bg) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--input-border) !important;
+}
+
+.dark-mode input::placeholder,
+.dark-mode textarea::placeholder {
+  color: var(--text-light) !important;
+  opacity: 0.7;
+}
+
+/* Labels y títulos */
+.dark-mode label,
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode h4 {
+  color: var(--text-primary) !important;
+}
+
+.dark-mode p,
+.dark-mode span {
+  color: var(--text-secondary);
+}
+
+/* Tablas */
+.dark-mode table {
+  background: var(--card-bg) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+}
+
+.dark-mode th {
+  background: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+  font-weight: 600;
+}
+
+.dark-mode td {
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.dark-mode tbody tr:hover {
+  background: var(--bg-secondary) !important;
+}
+
+/* Cards y mensajes */
+.dark-mode .waiting-message,
+.dark-mode .drawing-message,
+.dark-mode .completed-message,
+.dark-mode .success-message {
+  background: var(--card-bg) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+}
+
+.dark-mode .participant-card,
+.dark-mode .participant-card-waiting,
+.dark-mode .receiver-card {
+  background: var(--card-bg) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+}
+
+.dark-mode .participant-name,
+.dark-mode .participant-name-large,
+.dark-mode .receiver-name {
+  color: var(--text-primary) !important;
+}
+
+/* Personal link section */
+.dark-mode .personal-link-section {
+  background: var(--bg-secondary) !important;
+  border-color: var(--border-color) !important;
+}
+
+.dark-mode .personal-link-title {
+  color: var(--text-primary) !important;
+}
+
+.dark-mode .personal-link-input {
+  background: var(--input-bg) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--input-border) !important;
+}
+
+/* Room code display */
+.dark-mode .room-code-display {
+  background: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Textos pequeños y secundarios */
+.dark-mode small,
+.dark-mode .personal-link-hint,
+.dark-mode .participant-email,
+.dark-mode .participant-email-small,
+.dark-mode .person-email {
+  color: var(--text-light) !important;
+}
+
+/* Modal específicos */
+.dark-mode .modal-overlay {
+  background: rgba(0, 0, 0, 0.85) !important;
+}
+
+.dark-mode .modal-info {
+  background: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+}
+
+.dark-mode .modal-header h2 {
+  color: var(--text-primary) !important;
+}
+
+/* Dashboard */
+.dark-mode .stats {
+  color: var(--text-secondary) !important;
+}
+
+.dark-mode .room-info h3 {
+  color: var(--text-primary) !important;
+}
+
+.dark-mode .room-info p {
+  color: var(--text-secondary) !important;
+}
+
+/* QR Code - SIEMPRE blanco */
+.dark-mode .qr-container {
+  background: white !important;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.dark-mode .qr-code,
+.dark-mode .qr-code svg {
+  background: white !important;
+}
+
+/* Emojis y avatares - SIN filtros */
+.dark-mode .avatar-circle,
+.dark-mode .avatar-emoji,
+.dark-mode .role-icon,
+.dark-mode .logo,
+.dark-mode .home-logo,
+.dark-mode .participant-icon,
+.dark-mode .receiver-icon,
+.dark-mode .waiting-icon,
+.dark-mode .gift-icon,
+.dark-mode .success-icon,
+.dark-mode .checkmark {
+  filter: none !important;
+}
+
+/* Scrollbar */
+.dark-mode ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.dark-mode ::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+.dark-mode ::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+.dark-mode ::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Botones - mantener colores del gradiente */
+.dark-mode .btn-primary,
+.dark-mode .btn-join,
+.dark-mode .draw-btn,
+.dark-mode .copy-link-btn {
+  /* Los botones mantienen sus colores originales */
+  color: white !important;
+}
+
+/* Enlaces */
+.dark-mode a {
+  color: #667eea;
+}
+
+.dark-mode a:hover {
+  color: #764ba2;
+}
+
+/* Sombras más pronunciadas en dark mode */
+.dark-mode .role-card,
+.dark-mode .room-card,
+.dark-mode .student-container,
+.dark-mode .waiting-content {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6) !important;
+}

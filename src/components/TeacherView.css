@@ -55,7 +55,7 @@
 }
 
 .join-panel {
-  background: white;
+  background: var(--card-bg, white);
   padding: 30px;
   border-radius: 12px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
@@ -64,7 +64,7 @@
 
 .join-panel h2 {
   margin-top: 0;
-  color: #333;
+  color: var(--text-primary, #333);
   font-size: 1.3em;
   margin-bottom: 20px;
 }
@@ -99,13 +99,13 @@
 }
 
 .qr-container h3 {
-  color: #666;
+  color: var(--text-secondary, #666);
   font-size: 1.1em;
   margin-bottom: 15px;
 }
 
 .qr-code {
-  background: white;
+  background: var(--card-bg, white);
   padding: 15px;
   border-radius: 8px;
   display: inline-block;
@@ -120,7 +120,7 @@
 }
 
 .participants-panel {
-  background: white;
+  background: var(--card-bg, white);
   padding: 30px;
   border-radius: 12px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
@@ -135,7 +135,7 @@
 
 .panel-header h2 {
   margin: 0;
-  color: #333;
+  color: var(--text-primary, #333);
 }
 
 .count-badge {
@@ -252,7 +252,7 @@
 
 .avatar-name {
   font-weight: 600;
-  color: #333;
+  color: var(--text-primary, #333);
   text-align: center;
   font-size: 0.95em;
   max-width: 120px;
@@ -271,7 +271,7 @@
 
 .emails-title {
   margin: 0 0 15px 0;
-  color: #333;
+  color: var(--text-primary, #333);
   font-size: 1.1em;
   display: flex;
   align-items: center;
@@ -291,7 +291,7 @@
   align-items: center;
   gap: 8px;
   padding: 8px 12px;
-  background: white;
+  background: var(--card-bg, white);
   border-radius: 6px;
   font-size: 0.9em;
   transition: background 0.2s;
@@ -309,12 +309,12 @@
 
 .email-name {
   font-weight: 600;
-  color: #333;
+  color: var(--text-primary, #333);
   min-width: 150px;
 }
 
 .email-address {
-  color: #666;
+  color: var(--text-secondary, #666);
   font-family: 'Courier New', monospace;
   letter-spacing: 0.5px;
   cursor: help;
@@ -368,14 +368,14 @@
 .participant-name {
   /* Estilos antiguos - pueden eliminarse si no se usan */
   font-weight: 600;
-  color: #333;
+  color: var(--text-primary, #333);
   font-size: 1.1em;
 }
 
 .participant-email {
   /* Estilos antiguos - pueden eliminarse si no se usan */
   font-size: 0.9em;
-  color: #666;
+  color: var(--text-secondary, #666);
   font-family: 'Courier New', monospace;
   letter-spacing: 0.5px;
   cursor: help;
@@ -429,6 +429,51 @@
   color: #856404;
   margin-top: 15px;
   text-align: center;
+}
+
+.waiting-message {
+  background: #e8eaf6;
+  border-left: 4px solid #667eea;
+  padding: 20px;
+  border-radius: 8px;
+  color: #3f51b5;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.waiting-message p {
+  margin: 0;
+  font-size: 1.1em;
+}
+
+.drawing-message {
+  background: #e3f2fd;
+  border-left: 4px solid #2196f3;
+  padding: 20px;
+  border-radius: 8px;
+  color: #1565c0;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.drawing-message p {
+  margin: 0;
+  font-size: 1.1em;
+}
+
+.completed-message {
+  background: #d4edda;
+  border-left: 4px solid #4caf50;
+  padding: 30px;
+  border-radius: 8px;
+  color: #155724;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.completed-message p {
+  margin: 10px 0;
+  font-size: 1.1em;
 }
 
 .loading-message {
@@ -504,4 +549,322 @@
     font-size: 2em;
     letter-spacing: 4px;
   }
+  
+  .avatars-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 15px;
+  }
+  
+  .avatar-circle {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .avatar-emoji {
+    font-size: 2em;
+  }
 }
+
+@media (max-width: 600px) {
+  .teacher-view {
+    padding: 10px;
+  }
+  
+  .teacher-header {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .back-btn {
+    align-self: flex-start;
+  }
+  
+  .room-info h1 {
+    font-size: 1.8em;
+  }
+  
+  .code-display {
+    padding: 15px;
+  }
+  
+  .code-value {
+    font-size: 1.8em;
+    letter-spacing: 3px;
+  }
+  
+  .qr-code svg {
+    width: 180px !important;
+    height: 180px !important;
+  }
+  
+  .avatars-grid {
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 12px;
+    padding: 5px;
+    max-height: 300px;
+  }
+  
+  .avatar-circle {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .avatar-emoji {
+    font-size: 1.8em;
+  }
+  
+  .avatar-name {
+    font-size: 0.85em;
+    max-width: 90px;
+  }
+  
+  .remove-participant-btn {
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    top: -3px;
+    right: -3px;
+  }
+  
+  .emails-section {
+    padding: 15px;
+  }
+  
+  .emails-title {
+    font-size: 1em;
+  }
+  
+  .emails-list {
+    max-height: 150px;
+  }
+  
+  .email-item {
+    padding: 6px 10px;
+    font-size: 0.85em;
+    flex-wrap: wrap;
+  }
+  
+  .email-name {
+    min-width: 120px;
+  }
+  
+  .email-address {
+    font-size: 0.8em;
+  }
+  
+  .draw-btn,
+  .view-results-btn {
+    font-size: 0.95em;
+    padding: 15px;
+  }
+  
+  .panel-header h2 {
+    font-size: 1.3em;
+  }
+}
+
+/* ====================================
+   DARK MODE ESPECÍFICO
+   ==================================== */
+
+.dark-mode .join-panel,
+.dark-mode .participants-panel {
+  background: var(--card-bg) !important;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6) !important;
+}
+
+.dark-mode .join-panel h2,
+.dark-mode .panel-header h2 {
+  color: var(--text-primary) !important;
+}
+
+/* Code display - mantiene gradiente pero mejorado */
+.dark-mode .code-display {
+  background: linear-gradient(135deg, #667eea, #764ba2) !important;
+}
+
+.dark-mode .code-label {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.dark-mode .code-value {
+  color: white !important;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5) !important;
+}
+
+.dark-mode .qr-container h3 {
+  color: var(--text-secondary) !important;
+}
+
+.dark-mode .qr-url {
+  color: var(--text-light) !important;
+}
+
+.dark-mode .empty-state {
+  color: var(--text-secondary) !important;
+}
+
+.dark-mode .empty-state p {
+  color: var(--text-secondary) !important;
+}
+
+.dark-mode .empty-icon {
+  filter: grayscale(50%) opacity(0.7);
+}
+
+/* Mensajes de estado - MEJORADO */
+.dark-mode .waiting-message,
+.dark-mode .drawing-message,
+.dark-mode .completed-message,
+.dark-mode .loading-message {
+  background: var(--bg-secondary) !important;
+  border-color: #667eea !important;
+  color: var(--text-primary) !important;
+}
+
+.dark-mode .waiting-message p,
+.dark-mode .drawing-message p,
+.dark-mode .completed-message p,
+.dark-mode .loading-message p {
+  color: var(--text-primary) !important;
+}
+
+.dark-mode .waiting-icon,
+.dark-mode .gift-icon {
+  filter: none !important;
+}
+
+.dark-mode .success-message {
+  background: var(--success-bg) !important;
+  color: var(--success-text) !important;
+  border-color: var(--success-text) !important;
+}
+
+.dark-mode .success-message p,
+.dark-mode .success-message h3 {
+  color: var(--success-text) !important;
+}
+
+.dark-mode .success-icon {
+  filter: none !important;
+}
+
+.dark-mode .warning-message {
+  background: var(--error-bg) !important;
+  color: var(--error-text) !important;
+  border-color: var(--error-text) !important;
+}
+
+.dark-mode .warning-message p {
+  color: var(--error-text) !important;
+}
+
+/* QR Code siempre con fondo blanco - MEJORADO */
+.dark-mode .qr-container {
+  background: transparent !important;
+}
+
+.dark-mode .qr-code {
+  background: white !important;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8) !important;
+}
+
+.dark-mode .qr-code svg {
+  background: white !important;
+  filter: none !important;
+}
+
+/* Avatares grid - MEJORADO */
+.dark-mode .avatars-grid {
+  background: transparent !important;
+}
+
+.dark-mode .avatar-name {
+  color: var(--text-primary) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.dark-mode .avatar-email {
+  color: var(--text-light) !important;
+}
+
+/* Lista de emails - MEJORADO */
+.dark-mode .emails-section {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.dark-mode .emails-title {
+  color: var(--text-primary) !important;
+}
+
+.dark-mode .email-item {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--border-color);
+}
+
+.dark-mode .email-item:hover {
+  background: var(--bg-primary) !important;
+  border-color: #667eea;
+}
+
+.dark-mode .email-number {
+  color: var(--text-light) !important;
+}
+
+.dark-mode .email-name {
+  color: var(--text-primary) !important;
+}
+
+.dark-mode .email-address {
+  color: var(--text-secondary) !important;
+}
+
+/* Botón de eliminar - MEJORADO */
+.dark-mode .remove-participant-btn {
+  background: rgba(220, 38, 38, 0.9) !important;
+  border-color: var(--card-bg) !important;
+}
+
+.dark-mode .remove-participant-btn:hover {
+  background: rgba(185, 28, 28, 1) !important;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.8) !important;
+}
+
+/* Spinner en dark mode */
+.dark-mode .spinner {
+  border-color: var(--border-color) !important;
+  border-top-color: #667eea !important;
+}
+
+/* Count badge */
+.dark-mode .count-badge {
+  background: #667eea !important;
+  color: white !important;
+}
+
+/* Botón sorteo */
+.dark-mode .draw-btn {
+  background: linear-gradient(135deg, #4caf50, #45a049) !important;
+  color: white !important;
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.5) !important;
+}
+
+.dark-mode .draw-btn:hover {
+  box-shadow: 0 6px 12px rgba(76, 175, 80, 0.6) !important;
+}
+
+/* Botón view results */
+.dark-mode .view-results-btn {
+  background: linear-gradient(135deg, #667eea, #764ba2) !important;
+  color: white !important;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.5) !important;
+}
+
+.dark-mode .view-results-btn:hover {
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6) !important;
+}
+

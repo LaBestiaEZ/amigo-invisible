@@ -9,6 +9,7 @@ import TeacherView from './components/TeacherView'
 import StudentView from './components/StudentView'
 import StudentWaiting from './components/StudentWaiting'
 import ResultsModal from './components/ResultsModal'
+import DarkModeToggle from './components/DarkModeToggle'
 import { v4 as uuidv4 } from 'uuid'
 
 function App() {
@@ -600,6 +601,8 @@ VITE_SUPABASE_ANON_KEY=tu-clave-anon-key
           onClose={handleCloseResults}
         />
       )}
+
+      <DarkModeToggle />
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { QRCodeSVG } from 'qrcode.react'
 import './TeacherView.css'
+import { HapticFeedback } from '../lib/haptic'
 
 function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults, onRemoveParticipant }) {
   const [roomUrl, setRoomUrl] = useState('')
@@ -14,18 +15,23 @@ function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults,
 
   const handleRemoveParticipant = async (participant) => {
     if (room.status !== 'waiting') {
+      HapticFeedback.warning()
       alert('No se pueden expulsar participantes después del sorteo')
       return
     }
 
+    HapticFeedback.selection()
     const confirmRemove = window.confirm(
       `¿Expulsar a ${participant.name}?\n\nPodrá volver a unirse si quiere.`
     )
 
     if (confirmRemove) {
       try {
+        HapticFeedback.heavy()
         await onRemoveParticipant(participant.id)
+        HapticFeedback.success()
       } catch (error) {
+        HapticFeedback.error()
         alert('Error al expulsar: ' + error.message)
       }
     }
@@ -161,7 +167,10 @@ function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults,
 
           {participants.length >= 2 && room.status === 'waiting' && (
             <button 
-              onClick={onStartDraw}
+              onClick={() => {
+                HapticFeedback.heavy()
+                onStartDraw()
+              }}
               className="draw-btn"
             >
               🎲 Realizar Sorteo ({participants.length} participantes)

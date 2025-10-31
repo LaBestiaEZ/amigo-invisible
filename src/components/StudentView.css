@@ -8,9 +8,9 @@
 }
 
 .student-container {
-  background: white;
+  background: var(--card-bg, white);
   border-radius: 16px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 60px var(--card-shadow, rgba(0, 0, 0, 0.3));
   max-width: 500px;
   width: 100%;
   padding: 40px;
@@ -46,23 +46,23 @@
 
 .student-header h1 {
   margin: 0;
-  color: #333;
+  color: var(--text-primary, #333);
   font-size: 2.5em;
 }
 
 .student-header p {
-  color: #666;
+  color: var(--text-secondary, #666);
   margin: 10px 0 0;
   font-size: 1.1em;
 }
 
 .error-message {
-  background: #ffebee;
-  color: #c62828;
+  background: var(--error-bg, #ffebee);
+  color: var(--error-text, #c62828);
   padding: 15px;
   border-radius: 8px;
   margin-bottom: 20px;
-  border-left: 4px solid #c62828;
+  border-left: 4px solid var(--error-text, #c62828);
   animation: shake 0.5s;
 }
 
@@ -208,16 +208,117 @@
 }
 
 @media (max-width: 600px) {
+  .student-view {
+    padding: 15px;
+  }
+
   .student-container {
-    padding: 30px 20px;
+    padding: 25px 18px;
+    max-width: 100%;
+  }
+  
+  .logo {
+    font-size: 3.5em;
   }
   
   .student-header h1 {
-    font-size: 2em;
+    font-size: 1.8em;
+  }
+  
+  .student-header p {
+    font-size: 0.95em;
   }
   
   .code-input {
-    font-size: 1.5em !important;
-    letter-spacing: 4px;
+    font-size: 1.3em !important;
+    letter-spacing: 3px;
+    padding: 15px;
   }
+  
+  .btn-primary,
+  .btn-join {
+    padding: 14px;
+    font-size: 0.95em;
+  }
+  
+  .form-group label {
+    font-size: 0.95em;
+  }
+  
+  .form-group input {
+    padding: 12px;
+    font-size: 0.95em;
+  }
+  
+  .form-group small {
+    font-size: 0.8em;
+  }
+  
+  .student-footer {
+    font-size: 0.85em;
+  }
+}
+
+@media (max-width: 480px) {
+  .student-container {
+    padding: 20px 15px;
+  }
+  
+  .logo {
+    font-size: 3em;
+  }
+  
+  .student-header h1 {
+    font-size: 1.6em;
+  }
+  
+  .code-input {
+    font-size: 1.2em !important;
+    letter-spacing: 2px;
+  }
+}
+
+/* ====================================
+   DARK MODE ESPECÍFICO
+   ==================================== */
+
+.dark-mode .student-container {
+  background: var(--card-bg) !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8) !important;
+}
+
+.dark-mode .student-header h1,
+.dark-mode .student-header p {
+  color: var(--text-primary) !important;
+}
+
+.dark-mode .form-group label {
+  color: var(--text-primary) !important;
+}
+
+.dark-mode .form-group input,
+.dark-mode .form-group textarea {
+  background: var(--input-bg) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--input-border) !important;
+}
+
+.dark-mode .form-group input::placeholder {
+  color: var(--text-light) !important;
+}
+
+.dark-mode .form-group small {
+  color: var(--text-light) !important;
+}
+
+.dark-mode .room-code-display {
+  background: var(--bg-secondary) !important;
+}
+
+.dark-mode .room-code-display span {
+  color: var(--text-primary) !important;
+}
+
+.dark-mode .student-footer p {
+  color: rgba(255, 255, 255, 0.9) !important;
 }

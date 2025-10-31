@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import './StudentWaiting.css'
+import { HapticFeedback } from '../lib/haptic'
 
 function StudentWaiting({ participant, room, onLeave, supabase }) {
   const [dots, setDots] = useState('')
@@ -134,7 +135,9 @@ function StudentWaiting({ participant, room, onLeave, supabase }) {
             <button 
               className="copy-link-btn"
               onClick={() => {
+                HapticFeedback.light()
                 navigator.clipboard.writeText(`${window.location.origin}?p=${participant.id}`)
+                HapticFeedback.success()
                 alert('¡Link copiado! Guárdalo para volver después')
               }}
             >

@@ -1,14 +1,31 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { supabase } from '../lib/supabase'
 import './ResultsModal.css'
+import { SwipeDetector } from '../lib/swipe'
+import { HapticFeedback } from '../lib/haptic'
 
 function ResultsModal({ roomId, roomName, onClose }) {
   const [assignments, setAssignments] = useState([])
   const [loading, setLoading] = useState(true)
+  const modalRef = useRef(null)
 
   useEffect(() => {
     loadAssignments()
   }, [roomId])
+
+  useEffect(() => {
+    // Detectar swipe down para cerrar modal en móvil
+    if (modalRef.current) {
+      const swipeDetector = new SwipeDetector(modalRef.current, {
+        onSwipeDown: () => {
+          HapticFeedback.light()
+          onClose()
+        }
+      })
+
+      return () => swipeDetector.destroy()
+    }
+  }, [])
 
   const loadAssignments = async () => {
     try {
@@ -33,6 +50,7 @@ function ResultsModal({ roomId, roomName, onClose }) {
   }
 
   const downloadResults = () => {
+    HapticFeedback.medium()
     // Crear contenido CSV
     let csv = 'Quien regala,Email,Amigo invisible,Email amigo invisible\n'
     assignments.forEach(assignment => {
@@ -49,11 +67,12 @@ function ResultsModal({ roomId, roomName, onClose }) {
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
+    HapticFeedback.success()
   }
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+      <div className="modal-content" ref={modalRef} onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h2>📊 Resultados del Sorteo</h2>
           <button className="modal-close" onClick={onClose}>✕</button>

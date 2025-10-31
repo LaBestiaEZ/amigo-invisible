@@ -1,0 +1,217 @@
+/* ============================================
+   📱 ORIENTACIÓN LANDSCAPE (HORIZONTAL)
+   ============================================ */
+
+/* Móviles en horizontal */
+@media (max-width: 968px) and (orientation: landscape) {
+  /* Reducir alturas para aprovechar espacio */
+  .teacher-view,
+  .student-view,
+  .student-waiting,
+  .home-page {
+    padding: 10px;
+  }
+
+  /* Headers más compactos */
+  .teacher-header,
+  .home-header,
+  .student-header {
+    margin-bottom: 15px;
+  }
+
+  .teacher-header h1,
+  .home-header h1,
+  .student-header h1 {
+    font-size: 1.5em;
+  }
+
+  /* Logos más pequeños */
+  .home-logo,
+  .logo {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+  }
+
+  /* Teacher View en landscape */
+  .teacher-content {
+    grid-template-columns: 1fr 1.5fr;
+    gap: 15px;
+  }
+
+  .qr-container {
+    margin-top: 10px;
+  }
+
+  .qr-code svg {
+    width: 150px !important;
+    height: 150px !important;
+  }
+
+  .avatars-grid {
+    max-height: 250px;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 10px;
+  }
+
+  .avatar-circle {
+    width: 60px;
+    height: 60px;
+  }
+
+  .avatar-emoji {
+    font-size: 1.8em;
+  }
+
+  .avatar-name {
+    font-size: 0.8em;
+  }
+
+  /* Student waiting en landscape */
+  .waiting-content {
+    padding: 20px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .waiting-content h1 {
+    font-size: 1.4em;
+  }
+
+  .waiting-content h2 {
+    font-size: 1.1em;
+  }
+
+  .participant-card-waiting {
+    padding: 12px;
+    flex-direction: row;
+  }
+
+  .participant-icon {
+    width: 45px;
+    height: 45px;
+    font-size: 2em;
+  }
+
+  .receiver-card {
+    padding: 25px;
+  }
+
+  .receiver-icon {
+    font-size: 2.5em;
+  }
+
+  .receiver-name {
+    font-size: 1.6em;
+  }
+
+  /* Modales en landscape */
+  .modal-content {
+    max-height: 85vh;
+    width: 90%;
+  }
+
+  .modal-body {
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+
+  /* Dashboard en landscape */
+  .dashboard {
+    padding: 15px;
+  }
+
+  .rooms-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .room-card {
+    padding: 15px;
+  }
+
+  /* Forms más compactos */
+  .form-group {
+    margin-bottom: 12px;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 10px;
+  }
+
+  /* Botones más pequeños */
+  .btn-primary,
+  .btn-join,
+  .draw-btn,
+  .view-results-btn {
+    padding: 10px 20px;
+    font-size: 0.9em;
+  }
+
+  /* Mensajes y cards */
+  .waiting-message,
+  .drawing-message,
+  .completed-message,
+  .success-message {
+    padding: 15px;
+  }
+
+  .waiting-icon,
+  .gift-icon,
+  .success-icon {
+    font-size: 2.5em;
+  }
+
+  /* Personal link section */
+  .personal-link-section {
+    padding: 12px;
+  }
+
+  .personal-link-input {
+    font-size: 0.75em;
+    padding: 8px;
+  }
+
+  .copy-link-btn {
+    padding: 8px 15px;
+    font-size: 0.85em;
+  }
+}
+
+/* Tablets en landscape (más espacio) */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .teacher-content {
+    grid-template-columns: 400px 1fr;
+  }
+
+  .rooms-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .avatars-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    max-height: 350px;
+  }
+}
+
+/* Notificación de rotación sugerida (opcional) */
+.rotate-suggestion {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: var(--bg-gradient-start);
+  color: white;
+  text-align: center;
+  padding: 10px;
+  z-index: 9999;
+  font-size: 0.9em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 600px) and (orientation: landscape) {
+  .rotate-suggestion {
+    display: block;
+  }
+}

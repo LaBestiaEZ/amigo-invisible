@@ -22,7 +22,7 @@
 }
 
 .modal-content {
-  background: white;
+  background: var(--card-bg, white);
   border-radius: 20px;
   max-width: 900px;
   width: 90%;
@@ -92,7 +92,7 @@
 
 .modal-info h3 {
   margin: 0 0 10px 0;
-  color: #333;
+  color: var(--text-primary, #333);
   font-size: 1.5rem;
 }
 
@@ -138,7 +138,7 @@
 table {
   width: 100%;
   border-collapse: collapse;
-  background: white;
+  background: var(--card-bg, white);
 }
 
 thead {
@@ -208,7 +208,7 @@ tbody td:first-child {
 
 .person-name {
   font-weight: 600;
-  color: #333;
+  color: var(--text-primary, #333);
   font-size: 1rem;
 }
 
@@ -279,6 +279,7 @@ tbody td:first-child {
   .modal-content {
     width: 95%;
     max-height: 95vh;
+    margin: 10px;
   }
 
   .modal-header {
@@ -290,36 +291,175 @@ tbody td:first-child {
   }
 
   .modal-body {
-    padding: 20px;
+    padding: 15px;
+  }
+
+  .results-stats {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .stat-card {
+    padding: 12px;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+  }
+
+  .stat-value {
+    font-size: 1.5rem;
   }
 
   .assignments-table {
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   table {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+    min-width: 500px;
   }
 
   thead th,
   tbody td {
-    padding: 10px 8px;
+    padding: 8px 6px;
   }
 
   .person-name {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
 
   .person-email {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
+    max-width: 120px;
+  }
+
+  .email-status {
+    padding: 3px 8px;
+    font-size: 0.7rem;
   }
 
   .modal-actions {
-    flex-direction: column-reverse;
+    flex-direction: column;
+    gap: 10px;
   }
 
-  .download-btn,
-  .close-btn {
+  .btn-download,
+  .btn-close {
     width: 100%;
+    padding: 12px;
   }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    width: 100%;
+    height: 100vh;
+    max-height: 100vh;
+    border-radius: 0;
+    margin: 0;
+  }
+
+  .modal-header h2 {
+    font-size: 1.1rem;
+  }
+
+  .modal-body {
+    padding: 10px;
+  }
+
+  table {
+    font-size: 0.75rem;
+    min-width: 450px;
+  }
+
+  thead th,
+  tbody td {
+    padding: 6px 4px;
+  }
+}
+
+/* ====================================
+   DARK MODE ESPECÍFICO
+   ==================================== */
+
+.dark-mode .modal-overlay {
+  background: rgba(0, 0, 0, 0.9) !important;
+}
+
+.dark-mode .modal-content {
+  background: var(--card-bg) !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9) !important;
+}
+
+.dark-mode .modal-header {
+  background: var(--bg-secondary) !important;
+  border-color: var(--border-color) !important;
+}
+
+.dark-mode .modal-header h2 {
+  color: var(--text-primary) !important;
+}
+
+.dark-mode .modal-close {
+  color: var(--text-primary) !important;
+  background: transparent !important;
+}
+
+.dark-mode .modal-close:hover {
+  background: var(--bg-secondary) !important;
+}
+
+.dark-mode .modal-info {
+  background: var(--bg-secondary) !important;
+  border-color: var(--border-color) !important;
+}
+
+.dark-mode .modal-info h3,
+.dark-mode .modal-info p {
+  color: var(--text-primary) !important;
+}
+
+.dark-mode .warning-text {
+  color: var(--error-text) !important;
+}
+
+.dark-mode .assignments-table table {
+  background: transparent !important;
+}
+
+.dark-mode table {
+  border-color: var(--border-color) !important;
+}
+
+.dark-mode thead {
+  background: var(--bg-secondary) !important;
+}
+
+.dark-mode th {
+  background: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+}
+
+.dark-mode td {
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+}
+
+.dark-mode tbody tr:hover {
+  background: var(--bg-secondary) !important;
+}
+
+.dark-mode .person-name {
+  color: var(--text-primary) !important;
+}
+
+.dark-mode .person-email {
+  color: var(--text-light) !important;
+}
+
+.dark-mode .loading-state p {
+  color: var(--text-primary) !important;
 }

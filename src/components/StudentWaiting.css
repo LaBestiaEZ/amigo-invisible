@@ -33,12 +33,13 @@
 }
 
 .waiting-content {
-  background: white;
+  background: var(--card-bg, white);
   border-radius: 16px;
   padding: 50px 40px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 60px var(--card-shadow, rgba(0, 0, 0, 0.3));
   text-align: center;
   animation: fadeIn 0.5s ease;
+  color: var(--text-primary, #333);
 }
 
 @keyframes fadeIn {
@@ -81,7 +82,7 @@
 }
 
 .waiting-content h1 {
-  color: #333;
+  color: var(--text-primary, #333);
   margin: 0 0 10px;
   font-size: 2em;
 }
@@ -93,7 +94,7 @@
 }
 
 .participant-card-waiting {
-  background: #f8f9fa;
+  background: var(--bg-secondary, #f8f9fa);
   border-radius: 12px;
   padding: 20px;
   display: flex;
@@ -138,7 +139,7 @@
 
 .personal-link-title {
   font-weight: 600;
-  color: #333;
+  color: var(--text-primary, #333);
   margin: 0 0 10px;
   font-size: 0.95em;
 }
@@ -150,8 +151,8 @@
   border-radius: 8px;
   font-size: 0.9em;
   font-family: 'Courier New', monospace;
-  background: white;
-  color: #333;
+  background: var(--input-bg, white);
+  color: var(--text-primary, #333);
   margin-bottom: 10px;
   box-sizing: border-box;
 }
@@ -399,16 +400,208 @@
 }
 
 @media (max-width: 600px) {
+  .student-waiting {
+    padding: 15px;
+  }
+
+  .waiting-container {
+    max-width: 100%;
+  }
+
+  .leave-btn {
+    top: -50px;
+    padding: 8px 15px;
+    font-size: 0.9em;
+  }
+
   .waiting-content {
-    padding: 40px 20px;
+    padding: 30px 18px;
   }
   
   .waiting-content h1 {
-    font-size: 1.6em;
+    font-size: 1.5em;
+  }
+  
+  .waiting-content h2 {
+    font-size: 1.2em;
   }
   
   .participant-card-waiting {
     flex-direction: column;
     text-align: center;
+    padding: 15px;
+  }
+  
+  .participant-icon {
+    font-size: 2.5em;
+    width: 50px;
+    height: 50px;
+  }
+  
+  .participant-name-large {
+    font-size: 1.1em;
+  }
+  
+  .participant-email-small {
+    font-size: 0.85em;
+  }
+  
+  .personal-link-section {
+    padding: 15px;
+  }
+  
+  .personal-link-title {
+    font-size: 0.9em;
+  }
+  
+  .personal-link-input {
+    padding: 10px;
+    font-size: 0.8em;
+  }
+  
+  .copy-link-btn {
+    padding: 10px 18px;
+    font-size: 0.95em;
+  }
+  
+  .waiting-message,
+  .drawing-message,
+  .completed-message {
+    padding: 20px;
+  }
+  
+  .waiting-icon,
+  .gift-icon {
+    font-size: 3em;
+  }
+  
+  .waiting-message p,
+  .drawing-message p {
+    font-size: 0.95em;
+  }
+  
+  .receiver-card {
+    padding: 30px 20px;
+  }
+  
+  .receiver-icon {
+    font-size: 2.5em;
+  }
+  
+  .receiver-name {
+    font-size: 1.6em;
+  }
+  
+  .assignment-intro {
+    font-size: 1em;
+  }
+  
+  .email-reminder {
+    padding: 12px;
+  }
+  
+  .email-reminder p {
+    font-size: 0.85em;
   }
 }
+
+@media (max-width: 480px) {
+  .waiting-content {
+    padding: 25px 15px;
+  }
+  
+  .waiting-content h1 {
+    font-size: 1.3em;
+  }
+  
+  .waiting-content h2 {
+    font-size: 1.1em;
+  }
+  
+  .personal-link-input {
+    font-size: 0.75em;
+    padding: 8px;
+  }
+  
+  .receiver-card {
+    padding: 25px 15px;
+  }
+  
+  .receiver-name {
+    font-size: 1.4em;
+  }
+}
+
+/* ====================================
+   DARK MODE ESPECÍFICO
+   ==================================== */
+
+.dark-mode .waiting-content {
+  background: var(--card-bg) !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8) !important;
+}
+
+.dark-mode .waiting-content h1,
+.dark-mode .waiting-content h2 {
+  color: var(--text-primary) !important;
+}
+
+.dark-mode .participant-card-waiting {
+  background: var(--bg-secondary) !important;
+  border-color: #667eea !important;
+}
+
+.dark-mode .participant-name-large,
+.dark-mode .participant-email-small {
+  color: var(--text-primary) !important;
+}
+
+.dark-mode .personal-link-section {
+  background: var(--bg-secondary) !important;
+  border-color: var(--border-color) !important;
+}
+
+.dark-mode .personal-link-title {
+  color: var(--text-primary) !important;
+}
+
+.dark-mode .personal-link-input {
+  background: var(--input-bg) !important;
+  color: var(--text-primary) !important;
+  border-color: #667eea !important;
+}
+
+.dark-mode .personal-link-hint {
+  color: var(--text-light) !important;
+}
+
+.dark-mode .waiting-message,
+.dark-mode .drawing-message,
+.dark-mode .completed-message {
+  background: var(--card-bg) !important;
+  border-color: var(--border-color) !important;
+}
+
+.dark-mode .waiting-message p,
+.dark-mode .drawing-message p,
+.dark-mode .completed-message p {
+  color: var(--text-primary) !important;
+}
+
+.dark-mode .receiver-card {
+  background: var(--card-bg) !important;
+  border-color: #667eea !important;
+}
+
+.dark-mode .receiver-name {
+  color: var(--text-primary) !important;
+}
+
+.dark-mode .receiver-email {
+  color: var(--text-secondary) !important;
+}
+
+.dark-mode .success-message p {
+  color: var(--text-primary) !important;
+}
+
