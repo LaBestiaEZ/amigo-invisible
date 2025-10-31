@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import './App.css'
 import { supabase } from './lib/supabase'
 import { sendBulkSecretSantaEmails } from './lib/emailService'
 import HomePage from './components/HomePage'

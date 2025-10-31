@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
 import { supabase } from '../lib/supabase'
-import './ResultsModal.css'
 import { SwipeDetector } from '../lib/swipe'
 import { HapticFeedback } from '../lib/haptic'
 
@@ -71,62 +70,79 @@ function ResultsModal({ roomId, roomName, onClose }) {
   }
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" ref={modalRef} onClick={(e) => e.stopPropagation()}>
-        <div className="modal-header">
-          <h2>📊 Resultados del Sorteo</h2>
-          <button className="modal-close" onClick={onClose}>✕</button>
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-[fade-in_0.3s_ease-out]" onClick={onClose}>
+      <div 
+        className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col"
+        ref={modalRef} 
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-white">📊 Resultados del Sorteo</h2>
+          <button 
+            onClick={onClose}
+            className="w-10 h-10 flex items-center justify-center text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors text-xl"
+          >
+            ✕
+          </button>
         </div>
 
-        <div className="modal-body">
-          <div className="modal-info">
-            <h3>{roomName}</h3>
-            <p>Total de asignaciones: {assignments.length}</p>
-            <p className="warning-text">
+        {/* Body */}
+        <div className="flex-1 overflow-y-auto p-6">
+          {/* Info */}
+          <div className="mb-6 p-4 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg">
+            <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-2">{roomName}</h3>
+            <p className="text-gray-700 dark:text-gray-300 mb-2">Total de asignaciones: {assignments.length}</p>
+            <p className="text-red-600 dark:text-red-400 font-medium text-sm">
               ⚠️ Esta información es confidencial. Los estudiantes NO pueden verla.
             </p>
           </div>
 
           {loading ? (
-            <div className="loading-state">
-              <div className="spinner"></div>
-              <p>Cargando resultados...</p>
+            <div className="flex flex-col items-center justify-center py-12">
+              <div className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+              <p className="text-gray-600 dark:text-gray-400">Cargando resultados...</p>
             </div>
           ) : (
             <>
-              <div className="assignments-table">
-                <table>
-                  <thead>
+              {/* Table */}
+              <div className="overflow-x-auto mb-6 rounded-lg border border-gray-200 dark:border-gray-700">
+                <table className="w-full">
+                  <thead className="bg-gray-100 dark:bg-gray-700">
                     <tr>
-                      <th>#</th>
-                      <th>Quien regala</th>
-                      <th>→</th>
-                      <th>Amigo invisible</th>
-                      <th>Estado email</th>
+                      <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 dark:text-gray-300">#</th>
+                      <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 dark:text-gray-300">Quien regala</th>
+                      <th className="px-4 py-3 text-center text-sm font-semibold text-gray-700 dark:text-gray-300">→</th>
+                      <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 dark:text-gray-300">Amigo invisible</th>
+                      <th className="px-4 py-3 text-center text-sm font-semibold text-gray-700 dark:text-gray-300">Estado email</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                     {assignments.map((assignment, index) => (
-                      <tr key={assignment.id}>
-                        <td>{index + 1}</td>
-                        <td>
-                          <div className="person-cell">
-                            <span className="person-name">{assignment.giver.name}</span>
-                            <span className="person-email">{assignment.giver.email}</span>
+                      <tr key={assignment.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
+                        <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">{index + 1}</td>
+                        <td className="px-4 py-3">
+                          <div>
+                            <p className="font-medium text-gray-900 dark:text-white">{assignment.giver.name}</p>
+                            <p className="text-sm text-gray-500 dark:text-gray-400">{assignment.giver.email}</p>
                           </div>
                         </td>
-                        <td className="arrow-cell">→</td>
-                        <td>
-                          <div className="person-cell">
-                            <span className="person-name">{assignment.receiver.name}</span>
-                            <span className="person-email">{assignment.receiver.email}</span>
+                        <td className="px-4 py-3 text-center text-purple-500 dark:text-purple-400 font-bold">→</td>
+                        <td className="px-4 py-3">
+                          <div>
+                            <p className="font-medium text-gray-900 dark:text-white">{assignment.receiver.name}</p>
+                            <p className="text-sm text-gray-500 dark:text-gray-400">{assignment.receiver.email}</p>
                           </div>
                         </td>
-                        <td>
+                        <td className="px-4 py-3 text-center">
                           {assignment.email_sent ? (
-                            <span className="status-badge success">✓ Enviado</span>
+                            <span className="inline-block px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 text-xs font-semibold rounded-full">
+                              ✓ Enviado
+                            </span>
                           ) : (
-                            <span className="status-badge pending">⏳ Pendiente</span>
+                            <span className="inline-block px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 text-xs font-semibold rounded-full">
+                              ⏳ Pendiente
+                            </span>
                           )}
                         </td>
                       </tr>
@@ -135,11 +151,18 @@ function ResultsModal({ roomId, roomName, onClose }) {
                 </table>
               </div>
 
-              <div className="modal-actions">
-                <button onClick={downloadResults} className="download-btn">
+              {/* Actions */}
+              <div className="flex gap-3 justify-end">
+                <button 
+                  onClick={downloadResults}
+                  className="px-6 py-3 bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 text-white font-semibold rounded-lg transition-colors"
+                >
                   💾 Descargar CSV
                 </button>
-                <button onClick={onClose} className="close-btn">
+                <button 
+                  onClick={onClose}
+                  className="px-6 py-3 bg-gray-500 hover:bg-gray-600 dark:bg-gray-600 dark:hover:bg-gray-700 text-white font-semibold rounded-lg transition-colors"
+                >
                   Cerrar
                 </button>
               </div>

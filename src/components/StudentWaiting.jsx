@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import './StudentWaiting.css'
 import { HapticFeedback } from '../lib/haptic'
 
 function StudentWaiting({ participant, room, onLeave, supabase }) {
@@ -102,98 +101,115 @@ function StudentWaiting({ participant, room, onLeave, supabase }) {
   }
 
   return (
-    <div className="student-waiting">
-      <div className="waiting-container">
-        <button onClick={onLeave} className="leave-btn">← Salir</button>
+    <div className="min-h-screen bg-gradient-to-br from-green-500 to-green-700 dark:from-gray-900 dark:to-gray-800 p-4 safe-area-padding">
+      <div className="max-w-2xl mx-auto">
+        {/* Leave Button */}
+        <button 
+          onClick={onLeave} 
+          className="mb-4 px-4 py-2 bg-white/20 hover:bg-white/30 dark:bg-gray-800/50 dark:hover:bg-gray-800/70 text-white rounded-lg backdrop-blur-sm transition-colors"
+        >
+          ← Salir
+        </button>
         
-        <div className="waiting-content">
-          <div className="success-animation">
-            <div className="checkmark">✓</div>
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 animate-[fade-in_0.5s_ease-out]">
+          {/* Success Animation */}
+          <div className="flex items-center justify-center mb-6">
+            <div className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center text-white text-5xl font-bold animate-[fade-in_0.5s_ease-out]">
+              ✓
+            </div>
           </div>
           
-          <h1>¡Te has unido con éxito!</h1>
-          <h2>{room.name}</h2>
+          <h1 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-2">¡Te has unido con éxito!</h1>
+          <h2 className="text-xl text-center text-gray-600 dark:text-gray-400 mb-8">{room.name}</h2>
           
-          <div className="participant-card-waiting">
-            <div className="participant-icon">👤</div>
+          {/* Participant Card */}
+          <div className="flex items-center gap-4 p-4 bg-gray-100 dark:bg-gray-700 rounded-lg mb-6">
+            <div className="text-4xl">👤</div>
             <div>
-              <p className="participant-name-large">{participant.name}</p>
-              <p className="participant-email-small">{participant.email}</p>
+              <p className="text-lg font-bold text-gray-800 dark:text-white">{participant.name}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">{participant.email}</p>
             </div>
           </div>
 
-          {/* Link personal para volver */}
-          <div className="personal-link-section">
-            <p className="personal-link-title">🔗 Guarda este link para volver después:</p>
+          {/* Personal Link Section */}
+          <div className="mb-8 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+            <p className="font-semibold text-blue-800 dark:text-blue-300 mb-3">🔗 Guarda este link para volver después:</p>
             <input 
               type="text" 
               value={`${window.location.origin}?p=${participant.id}`}
               readOnly
-              className="personal-link-input"
               onClick={(e) => e.target.select()}
+              className="w-full px-3 py-2 mb-2 text-sm bg-white dark:bg-gray-800 border border-blue-300 dark:border-blue-700 rounded text-gray-800 dark:text-white font-mono"
             />
             <button 
-              className="copy-link-btn"
               onClick={() => {
                 HapticFeedback.light()
                 navigator.clipboard.writeText(`${window.location.origin}?p=${participant.id}`)
                 HapticFeedback.success()
                 alert('¡Link copiado! Guárdalo para volver después')
               }}
+              className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-lg transition-colors"
             >
               📋 Copiar link
             </button>
-            <small className="personal-link-hint">
+            <small className="block mt-2 text-xs text-blue-700 dark:text-blue-400">
               Con este link podrás ver tu resultado cuando quieras
             </small>
           </div>
 
+          {/* Waiting Status */}
           {room.status === 'waiting' && (
-            <div className="waiting-message">
-              <div className="waiting-icon">⏳</div>
-              <p>Esperando a que el profesor realice el sorteo{dots}</p>
-              <small>Recibirás un email con tu amigo invisible cuando el sorteo esté listo</small>
+            <div className="text-center py-8">
+              <div className="text-6xl mb-4">⏳</div>
+              <p className="text-lg text-gray-800 dark:text-white mb-2">
+                Esperando a que el profesor realice el sorteo{dots}
+              </p>
+              <small className="text-gray-600 dark:text-gray-400">
+                Recibirás un email con tu amigo invisible cuando el sorteo esté listo
+              </small>
             </div>
           )}
 
+          {/* Drawing Status */}
           {room.status === 'drawing' && (
-            <div className="drawing-message">
-              <div className="spinner-large"></div>
-              <p>¡El sorteo está en proceso!</p>
-              <small>Revisa tu email en unos momentos...</small>
+            <div className="text-center py-8">
+              <div className="w-16 h-16 mx-auto mb-4 border-4 border-green-500 border-t-transparent rounded-full animate-spin"></div>
+              <p className="text-lg font-semibold text-gray-800 dark:text-white mb-2">¡El sorteo está en proceso!</p>
+              <small className="text-gray-600 dark:text-gray-400">Revisa tu email en unos momentos...</small>
             </div>
           )}
 
+          {/* Completed Status */}
           {room.status === 'completed' && (
-            <div className="completed-message">
-              <div className="gift-icon">🎁</div>
-              <h3>¡Sorteo completado!</h3>
+            <div className="text-center py-8">
+              <div className="text-7xl mb-4">🎁</div>
+              <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">¡Sorteo completado!</h3>
               
               {loadingAssignment ? (
-                <div className="loading-assignment">
-                  <div className="spinner-small"></div>
-                  <p>Cargando tu resultado...</p>
+                <div className="py-4">
+                  <div className="w-12 h-12 mx-auto mb-3 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
+                  <p className="text-gray-600 dark:text-gray-400">Cargando tu resultado...</p>
                 </div>
               ) : assignment ? (
-                <div className="assignment-reveal">
-                  <p className="assignment-intro">Tu amigo invisible es:</p>
-                  <div className="receiver-card">
-                    <div className="receiver-icon">🎅</div>
-                    <div className="receiver-name">{assignment.receiver_name}</div>
+                <div className="space-y-6">
+                  <p className="text-lg text-gray-700 dark:text-gray-300">Tu amigo invisible es:</p>
+                  <div className="p-6 bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 rounded-xl">
+                    <div className="text-6xl mb-3">🎅</div>
+                    <div className="text-3xl font-bold text-purple-800 dark:text-purple-300">{assignment.receiver_name}</div>
                   </div>
-                  <div className="assignment-reminder">
-                    <p>🤫 ¡Recuerda mantenerlo en secreto!</p>
+                  <div className="p-4 bg-yellow-100 dark:bg-yellow-900/30 border border-yellow-300 dark:border-yellow-700 rounded-lg">
+                    <p className="text-yellow-800 dark:text-yellow-300">🤫 ¡Recuerda mantenerlo en secreto!</p>
                   </div>
-                  <div className="email-reminder">
+                  <div className="text-sm text-gray-600 dark:text-gray-400">
                     <small>También hemos enviado esta información a:</small>
-                    <p>{participant.email}</p>
+                    <p className="font-medium text-gray-800 dark:text-white mt-1">{participant.email}</p>
                   </div>
                 </div>
               ) : (
-                <div className="email-reminder">
-                  <p>Revisa tu email para ver quién es tu amigo invisible</p>
-                  <strong>Email enviado a:</strong>
-                  <p>{participant.email}</p>
+                <div className="p-6 bg-gray-100 dark:bg-gray-700 rounded-lg">
+                  <p className="text-gray-800 dark:text-white mb-2">Revisa tu email para ver quién es tu amigo invisible</p>
+                  <strong className="block text-gray-700 dark:text-gray-300 mb-1">Email enviado a:</strong>
+                  <p className="text-gray-900 dark:text-white font-medium">{participant.email}</p>
                 </div>
               )}
             </div>

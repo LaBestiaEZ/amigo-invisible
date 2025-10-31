@@ -1,239 +1,81 @@
-@tailwind base;@tailwind base;/* ============================================
-
+﻿@tailwind base;
 @tailwind components;
-
-@tailwind utilities;@tailwind components;   🎨 BASE STYLES
-
-
-
-/* Custom CSS mínimo para safe areas de iOS */@tailwind utilities;   Estilos base después del reset
+@tailwind utilities;
 
 @layer base {
-
-  html {   ============================================ */
-
+  html {
     height: 100%;
-
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);/* Custom CSS mínimo para safe areas de iOS */
-
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   }
-
-@layer base {:root {
 
   body {
-
-    min-height: 100vh;  html {  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-
+    min-height: 100vh;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.5;
   }
 
-    height: 100%;  line-height: 1.5;
-
-  /* Fondo para safe areas de iOS */
-
-  body::before {    @apply bg-gradient-to-br from-[#667eea] to-[#764ba2];  font-weight: 400;
-
-    content: "";
-
-    position: fixed;  }
-
+  body::before {
+    content: '';
+    position: fixed;
     top: 0;
-
-    left: 0;  font-synthesis: none;
-
+    left: 0;
     right: 0;
-
-    bottom: 0;  body {  text-rendering: optimizeLegibility;
-
+    bottom: 0;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-
-    z-index: -50;    min-height: 100vh;  -webkit-font-smoothing: antialiased;
-
+    z-index: -1;
   }
 
-    @apply text-gray-900 dark:text-gray-100;  -moz-osx-font-smoothing: grayscale;
-
-  /* Dark mode body background */
-
-  .dark body::before {  }}
-
+  .dark body::before {
     background: #1a202c;
-
   }
-
 }
 
-  /* Fondo para safe areas de iOS */html {
-
-/* Componentes reutilizables */
-
-@layer components {  body::before {  height: 100%;
-
+@layer components {
   .gradient-page {
-
-    @apply min-h-screen bg-gradient-to-br from-[#667eea] to-[#764ba2] flex items-center justify-center p-5;    content: "";  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-
+    @apply min-h-screen bg-gradient-to-br from-purple-500 to-purple-700;
   }
-
-    position: fixed;  background-attachment: fixed;
 
   .card-white {
-
-    @apply bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-10 animate-fade-in;    top: 0;}
-
+    @apply bg-white rounded-lg shadow-lg p-6;
   }
-
-    left: 0;
 
   .btn-primary {
-
-    @apply bg-[#667eea] hover:bg-[#5a6fd1] text-white font-semibold py-3 px-6 rounded-lg     right: 0;/* Pseudo-elemento para forzar el fondo detrás de las safe areas de iOS */
-
-           transition-all duration-300 hover:scale-105 active:scale-95;
-
-  }    bottom: 0;body::before {
-
-
-
-  .btn-secondary {    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);  content: "";
-
-    @apply bg-[#764ba2] hover:bg-[#64408a] text-white font-semibold py-3 px-6 rounded-lg 
-
-           transition-all duration-300 hover:scale-105 active:scale-95;    z-index: -50;  position: fixed;
-
+    @apply bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 hover:scale-105 active:scale-95;
   }
-
-  }  top: 0;
-
-  .btn-danger {
-
-    @apply bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-lg   left: 0;
-
-           transition-all duration-300 hover:scale-105 active:scale-95;
-
-  }  /* Dark mode body background */  right: 0;
-
-
-
-  .btn-success {  .dark body::before {  bottom: 0;
-
-    @apply bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg 
-
-           transition-all duration-300 hover:scale-105 active:scale-95;    background: #1a202c;  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-
-  }
-
-  }  z-index: -9999;
-
-  .input-field {
-
-    @apply w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg }}
-
-           bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400
-
-           focus:outline-none focus:border-[#667eea] focus:ring-2 focus:ring-[#667eea]/20 transition-all;
-
-  }
-
-/* Componentes reutilizables */body {
-
-  @keyframes fade-in {
-
-    from {@layer components {  margin: 0;
-
-      opacity: 0;
-
-      transform: translateY(20px);  .gradient-page {  padding: 0;
-
-    }
-
-    to {    min-height: 100vh;  min-height: 100vh;
-
-      opacity: 1;
-
-      transform: translateY(0);    @apply bg-gradient-to-br from-[#667eea] to-[#764ba2] flex items-center justify-center p-5;  color: var(--text-primary);
-
-    }
-
-  }  }  background-color: transparent;
-
-
-
-  .animate-fade-in {  transition: background-color 0.3s ease, color 0.3s ease;
-
-    animation: fade-in 0.4s ease-out;
-
-  }  .card-white {}
-
-}
-
-    @apply bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-10 animate-fade-in;
-
-/* Utilidades para safe areas móviles */
-
-@layer utilities {  }#root {
-
-  .safe-area-padding {
-
-    padding-top: max(1.25rem, env(safe-area-inset-top));  min-height: 100vh;
-
-    padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
-
-    padding-left: max(1.25rem, env(safe-area-inset-left));  .btn-primary {  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-
-    padding-right: max(1.25rem, env(safe-area-inset-right));
-
-  }    @apply bg-[#667eea] hover:bg-[#5a6fd1] text-white font-semibold py-3 px-6 rounded-lg   position: relative;
-
-}
-
-           transition-all duration-300 hover:scale-105 active:scale-95;  z-index: 1;
-
-  }}
-
 
   .btn-secondary {
-    @apply bg-[#764ba2] hover:bg-[#64408a] text-white font-semibold py-3 px-6 rounded-lg 
-           transition-all duration-300 hover:scale-105 active:scale-95;
+    @apply bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-3 px-6 rounded-lg transition-all duration-300 hover:scale-105 active:scale-95;
   }
 
   .btn-danger {
-    @apply bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-lg 
-           transition-all duration-300 hover:scale-105 active:scale-95;
+    @apply bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors;
   }
 
   .btn-success {
-    @apply bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg 
-           transition-all duration-300 hover:scale-105 active:scale-95;
+    @apply bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors;
   }
 
   .input-field {
-    @apply w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg 
-           bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400
-           focus:outline-none focus:border-[#667eea] focus:ring-2 focus:ring-[#667eea]/20 transition-all;
-  }
-
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .animate-fade-in {
-    animation: fade-in 0.4s ease-out;
+    @apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent;
   }
 }
 
-/* Utilidades para safe areas móviles */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @layer utilities {
   .safe-area-padding {
-    padding-top: max(1.25rem, env(safe-area-inset-top));
-    padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
-    padding-left: max(1.25rem, env(safe-area-inset-left));
-    padding-right: max(1.25rem, env(safe-area-inset-right));
+    padding-top: max(1rem, env(safe-area-inset-top));
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
   }
 }

@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import './TeacherAuth.css'
 
 function TeacherAuth({ onLogin, onRegister }) {
   const [isLogin, setIsLogin] = useState(true)
@@ -30,24 +29,31 @@ function TeacherAuth({ onLogin, onRegister }) {
   }
 
   return (
-    <div className="teacher-auth">
-      <div className="auth-container">
-        <div className="auth-header">
-          <div className="auth-logo">👨‍🏫</div>
-          <h1>{isLogin ? 'Iniciar Sesión' : 'Crear Cuenta'}</h1>
-          <p>Acceso para Profesores</p>
+    <div className="min-h-screen bg-gradient-to-br from-purple-500 to-purple-700 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4 safe-area-padding">
+      <div className="w-full max-w-md bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 animate-[fade-in_0.5s_ease-out]">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <div className="text-6xl mb-4">👨‍🏫</div>
+          <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-2">
+            {isLogin ? 'Iniciar Sesión' : 'Crear Cuenta'}
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400">Acceso para Profesores</p>
         </div>
 
+        {/* Error Message */}
         {error && (
-          <div className="auth-error">
+          <div className="mb-6 p-4 bg-red-100 dark:bg-red-900/30 border border-red-400 dark:border-red-700 text-red-700 dark:text-red-300 rounded-lg">
             {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="auth-form">
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="space-y-4">
           {!isLogin && (
-            <div className="form-group">
-              <label>Nombre completo</label>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Nombre completo
+              </label>
               <input
                 type="text"
                 value={name}
@@ -56,12 +62,15 @@ function TeacherAuth({ onLogin, onRegister }) {
                 required={!isLogin}
                 disabled={loading}
                 autoFocus
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-400 focus:border-transparent disabled:opacity-50"
               />
             </div>
           )}
 
-          <div className="form-group">
-            <label>Email</label>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Email
+            </label>
             <input
               type="email"
               value={email}
@@ -70,11 +79,14 @@ function TeacherAuth({ onLogin, onRegister }) {
               required
               disabled={loading}
               autoFocus={isLogin}
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-400 focus:border-transparent disabled:opacity-50"
             />
           </div>
 
-          <div className="form-group">
-            <label>Contraseña</label>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Contraseña
+            </label>
             <input
               type="password"
               value={password}
@@ -83,44 +95,49 @@ function TeacherAuth({ onLogin, onRegister }) {
               required
               disabled={loading}
               minLength={6}
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-400 focus:border-transparent disabled:opacity-50"
             />
           </div>
 
           <button 
             type="submit" 
-            className="auth-submit-btn"
             disabled={loading}
+            className="w-full bg-purple-600 hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
-            {loading ? (
-              <>
-                <div className="btn-spinner"></div>
-                {isLogin ? 'Iniciando sesión...' : 'Creando cuenta...'}
-              </>
-            ) : (
-              isLogin ? 'Iniciar Sesión' : 'Crear Cuenta'
+            {loading && (
+              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
             )}
+            {loading ? (isLogin ? 'Iniciando sesión...' : 'Creando cuenta...') : (isLogin ? 'Iniciar Sesión' : 'Crear Cuenta')}
           </button>
         </form>
 
-        <div className="auth-switch">
+        {/* Switch Mode */}
+        <div className="mt-6 text-center text-gray-600 dark:text-gray-400">
           {isLogin ? (
             <p>
               ¿No tienes cuenta?{' '}
-              <button onClick={() => setIsLogin(false)} className="switch-btn">
+              <button 
+                onClick={() => setIsLogin(false)} 
+                className="text-purple-600 dark:text-purple-400 font-medium hover:underline"
+              >
                 Crear cuenta
               </button>
             </p>
           ) : (
             <p>
               ¿Ya tienes cuenta?{' '}
-              <button onClick={() => setIsLogin(true)} className="switch-btn">
+              <button 
+                onClick={() => setIsLogin(true)} 
+                className="text-purple-600 dark:text-purple-400 font-medium hover:underline"
+              >
                 Iniciar sesión
               </button>
             </p>
           )}
         </div>
 
-        <div className="auth-footer">
+        {/* Footer */}
+        <div className="mt-6 text-center text-sm text-gray-500 dark:text-gray-500">
           <p>🔒 Tu cuenta te permite gestionar múltiples sorteos y recuperar tus salas</p>
         </div>
       </div>
