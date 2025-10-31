@@ -20,6 +20,20 @@ html {
   height: -webkit-fill-available;
   /* Background que coincide con el gradiente para evitar franjas en iOS */
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  /* Asegurar que el fondo cubra toda el área incluyendo notch */
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+/* En modo oscuro, cambiar el gradiente del html también */
+@media (prefers-color-scheme: dark) {
+  html:not(.force-light) {
+    background: #2d3748;
+  }
+}
+
+html.dark-mode {
+  background: #2d3748;
 }
 
 body {
