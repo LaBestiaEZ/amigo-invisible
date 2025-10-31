@@ -9,11 +9,13 @@
     <link rel="manifest" href="/manifest.json" />
     
   <!-- PWA Meta Tags -->
-  <!-- Safari/iOS: usa theme-color distinto para light/dark para evitar barras blancas -->
-  <meta name="theme-color" content="#667eea" media="(prefers-color-scheme: light)" />
-  <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
-  <!-- Fallback general -->
-  <meta name="theme-color" content="#0f172a" />
+  <!-- Safari/iOS: theme-color por esquema para que coincida con los gradientes de la app -->
+  <!-- Light: gradiente from-purple-500 to-purple-700 → elegimos purple-600 (#7c3aed) -->
+  <meta name="theme-color" content="#7c3aed" media="(prefers-color-scheme: light)" />
+  <!-- Dark: gradiente from-gray-900 to-gray-800 → usamos gray-900 (#111827) -->
+  <meta name="theme-color" content="#111827" media="(prefers-color-scheme: dark)" />
+  <!-- Fallback general (oscuro) -->
+  <meta name="theme-color" content="#111827" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
   
     <meta name="apple-mobile-web-app-title" content="Amigo Invisible" />
