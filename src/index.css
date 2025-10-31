@@ -8,15 +8,15 @@
 
   html {
     height: 100%;
-    /* Color sólido de fondo para evitar destellos/blancos en iOS Safari */
-    background-color: #0f172a;
+    /* Color base en claro: blanco para esquinas y overscroll */
+    background-color: #ffffff;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   }
 
   body {
     min-height: 100vh;
-    /* Fondo sólido también en body para overscroll/elastic scroll en iOS */
-    background-color: #0f172a;
+    /* Fondo sólido en claro */
+    background-color: #ffffff;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.5;
   }
@@ -34,6 +34,11 @@
 
   .dark body::before {
     background: #1a202c;
+  }
+
+  /* Colores sólidos para esquinas/overscroll en modo oscuro de la app (.dark en html) */
+  .dark html, .dark body {
+    background-color: #141c2b;
   }
 }
 

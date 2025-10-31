@@ -22,6 +22,11 @@ function DarkModeToggle() {
     } else {
       document.documentElement.classList.remove('dark')
     }
+    // Actualizar theme-color dinámico para Safari/Android
+    const meta = document.querySelector('meta#theme-color-dynamic') || document.querySelector('meta[name="theme-color"]')
+    if (meta) {
+      meta.setAttribute('content', isDarkMode ? '#141c2b' : '#ffffff')
+    }
   }
 
   const toggleDarkMode = () => {
