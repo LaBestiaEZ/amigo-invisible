@@ -101,7 +101,7 @@ function StudentWaiting({ participant, room, onLeave, supabase }) {
   }
 
   return (
-    <div className="min-h-screen h-screen bg-gradient-to-br from-green-500 to-green-700 dark:from-gray-900 dark:to-gray-800 p-4 overflow-y-auto">
+    <div className="min-h-screen min-h-[100svh] min-h-[100dvh] bg-gradient-to-br from-green-500 to-green-700 dark:from-gray-900 dark:to-gray-800 p-4 overflow-y-auto">
       <div className="max-w-2xl mx-auto my-auto">
         {/* Leave Button */}
         <button 
