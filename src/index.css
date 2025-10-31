@@ -18,6 +18,19 @@
 html {
   height: 100%;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-attachment: fixed;
+}
+
+/* Pseudo-elemento para forzar el fondo detrás de las safe areas de iOS */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  z-index: -9999;
 }
 
 body {

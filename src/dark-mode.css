@@ -110,3 +110,22 @@ html.force-light body {
 .receiver-icon {
   filter: none !important;
 }
+
+/* Fondo oscuro para safe areas en iOS en dark mode */
+@media (prefers-color-scheme: dark) {
+  html:not(.force-light) {
+    background: #1a202c;
+  }
+  
+  body:not(.force-light)::before {
+    background: #1a202c;
+  }
+}
+
+html.dark-mode {
+  background: #1a202c !important;
+}
+
+html.dark-mode body::before {
+  background: #1a202c !important;
+}
