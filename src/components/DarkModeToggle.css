@@ -25,14 +25,3 @@
 .dark-mode-toggle:active {
   transform: scale(0.95);
 }
-
-/* Responsive */
-@media (max-width: 768px) {
-  .dark-mode-toggle {
-    width: 45px;
-    height: 45px;
-    font-size: 1.3em;
-    top: 15px;
-    right: 15px;
-  }
-}

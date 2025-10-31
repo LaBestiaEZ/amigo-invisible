@@ -1,0 +1,52 @@
+/* ============================================
+   📱 MOBILE ADJUSTMENTS
+   Ajustes específicos para dispositivos móviles
+   ============================================ */
+
+@media (max-width: 768px) {
+  /* Páginas con gradiente - ocupar más altura en móviles */
+  .home-page,
+  .student-view,
+  .student-waiting,
+  .teacher-view,
+  .teacher-auth,
+  .teacher-dashboard {
+    min-height: 105vh;
+  }
+
+  /* Reducir padding en móviles para aprovechar espacio */
+  .home-page,
+  .student-view,
+  .student-waiting,
+  .teacher-auth {
+    padding: 15px;
+  }
+
+  .teacher-view {
+    padding: 15px;
+  }
+
+  /* Ajustes para contenedores */
+  .student-container,
+  .auth-container {
+    padding: 30px 25px;
+  }
+
+  /* Dashboard en móvil */
+  .dashboard-header {
+    padding: 15px;
+  }
+
+  .dashboard-content {
+    padding: 20px 15px;
+  }
+
+  /* Dark mode toggle en móvil */
+  .dark-mode-toggle {
+    width: 45px;
+    height: 45px;
+    font-size: 1.3em;
+    top: 15px;
+    right: 15px;
+  }
+}

@@ -1,0 +1,59 @@
+/* ============================================
+   🎨 COMMON LAYOUTS
+   Layouts comunes para páginas con gradiente
+   ============================================ */
+
+/* Layout base para páginas fullscreen con gradiente */
+.gradient-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Layout centrado (usado en login, registro, etc) */
+.gradient-page.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Layout con padding normal (usado en vistas con contenido) */
+.gradient-page.padded {
+  padding: 20px;
+}
+
+/* Container blanco común para formularios */
+.white-container {
+  background: var(--card-bg, white);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px var(--card-shadow, rgba(0, 0, 0, 0.3));
+  padding: 40px;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Tamaños comunes */
+.white-container.small {
+  max-width: 450px;
+  width: 100%;
+}
+
+.white-container.medium {
+  max-width: 500px;
+  width: 100%;
+}
+
+.white-container.large {
+  max-width: 600px;
+  width: 100%;
+}

@@ -4,13 +4,6 @@
   padding: 20px;
 }
 
-/* En móviles, ocupar más altura */
-@media (max-width: 768px) {
-  .teacher-view {
-    min-height: 105vh;
-  }
-}
-
 .teacher-header {
   max-width: 1200px;
   margin: 0 auto 30px;

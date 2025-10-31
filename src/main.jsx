@@ -3,6 +3,8 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import './dark-mode.css'
 import './dark-mode-overrides.css'
+import './common-layouts.css'
+import './mobile-adjustments.css'
 import './landscape.css'
 import App from './App.jsx'
 

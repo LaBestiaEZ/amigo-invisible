@@ -7,13 +7,6 @@
   padding: 20px;
 }
 
-/* En móviles, ocupar más altura */
-@media (max-width: 768px) {
-  .student-view {
-    min-height: 105vh;
-  }
-}
-
 .student-container {
   background: var(--card-bg, white);
   border-radius: 16px;

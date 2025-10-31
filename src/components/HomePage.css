@@ -7,13 +7,6 @@
   padding: 20px;
 }
 
-/* En móviles, ocupar más altura */
-@media (max-width: 768px) {
-  .home-page {
-    min-height: 105vh;
-  }
-}
-
 .home-container {
   max-width: 900px;
   width: 100%;

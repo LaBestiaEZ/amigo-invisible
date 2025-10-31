@@ -3,13 +3,6 @@
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
-/* En móviles, ocupar más altura */
-@media (max-width: 768px) {
-  .teacher-dashboard {
-    min-height: 105vh;
-  }
-}
-
 .dashboard-header {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
