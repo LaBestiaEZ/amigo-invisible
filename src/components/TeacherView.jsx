@@ -73,7 +73,7 @@ function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults,
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-500 to-purple-700 dark:from-gray-900 dark:to-gray-800 safe-area-padding">
+    <div className="min-h-screen h-screen bg-gradient-to-br from-purple-500 to-purple-700 dark:from-gray-900 dark:to-gray-800 overflow-y-auto">
       {/* Header compacto: Título + Código + QR + Botón */}
       <div className="bg-white dark:bg-gray-800 shadow-md">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-2 sm:gap-4">
