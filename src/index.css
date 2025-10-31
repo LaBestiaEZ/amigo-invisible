@@ -18,6 +18,8 @@
 html {
   height: 100%;
   height: -webkit-fill-available;
+  /* Background que coincide con el gradiente para evitar franjas en iOS */
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 body {
@@ -26,7 +28,7 @@ body {
   min-height: 100vh;
   min-height: -webkit-fill-available;
   color: var(--text-primary);
-  background-color: var(--bg-primary);
+  background-color: transparent;
   transition: background-color 0.3s ease, color 0.3s ease;
   overflow-x: hidden;
 }
@@ -34,5 +36,5 @@ body {
 #root {
   min-height: 100vh;
   min-height: -webkit-fill-available;
-  background-color: var(--bg-primary);
+  background-color: transparent;
 }
