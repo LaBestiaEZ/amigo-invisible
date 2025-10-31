@@ -18,13 +18,13 @@ function HomePage({ onCreateRoom, onJoinAsStudent }) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center p-4 safe-area-padding">
+    <div className="min-h-screen bg-gradient-to-br from-purple-500 to-purple-700 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4 safe-area-padding">
       <div className="w-full max-w-4xl animate-[fade-in_0.5s_ease-out]">
         {/* Header */}
         <div className="text-center mb-12">
           <div className="text-7xl mb-4">🎅</div>
           <h1 className="text-5xl font-bold text-white mb-3">Amigo Invisible</h1>
-          <p className="text-purple-100 text-lg">Sistema de sorteo para institutos</p>
+          <p className="text-purple-100 dark:text-gray-300 text-lg">Sistema de sorteo para institutos</p>
         </div>
 
         {/* Role Cards */}
@@ -32,12 +32,12 @@ function HomePage({ onCreateRoom, onJoinAsStudent }) {
           {/* Teacher Card */}
           <div 
             onClick={onCreateRoom}
-            className="bg-white rounded-2xl shadow-xl p-8 text-center cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl active:scale-95"
+            className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 text-center cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl active:scale-95"
           >
             <div className="text-6xl mb-4">👨‍🏫</div>
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">Soy Profesor</h2>
-            <p className="text-gray-600 mb-6">Crear y gestionar salas de sorteo</p>
-            <button className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">Soy Profesor</h2>
+            <p className="text-gray-600 dark:text-gray-400 mb-6">Crear y gestionar salas de sorteo</p>
+            <button className="w-full bg-purple-600 hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
               Acceder
             </button>
           </div>
@@ -45,12 +45,12 @@ function HomePage({ onCreateRoom, onJoinAsStudent }) {
           {/* Student Card */}
           <div 
             onClick={onJoinAsStudent}
-            className="bg-white rounded-2xl shadow-xl p-8 text-center cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl active:scale-95"
+            className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 text-center cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl active:scale-95"
           >
             <div className="text-6xl mb-4">🎓</div>
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">Soy Estudiante</h2>
-            <p className="text-gray-600 mb-6">Unirme a una sala existente</p>
-            <button className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">Soy Estudiante</h2>
+            <p className="text-gray-600 dark:text-gray-400 mb-6">Unirme a una sala existente</p>
+            <button className="w-full bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
               Unirse con Código
             </button>
           </div>
@@ -58,7 +58,7 @@ function HomePage({ onCreateRoom, onJoinAsStudent }) {
 
         {/* Footer */}
         <div className="text-center">
-          <p className="text-purple-100">✨ Sistema interactivo de amigo invisible con códigos QR</p>
+          <p className="text-purple-100 dark:text-gray-400">✨ Sistema interactivo de amigo invisible con códigos QR</p>
         </div>
       </div>
     </div>
