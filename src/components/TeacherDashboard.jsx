@@ -41,32 +41,75 @@ function TeacherDashboard({ user, rooms, onCreateRoom, onOpenRoom, onDeleteRoom,
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-500 to-purple-700 dark:from-gray-900 dark:to-gray-800 safe-area-padding">
-      {/* Header */}
-      <div className="bg-white dark:bg-gray-800 shadow-md">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div className="text-4xl">👨‍🏫</div>
-            <div>
-              <h1 className="text-2xl font-bold text-gray-800 dark:text-white">Mis Salas</h1>
-              <p className="text-sm text-gray-600 dark:text-gray-400">{user.email}</p>
+      {/* Header Mejorado */}
+      <div className="bg-gradient-to-r from-purple-600 to-purple-800 dark:from-gray-800 dark:to-gray-900 shadow-lg">
+        <div className="max-w-7xl mx-auto px-4 py-6">
+          {/* Top Row: Logo y Logout */}
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <div className="w-14 h-14 bg-white/20 dark:bg-white/10 rounded-full flex items-center justify-center text-3xl backdrop-blur-sm">
+                👨‍🏫
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold text-white">Panel del Profesor</h1>
+                <p className="text-sm text-purple-100 dark:text-gray-400">{user.email}</p>
+              </div>
+            </div>
+            <button 
+              onClick={onLogout} 
+              className="px-4 py-2 bg-white/20 hover:bg-white/30 dark:bg-red-500/80 dark:hover:bg-red-600 backdrop-blur-sm text-white rounded-lg font-medium transition-all hover:scale-105 active:scale-95"
+            >
+              Cerrar Sesión
+            </button>
+          </div>
+
+          {/* Stats Row */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="bg-white/10 dark:bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center text-xl">
+                  📚
+                </div>
+                <div>
+                  <p className="text-xs text-purple-100 dark:text-gray-400">Total Salas</p>
+                  <p className="text-2xl font-bold text-white">{rooms.length}</p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white/10 dark:bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-green-500/30 rounded-lg flex items-center justify-center text-xl">
+                  ✓
+                </div>
+                <div>
+                  <p className="text-xs text-purple-100 dark:text-gray-400">Completadas</p>
+                  <p className="text-2xl font-bold text-white">{rooms.filter(r => r.status === 'completed').length}</p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white/10 dark:bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-yellow-500/30 rounded-lg flex items-center justify-center text-xl">
+                  ⏳
+                </div>
+                <div>
+                  <p className="text-xs text-purple-100 dark:text-gray-400">En Espera</p>
+                  <p className="text-2xl font-bold text-white">{rooms.filter(r => r.status === 'waiting').length}</p>
+                </div>
+              </div>
             </div>
           </div>
-          <button 
-            onClick={onLogout} 
-            className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-medium transition-colors"
-          >
-            Cerrar Sesión
-          </button>
         </div>
       </div>
 
       {/* Content */}
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Actions Bar */}
-        <div className="mb-6">
+        <div className="mb-6 flex items-center justify-between">
+          <h2 className="text-2xl font-bold text-white">Mis Salas de Sorteo</h2>
           <button 
             onClick={() => setShowCreateForm(!showCreateForm)}
-            className={`px-6 py-3 rounded-lg font-semibold transition-all ${showCreateForm ? 'bg-gray-500 hover:bg-gray-600' : 'bg-green-500 hover:bg-green-600'} text-white`}
+            className={`px-6 py-3 rounded-lg font-semibold transition-all shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 ${showCreateForm ? 'bg-gray-600 hover:bg-gray-700' : 'bg-green-500 hover:bg-green-600'} text-white`}
           >
             {showCreateForm ? '✕ Cancelar' : '➕ Nueva Sala'}
           </button>
