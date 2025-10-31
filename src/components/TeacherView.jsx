@@ -76,24 +76,25 @@ function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults,
     <div className="min-h-screen bg-gradient-to-br from-purple-500 to-purple-700 dark:from-gray-900 dark:to-gray-800 safe-area-padding">
       {/* Header compacto: Título + Código + QR + Botón */}
       <div className="bg-white dark:bg-gray-800 shadow-md">
-        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-2 sm:gap-4">
           {/* Título de la sala */}
-          <div className="flex-shrink-0">
-            <h1 className="text-xl font-bold text-gray-800 dark:text-white">{room.name}</h1>
-            <p className="text-xs text-gray-600 dark:text-gray-400">Profesor: {room.teacher_name}</p>
+          <div className="flex-shrink-0 min-w-0">
+            <h1 className="text-base sm:text-xl font-bold text-gray-800 dark:text-white truncate">{room.name}</h1>
+            <p className="text-xs text-gray-600 dark:text-gray-400 hidden sm:block">Profesor: {room.teacher_name}</p>
           </div>
           
-          {/* Código de sala */}
-          <div className="hidden sm:flex items-center gap-2 px-3 py-2 bg-purple-50 dark:bg-purple-900/20 border border-purple-300 dark:border-purple-700 rounded-lg">
-            <span className="text-xs font-medium text-purple-700 dark:text-purple-300">Código:</span>
-            <span className="text-xl font-bold text-purple-600 dark:text-purple-400 tracking-wider font-mono">{room.code}</span>
+          {/* Código de sala - visible siempre */}
+          <div className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 sm:py-2 bg-purple-50 dark:bg-purple-900/20 border border-purple-300 dark:border-purple-700 rounded-lg">
+            <span className="text-xs font-medium text-purple-700 dark:text-purple-300 hidden sm:inline">Código:</span>
+            <span className="text-base sm:text-xl font-bold text-purple-600 dark:text-purple-400 tracking-wider font-mono">{room.code}</span>
           </div>
 
-          {/* QR Code pequeño */}
-          <div className="hidden md:block p-2 bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
+          {/* QR Code - visible siempre, más grande */}
+          <div className="p-1.5 sm:p-2 bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
             <QRCodeSVG 
               value={roomUrl} 
-              size={60}
+              size={50}
+              className="sm:w-20 sm:h-20"
               level="H"
               includeMargin={false}
             />
@@ -102,7 +103,7 @@ function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults,
           {/* Botón Atrás */}
           <button 
             onClick={onGoBack}
-            className="flex-shrink-0 px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg font-medium transition-colors text-sm"
+            className="flex-shrink-0 px-3 sm:px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg font-medium transition-colors text-xs sm:text-sm"
           >
             ← Atrás
           </button>
@@ -129,26 +130,26 @@ function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults,
             </div>
           ) : (
             <>
-              {/* Avatars Grid */}
-              <div className="grid grid-cols-3 sm:grid-cols-4 gap-4 mb-6">
+              {/* Avatars Grid - más columnas para 30+ participantes */}
+              <div className="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-3 mb-6">
                 {participants.map((participant, index) => (
                   <div key={participant.id} className="relative group">
                     {room.status === 'waiting' && (
                       <button
                         onClick={() => handleRemoveParticipant(participant)}
                         title={`Expulsar a ${participant.name}`}
-                        className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 hover:bg-red-600 text-white rounded-full text-xs flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10"
+                        className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 hover:bg-red-600 text-white rounded-full text-xs flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10"
                       >
                         ✕
                       </button>
                     )}
                     <div 
-                      className="w-full aspect-square rounded-full flex items-center justify-center text-3xl shadow-lg"
+                      className="w-full aspect-square rounded-full flex items-center justify-center text-xl sm:text-2xl shadow-md"
                       style={{ backgroundColor: getAvatarColor(participant.name, index) }}
                     >
                       {getAvatarEmoji(index)}
                     </div>
-                    <p className="mt-2 text-xs text-center text-gray-700 dark:text-gray-300 font-medium truncate">
+                    <p className="mt-1 text-[10px] sm:text-xs text-center text-gray-700 dark:text-gray-300 font-medium truncate">
                       {participant.name}
                     </p>
                   </div>
