@@ -35,7 +35,7 @@ function StudentView({ onJoinRoom, initialCode = '' }) {
   }
 
   return (
-    <div className="min-h-screen min-h-[100svh] min-h-[100dvh] bg-gradient-to-br from-green-500 to-green-700 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div className="min-h-screen min-h-[100svh] min-h-[100dvh] bg-gradient-to-br from-purple-500 to-purple-700 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
       <div className="w-full max-w-md bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 sm:p-8 animate-[fade-in_0.5s_ease-out] my-auto">
         {/* Header */}
         <div className="text-center mb-6 sm:mb-8">
