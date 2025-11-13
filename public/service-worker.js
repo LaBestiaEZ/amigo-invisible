@@ -2,11 +2,7 @@
 const CACHE_NAME = 'amigo-invisible-v1';
 const urlsToCache = [
   '/',
-  '/index.html',
-  '/src/main.jsx',
-  '/src/App.jsx',
-  '/src/App.css',
-  '/src/index.css'
+  '/index.html'
 ];
 
 // Instalación del Service Worker
@@ -72,8 +68,6 @@ self.addEventListener('fetch', (event) => {
 self.addEventListener('push', (event) => {
   const options = {
     body: event.data ? event.data.text() : '¡Nuevo sorteo realizado!',
-    icon: '/icon-192.png',
-    badge: '/icon-192.png',
     vibrate: [200, 100, 200],
     data: {
       dateOfArrival: Date.now(),
