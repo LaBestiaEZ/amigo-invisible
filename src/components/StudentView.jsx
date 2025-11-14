@@ -1,20 +1,63 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { HapticFeedback } from '../lib/haptic'
 
-function StudentView({ onJoinRoom, initialCode = '', onLeave = () => {} }) {
+function StudentView({ onJoinRoom, initialCode = '', onLeave, supabase }) {
   const [code, setCode] = useState(initialCode)
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
-  const [step, setStep] = useState(initialCode ? 'form' : 'code') // code or form
+  const [step, setStep] = useState('code') // Siempre empezar en 'code' para validar
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
-  const handleCodeSubmit = (e) => {
-    e.preventDefault()
-    if (code.trim()) {
-      HapticFeedback.light()
+  // Si hay código inicial, validar automáticamente
+  useEffect(() => {
+    if (initialCode && supabase) {
+      validateRoom(initialCode)
+    }
+  }, [initialCode])
+
+  const validateRoom = async (roomCode) => {
+    setLoading(true)
+    setError('')
+
+    try {
+      const { data: room, error: roomError } = await supabase
+        .from('rooms')
+        .select('id, name, status')
+        .eq('code', roomCode.toUpperCase())
+        .maybeSingle()
+
+      if (roomError) {
+        throw new Error('Error al verificar la sala')
+      }
+
+      if (!room) {
+        throw new Error('Sala no encontrada. Verifica el código.')
+      }
+
+      if (room.status !== 'waiting') {
+        throw new Error('Esta sala ya no está aceptando participantes. El sorteo ya fue realizado.')
+      }
+
+      // Si todo está bien, pasar al siguiente paso
       setStep('form')
-      setError('')
+    } catch (err) {
+      setError(err.message || 'Error al verificar la sala')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleCodeSubmit = async (e) => {
+    e.preventDefault()
+    if (!code.trim()) return
+
+    HapticFeedback.light()
+    await validateRoom(code)
+    if (!error) {
+      HapticFeedback.success()
+    } else {
+      HapticFeedback.error()
     }
   }
 
@@ -44,7 +87,7 @@ function StudentView({ onJoinRoom, initialCode = '', onLeave = () => {} }) {
               onClick={onLeave} 
               className="px-4 py-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-white rounded-lg transition-colors font-medium"
             >
-              ← Salir
+              ← Volver
             </button>
           </div>
           <div className="text-center">
@@ -82,9 +125,13 @@ function StudentView({ onJoinRoom, initialCode = '', onLeave = () => {} }) {
             </div>
             <button 
               type="submit" 
-              className="w-full bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 text-white font-semibold py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg transition-colors text-sm sm:text-base"
+              disabled={loading}
+              className="w-full bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 text-white font-semibold py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg transition-colors text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
-              Continuar →
+              {loading && (
+                <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+              )}
+              {loading ? 'Verificando...' : 'Continuar →'}
             </button>
           </form>
         )}

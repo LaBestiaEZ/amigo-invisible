@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-function TeacherAuth({ onLogin, onRegister, onBack = () => {} }) {
+function TeacherAuth({ onLogin, onRegister, onBack}) {
   const [isLogin, setIsLogin] = useState(true)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')

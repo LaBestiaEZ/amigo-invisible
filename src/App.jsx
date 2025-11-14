@@ -583,6 +583,7 @@ VITE_SUPABASE_ANON_KEY=tu-clave-anon-key
           onJoinRoom={joinRoom}
           initialCode={new URLSearchParams(window.location.search).get('code') || ''}
           onLeave={goBack}
+          supabase={supabase}
         />
       )}
 
