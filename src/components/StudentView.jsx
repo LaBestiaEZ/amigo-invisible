@@ -36,7 +36,7 @@ function StudentView({ onJoinRoom, initialCode = '', onLeave, supabase }) {
       }
 
       if (room.status !== 'waiting') {
-        throw new Error('Esta sala ya no está aceptando participantes. El sorteo ya fue realizado.')
+        throw new Error('El sorteo ya a finalizado. No puedes unirte.')
       }
 
       // Si todo está bien, pasar al siguiente paso
@@ -200,7 +200,7 @@ function StudentView({ onJoinRoom, initialCode = '', onLeave, supabase }) {
 
         {/* Footer */}
         <div className="mt-4 sm:mt-6 text-center text-xs sm:text-sm text-gray-500 dark:text-gray-500 px-2">
-          <p>Escanea el QR del profesor o ingresa el código de la sala</p>
+          <p>Escanea el QR del organizador o ingresa el código de la sala</p>
         </div>
       </div>
     </div>

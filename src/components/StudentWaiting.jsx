@@ -163,7 +163,7 @@ function StudentWaiting({ participant, room, onLeave, supabase }) {
             <div className="text-center py-8">
               <div className="text-6xl mb-4">⏳</div>
               <p className="text-lg text-gray-800 dark:text-white mb-2">
-                Esperando a que el profesor realice el sorteo{dots}
+                Esperando a que el organizador/a realice el sorteo{dots}
               </p>
               <small className="text-gray-600 dark:text-gray-400">
                 Recibirás un email con tu amigo invisible cuando el sorteo esté listo

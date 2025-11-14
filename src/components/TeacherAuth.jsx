@@ -46,7 +46,7 @@ function TeacherAuth({ onLogin, onRegister, onBack}) {
             <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-2">
               {isLogin ? 'Iniciar Sesión' : 'Crear Cuenta'}
             </h1>
-            <p className="text-gray-600 dark:text-gray-400">Acceso para Profesores</p>
+            <p className="text-gray-600 dark:text-gray-400">Acceso para Organizadores</p>
           </div>
         </div>
 

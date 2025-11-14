@@ -51,7 +51,7 @@ function TeacherDashboard({ user, rooms, onCreateRoom, onOpenRoom, onDeleteRoom,
                 👨‍🏫
               </div>
               <div className="min-w-0 flex-1">
-                <h1 className="text-lg sm:text-2xl font-bold text-white truncate">Panel del Profesor</h1>
+                <h1 className="text-lg sm:text-2xl font-bold text-white truncate">Panel del Organizador/a</h1>
                 <p className="text-xs sm:text-sm text-purple-100 dark:text-gray-400 truncate">{user.email}</p>
               </div>
             </div>
@@ -72,7 +72,7 @@ function TeacherDashboard({ user, rooms, onCreateRoom, onOpenRoom, onDeleteRoom,
                   📚
                 </div>
                 <div>
-                  <p className="text-[10px] sm:text-xs text-purple-100 dark:text-gray-400">Total</p>
+                  <p className="text-[10px] sm:text-xs text-purple-100 dark:text-gray-400">Salas Totales</p>
                   <p className="text-lg sm:text-2xl font-bold text-white">{rooms.length}</p>
                 </div>
               </div>
@@ -83,7 +83,7 @@ function TeacherDashboard({ user, rooms, onCreateRoom, onOpenRoom, onDeleteRoom,
                   ✓
                 </div>
                 <div>
-                  <p className="text-[10px] sm:text-xs text-purple-100 dark:text-gray-400">Completas</p>
+                  <p className="text-[10px] sm:text-xs text-purple-100 dark:text-gray-400">Salas Finalizadas</p>
                   <p className="text-lg sm:text-2xl font-bold text-white">{rooms.filter(r => r.status === 'completed').length}</p>
                 </div>
               </div>
@@ -94,7 +94,7 @@ function TeacherDashboard({ user, rooms, onCreateRoom, onOpenRoom, onDeleteRoom,
                   ⏳
                 </div>
                 <div>
-                  <p className="text-[10px] sm:text-xs text-purple-100 dark:text-gray-400">Espera</p>
+                  <p className="text-[10px] sm:text-xs text-purple-100 dark:text-gray-400">Salas en Espera</p>
                   <p className="text-lg sm:text-2xl font-bold text-white">{rooms.filter(r => r.status === 'waiting').length}</p>
                 </div>
               </div>
@@ -157,7 +157,7 @@ function TeacherDashboard({ user, rooms, onCreateRoom, onOpenRoom, onDeleteRoom,
               onClick={() => setShowCreateForm(true)}
               className="px-4 sm:px-6 py-2.5 sm:py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition-colors text-sm sm:text-base"
             >
-              ➕ Crear Primera Sala
+              ➕ Nueva Sala
             </button>
           </div>
         ) : (

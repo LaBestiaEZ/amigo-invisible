@@ -359,6 +359,11 @@ function App() {
       return
     }
 
+    // Confirmación antes de realizar el sorteo
+    if (!confirm(`¿Estás seguro de realizar el sorteo con ${participants.length} participantes?\n\nEsta acción no se puede deshacer y se enviarán los emails automáticamente.`)) {
+      return
+    }
+
     try {
       // Actualizar estado de la sala
       await supabase

@@ -80,7 +80,7 @@ function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults,
           {/* Título de la sala */}
           <div className="flex-shrink-0 min-w-0">
             <h1 className="text-base sm:text-xl font-bold text-gray-800 dark:text-white truncate">{room.name}</h1>
-            <p className="text-xs text-gray-600 dark:text-gray-400 hidden sm:block">Profesor: {room.teacher_name}</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400 hidden sm:block">Organizador/a: {room.teacher_name}</p>
           </div>
           
           {/* Código de sala - visible siempre */}
