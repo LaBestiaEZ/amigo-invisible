@@ -247,6 +247,7 @@ function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults,
       {editingParticipant && (
         <EditParticipantModal
           participant={editingParticipant}
+          participants={participants}
           onClose={() => setEditingParticipant(null)}
           onSave={handleSaveParticipant}
         />

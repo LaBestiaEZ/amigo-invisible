@@ -1,10 +1,21 @@
 import { useState } from 'react'
 
-function EditParticipantModal({ participant, onClose, onSave }) {
+function EditParticipantModal({ participant, participants, onClose, onSave }) {
   const [email, setEmail] = useState(participant?.email || '')
   const [preferences, setPreferences] = useState(participant?.preferences || '')
+  const [restrictions, setRestrictions] = useState(participant?.restrictions || [])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+
+  const toggleRestriction = (participantId) => {
+    setRestrictions(prev => {
+      if (prev.includes(participantId)) {
+        return prev.filter(id => id !== participantId)
+      } else {
+        return [...prev, participantId]
+      }
+    })
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -15,7 +26,8 @@ function EditParticipantModal({ participant, onClose, onSave }) {
       await onSave({
         id: participant.id,
         email: email.trim(),
-        preferences: preferences.trim()
+        preferences: preferences.trim(),
+        restrictions: restrictions
       })
       onClose()
     } catch (err) {
@@ -23,6 +35,9 @@ function EditParticipantModal({ participant, onClose, onSave }) {
       setLoading(false)
     }
   }
+
+  // Filtrar participantes (excluir al actual)
+  const otherParticipants = participants.filter(p => p.id !== participant.id)
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in" onClick={onClose}>
@@ -81,6 +96,43 @@ function EditParticipantModal({ participant, onClose, onSave }) {
               Esta información se mostrará a quien le toque este participante
             </p>
           </div>
+
+          {/* Restricciones */}
+          {otherParticipants.length > 0 && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                🚫 Restricciones <span className="text-xs text-gray-500">(opcional)</span>
+              </label>
+              <div className="p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700/50 max-h-48 overflow-y-auto">
+                <p className="text-xs text-gray-600 dark:text-gray-400 mb-3">
+                  Marca las personas que <strong>NO</strong> pueden tocarle a <strong>{participant.name}</strong>:
+                </p>
+                <div className="space-y-2">
+                  {otherParticipants.map(p => (
+                    <label 
+                      key={p.id}
+                      className="flex items-center gap-2 p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded cursor-pointer"
+                    >
+                      <input
+                        type="checkbox"
+                        checked={restrictions.includes(p.id)}
+                        onChange={() => toggleRestriction(p.id)}
+                        disabled={loading}
+                        className="w-4 h-4 text-purple-600 rounded focus:ring-purple-500"
+                      />
+                      <span className="text-sm text-gray-700 dark:text-gray-300">{p.name}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+              <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                {restrictions.length > 0 
+                  ? `${restrictions.length} restricción${restrictions.length > 1 ? 'es' : ''} aplicada${restrictions.length > 1 ? 's' : ''}`
+                  : 'No hay restricciones'
+                }
+              </p>
+            </div>
+          )}
 
           <div className="flex gap-3 pt-2">
             <button

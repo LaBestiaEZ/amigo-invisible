@@ -353,13 +353,14 @@ function App() {
     }
   }
 
-  const editParticipant = async ({ id, email, preferences }) => {
+  const editParticipant = async ({ id, email, preferences, restrictions }) => {
     try {
       const { error } = await supabase
         .from('room_participants')
         .update({ 
           email: email,
-          preferences: preferences || null
+          preferences: preferences || null,
+          restrictions: restrictions || []
         })
         .eq('id', id)
 
@@ -393,19 +394,11 @@ function App() {
         .update({ status: 'drawing' })
         .eq('id', currentRoom.id)
 
-      // Crear asignaciones aleatorias
-      const shuffled = [...participants]
-      for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1))
-        ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
-      }
-
-      // Asegurar que nadie se regala a sí mismo
-      for (let i = 0; i < participants.length; i++) {
-        if (participants[i].id === shuffled[i].id) {
-          const nextIndex = (i + 1) % shuffled.length
-          ;[shuffled[i], shuffled[nextIndex]] = [shuffled[nextIndex], shuffled[i]]
-        }
+      // Algoritmo mejorado de sorteo con restricciones
+      const shuffled = generateValidAssignments(participants)
+      
+      if (!shuffled) {
+        throw new Error('No se pudo generar un sorteo válido con las restricciones actuales. Intenta modificar las restricciones.')
       }
 
       // Guardar asignaciones
@@ -445,7 +438,7 @@ function App() {
       alert('¡Sorteo completado! Los emails han sido enviados.')
     } catch (error) {
       console.error('Error performing draw:', error)
-      alert('Error al realizar el sorteo')
+      alert(error.message || 'Error al realizar el sorteo')
       
       // Revertir estado
       await supabase
@@ -453,6 +446,61 @@ function App() {
         .update({ status: 'waiting' })
         .eq('id', currentRoom.id)
     }
+  }
+
+  // Algoritmo mejorado que evita regalos mutuos y respeta restricciones
+  const generateValidAssignments = (participants) => {
+    const maxAttempts = 1000
+    
+    for (let attempt = 0; attempt < maxAttempts; attempt++) {
+      // Mezclar aleatoriamente (Fisher-Yates)
+      const shuffled = [...participants]
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1))
+        ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+      }
+
+      // Verificar todas las reglas
+      let isValid = true
+      
+      for (let i = 0; i < participants.length; i++) {
+        const giver = participants[i]
+        const receiver = shuffled[i]
+        
+        // Regla 1: Nadie se regala a sí mismo
+        if (giver.id === receiver.id) {
+          isValid = false
+          break
+        }
+        
+        // Regla 2: Evitar regalos mutuos (solo si hay más de 2 personas)
+        if (participants.length > 2) {
+          const receiverIndex = participants.findIndex(p => p.id === receiver.id)
+          const receiversReceiver = shuffled[receiverIndex]
+          
+          if (receiversReceiver && receiversReceiver.id === giver.id) {
+            // A → B y B → A (regalo mutuo detectado)
+            isValid = false
+            break
+          }
+        }
+        
+        // Regla 3: Respetar restricciones
+        if (giver.restrictions && Array.isArray(giver.restrictions)) {
+          if (giver.restrictions.includes(receiver.id)) {
+            isValid = false
+            break
+          }
+        }
+      }
+      
+      if (isValid) {
+        return shuffled
+      }
+    }
+    
+    // No se pudo encontrar una asignación válida
+    return null
   }
 
   const sendEmails = async (givers, receivers) => {

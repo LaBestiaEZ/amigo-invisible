@@ -23,6 +23,7 @@ CREATE TABLE room_participants (
   name TEXT NOT NULL,
   email TEXT NOT NULL,
   preferences TEXT,
+  restrictions TEXT[], -- Array de IDs de participantes que no pueden tocarle
   joined_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   UNIQUE(room_id, email)
 );
