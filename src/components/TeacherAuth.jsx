@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-function TeacherAuth({ onLogin, onRegister }) {
+function TeacherAuth({ onLogin, onRegister, onBack = () => {} }) {
   const [isLogin, setIsLogin] = useState(true)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -33,6 +33,14 @@ function TeacherAuth({ onLogin, onRegister }) {
       <div className="w-full max-w-md bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 animate-[fade-in_0.5s_ease-out] my-auto">
         {/* Header */}
         <div className="text-center mb-8">
+          <div className="text-left mb-4">
+            <button
+              onClick={onBack}
+              className="px-3 py-2 bg-white/20 hover:bg-white/30 dark:bg-gray-800/50 dark:hover:bg-gray-800/70 text-white rounded-lg backdrop-blur-sm transition-colors"
+            >
+              ← Volver
+            </button>
+          </div>
           <div className="text-6xl mb-4">👨‍🏫</div>
           <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-2">
             {isLogin ? 'Iniciar Sesión' : 'Crear Cuenta'}

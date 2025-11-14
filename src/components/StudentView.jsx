@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { HapticFeedback } from '../lib/haptic'
 
-function StudentView({ onJoinRoom, initialCode = '' }) {
+function StudentView({ onJoinRoom, initialCode = '', onLeave = () => {} }) {
   const [code, setCode] = useState(initialCode)
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')

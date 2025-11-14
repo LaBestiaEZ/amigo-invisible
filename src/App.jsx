@@ -552,6 +552,7 @@ VITE_SUPABASE_ANON_KEY=tu-clave-anon-key
         <TeacherAuth 
           onLogin={handleTeacherLogin}
           onRegister={handleTeacherRegister}
+          onBack={goBack}
         />
       )}
 
@@ -581,6 +582,7 @@ VITE_SUPABASE_ANON_KEY=tu-clave-anon-key
         <StudentView 
           onJoinRoom={joinRoom}
           initialCode={new URLSearchParams(window.location.search).get('code') || ''}
+          onLeave={goBack}
         />
       )}
 
