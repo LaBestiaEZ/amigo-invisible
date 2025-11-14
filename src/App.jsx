@@ -513,21 +513,22 @@ function App() {
 
   if (!supabaseConfigured) {
     return (
-      <div className="app">
-        <div className="config-warning-center">
-          <h2>⚙️ Configuración Requerida</h2>
-          <ol>
-            <li>Crea un proyecto en <a href="https://supabase.com" target="_blank" rel="noopener noreferrer">Supabase</a></li>
-            <li>Ejecuta el script SQL que está en <code>supabase-setup.sql</code></li>
-            <li>Copia tus credenciales al archivo <code>.env</code>:
-              <pre>
+      <div className="min-h-screen bg-gradient-to-br from-purple-500 to-purple-700 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4 overflow-y-auto">
+        <div className="max-w-2xl bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 sm:p-8 animate-fade-in">
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">⚙️ Configuración Requerida</h2>
+          <ol className="list-decimal list-inside space-y-3 text-gray-700 dark:text-gray-300 mb-4">
+            <li>Crea un proyecto en <a href="https://supabase.com" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">Supabase</a></li>
+            <li>Ejecuta el script SQL que está en <code className="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-sm">supabase-setup.sql</code></li>
+            <li>
+              Copia tus credenciales al archivo <code className="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-sm">.env</code>:
+              <pre className="mt-2 p-3 bg-gray-100 dark:bg-gray-700 rounded text-sm overflow-x-auto">
 VITE_SUPABASE_URL=https://tu-proyecto.supabase.co
 VITE_SUPABASE_ANON_KEY=tu-clave-anon-key
               </pre>
             </li>
             <li>Reinicia el servidor de desarrollo</li>
           </ol>
-          <p>Lee el archivo <code>README.md</code> para instrucciones detalladas.</p>
+          <p className="text-gray-600 dark:text-gray-400 text-sm">Lee el archivo <code className="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-xs">README.md</code> para instrucciones detalladas.</p>
         </div>
       </div>
     )
@@ -535,10 +536,10 @@ VITE_SUPABASE_ANON_KEY=tu-clave-anon-key
 
   if (loading) {
     return (
-      <div className="app">
-        <div className="loading-screen">
-          <div className="spinner-large"></div>
-          <p>Cargando...</p>
+      <div className="min-h-screen bg-gradient-to-br from-purple-500 to-purple-700 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
+        <div className="text-center animate-fade-in">
+          <div className="w-16 h-16 mx-auto mb-4 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-white text-lg font-medium">Cargando...</p>
         </div>
       </div>
     )
