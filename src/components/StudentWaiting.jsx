@@ -103,15 +103,16 @@ function StudentWaiting({ participant, room, onLeave, supabase }) {
   return (
     <div className="min-h-screen min-h-[100svh] min-h-[100dvh] bg-gradient-to-br from-purple-500 to-purple-700 dark:from-gray-900 dark:to-gray-800 p-4 overflow-y-auto">
       <div className="max-w-2xl mx-auto my-auto">
-        {/* Leave Button */}
-        <button 
-          onClick={onLeave} 
-          className="mb-4 px-4 py-2 bg-white/20 hover:bg-white/30 dark:bg-gray-800/50 dark:hover:bg-gray-800/70 text-white rounded-lg backdrop-blur-sm transition-colors"
-        >
-          ← Salir
-        </button>
-        
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 animate-[fade-in_0.5s_ease-out]">
+          {/* Leave Button */}
+          <div className="mb-6">
+            <button 
+              onClick={onLeave} 
+              className="px-4 py-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-white rounded-lg transition-colors font-medium"
+            >
+              ← Salir
+            </button>
+          </div>
           {/* Success Animation */}
           <div className="flex items-center justify-center mb-6">
             <div className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center text-white text-5xl font-bold animate-[fade-in_0.5s_ease-out]">

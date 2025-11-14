@@ -32,20 +32,22 @@ function TeacherAuth({ onLogin, onRegister, onBack = () => {} }) {
     <div className="min-h-screen min-h-[100svh] min-h-[100dvh] bg-gradient-to-br from-purple-500 to-purple-700 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4 overflow-y-auto">
       <div className="w-full max-w-md bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 animate-[fade-in_0.5s_ease-out] my-auto">
         {/* Header */}
-        <div className="text-center mb-8">
-          <div className="text-left mb-4">
+        <div className="mb-8">
+          <div className="mb-4">
             <button
               onClick={onBack}
-              className="px-3 py-2 bg-white/20 hover:bg-white/30 dark:bg-gray-800/50 dark:hover:bg-gray-800/70 text-white rounded-lg backdrop-blur-sm transition-colors"
+              className="px-4 py-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-white rounded-lg transition-colors font-medium"
             >
               ← Volver
             </button>
           </div>
-          <div className="text-6xl mb-4">👨‍🏫</div>
-          <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-2">
-            {isLogin ? 'Iniciar Sesión' : 'Crear Cuenta'}
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400">Acceso para Profesores</p>
+          <div className="text-center">
+            <div className="text-6xl mb-4">👨‍🏫</div>
+            <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-2">
+              {isLogin ? 'Iniciar Sesión' : 'Crear Cuenta'}
+            </h1>
+            <p className="text-gray-600 dark:text-gray-400">Acceso para Profesores</p>
+          </div>
         </div>
 
         {/* Error Message */}
