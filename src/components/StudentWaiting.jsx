@@ -110,7 +110,7 @@ function StudentWaiting({ participant, room, onLeave, supabase }) {
               onClick={onLeave} 
               className="px-4 py-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-white rounded-lg transition-colors font-medium"
             >
-              ← Salir
+              ← Volver
             </button>
           </div>
           {/* Success Animation */}
