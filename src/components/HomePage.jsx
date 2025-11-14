@@ -19,7 +19,7 @@ function HomePage({ onCreateRoom, onJoinAsStudent }) {
 
   return (
     <div className="min-h-screen min-h-[100svh] min-h-[100dvh] bg-gradient-to-br from-purple-500 to-purple-700 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
-      <div className="w-full max-w-4xl animate-[fade-in_0.5s_ease-out] my-auto">
+      <div className="w-full max-w-4xl animate-fade-in my-auto">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">
           <div className="text-5xl sm:text-7xl mb-3 sm:mb-4">🎅</div>

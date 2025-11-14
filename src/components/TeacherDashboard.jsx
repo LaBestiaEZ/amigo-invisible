@@ -118,7 +118,7 @@ function TeacherDashboard({ user, rooms, onCreateRoom, onOpenRoom, onDeleteRoom,
 
         {/* Create Form */}
         {showCreateForm && (
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-4 sm:p-6 mb-4 sm:mb-6 animate-[fade-in_0.3s_ease-out]">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-4 sm:p-6 mb-4 sm:mb-6 animate-fade-in">
             <h3 className="text-lg sm:text-xl font-bold text-gray-800 dark:text-white mb-3 sm:mb-4">Crear Nueva Sala</h3>
             <form onSubmit={handleCreateRoom} className="space-y-4">
               <div>
