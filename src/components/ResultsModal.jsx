@@ -94,7 +94,7 @@ function ResultsModal({ roomId, roomName, onClose }) {
             <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-2">{roomName}</h3>
             <p className="text-gray-700 dark:text-gray-300 mb-2">Total de asignaciones: {assignments.length}</p>
             <p className="text-red-600 dark:text-red-400 font-medium text-sm">
-              ⚠️ Esta información es confidencial. Los estudiantes NO pueden verla.
+              ⚠️ Esta información es confidencial. Los invitados NO pueden verla.
             </p>
           </div>
 
@@ -113,7 +113,7 @@ function ResultsModal({ roomId, roomName, onClose }) {
                       <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 dark:text-gray-300">#</th>
                       <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 dark:text-gray-300">Quien regala</th>
                       <th className="px-4 py-3 text-center text-sm font-semibold text-gray-700 dark:text-gray-300">→</th>
-                      <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 dark:text-gray-300">Amigo invisible</th>
+                      <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 dark:text-gray-300">A quien regala</th>
                       <th className="px-4 py-3 text-center text-sm font-semibold text-gray-700 dark:text-gray-300">Estado email</th>
                     </tr>
                   </thead>

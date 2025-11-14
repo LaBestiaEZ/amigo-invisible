@@ -38,11 +38,18 @@ function StudentView({ onJoinRoom, initialCode = '' }) {
     <div className="min-h-screen min-h-[100svh] min-h-[100dvh] bg-gradient-to-br from-purple-500 to-purple-700 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
       <div className="w-full max-w-md bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 sm:p-8 animate-[fade-in_0.5s_ease-out] my-auto">
         {/* Header */}
-        <div className="text-center mb-6 sm:mb-8">
+          <div className="text-center mb-6 sm:mb-8">
+            <button 
+            onClick={onLeave} 
+            className="mb-4 px-4 py-2 bg-white/20 hover:bg-white/30 dark:bg-gray-800/50 dark:hover:bg-gray-800/70 text-white rounded-lg backdrop-blur-sm transition-colors"
+          >
+            ← Salir
+          </button>
           <div className="text-5xl sm:text-6xl mb-3 sm:mb-4">🎅</div>
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-white mb-2">Amigo Invisible</h1>
-          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">Únete a la sala de tu clase</p>
+          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">Únete a la sala</p>
         </div>
+        
 
         {/* Error */}
         {error && (

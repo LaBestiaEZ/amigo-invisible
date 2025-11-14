@@ -35,7 +35,7 @@ function HomePage({ onCreateRoom, onJoinAsStudent }) {
             className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 sm:p-8 text-center cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl active:scale-95"
           >
             <div className="text-5xl sm:text-6xl mb-3 sm:mb-4">👨‍🏫</div>
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white mb-2">Soy Profesor</h2>
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white mb-2">Soy Organizador</h2>
             <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4 sm:mb-6">Crear y gestionar salas de sorteo</p>
             <button className="w-full bg-purple-600 hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-600 text-white font-semibold py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg transition-colors text-sm sm:text-base">
               Acceder
@@ -48,7 +48,7 @@ function HomePage({ onCreateRoom, onJoinAsStudent }) {
             className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 sm:p-8 text-center cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl active:scale-95"
           >
             <div className="text-5xl sm:text-6xl mb-3 sm:mb-4">🎓</div>
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white mb-2">Soy Estudiante</h2>
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white mb-2">Soy Invitado</h2>
             <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4 sm:mb-6">Unirme a una sala existente</p>
             <button className="w-full bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 text-white font-semibold py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg transition-colors text-sm sm:text-base">
               Unirse con Código
