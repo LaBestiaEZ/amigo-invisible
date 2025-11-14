@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
 import { QRCodeSVG } from 'qrcode.react'
 import { HapticFeedback } from '../lib/haptic'
+import EditParticipantModal from './EditParticipantModal'
 
-function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults, onRemoveParticipant }) {
+function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults, onRemoveParticipant, onEditParticipant }) {
   const [roomUrl, setRoomUrl] = useState('')
   const [showResults, setShowResults] = useState(false)
+  const [editingParticipant, setEditingParticipant] = useState(null)
 
   useEffect(() => {
     // URL para que los estudiantes se unan
@@ -33,6 +35,16 @@ function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults,
         HapticFeedback.error()
         alert('Error al expulsar: ' + error.message)
       }
+    }
+  }
+
+  const handleSaveParticipant = async (updatedData) => {
+    try {
+      await onEditParticipant(updatedData)
+      HapticFeedback.success()
+    } catch (error) {
+      HapticFeedback.error()
+      throw error
     }
   }
 
@@ -159,16 +171,27 @@ function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults,
               {/* Emails List */}
               <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
                 <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
-                  📧 Correos registrados ({participants.length})
+                  📧 Correos y preferencias ({participants.length})
                 </h3>
-                <div className="space-y-2 max-h-40 overflow-y-auto">
+                <div className="space-y-2 max-h-60 overflow-y-auto">
                   {participants.map((participant, index) => (
-                    <div key={participant.id} className="flex items-center gap-2 text-sm">
-                      <span className="text-gray-500 dark:text-gray-500">{index + 1}.</span>
-                      <span className="font-medium text-gray-800 dark:text-white">{participant.name}:</span>
-                      <span className="text-gray-600 dark:text-gray-400 truncate" title={participant.email}>
-                        {maskEmail(participant.email)}
-                      </span>
+                    <div key={participant.id} className="flex items-center justify-between gap-2 p-2 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-lg transition-colors">
+                      <div className="flex items-center gap-2 text-sm min-w-0 flex-1">
+                        <span className="text-gray-500 dark:text-gray-500 flex-shrink-0">{index + 1}.</span>
+                        <span className="font-medium text-gray-800 dark:text-white flex-shrink-0">{participant.name}:</span>
+                        <span className="text-gray-600 dark:text-gray-400 truncate" title={participant.email}>
+                          {maskEmail(participant.email)}
+                        </span>
+                        {participant.preferences && (
+                          <span className="text-green-500 dark:text-green-400 flex-shrink-0" title="Tiene preferencias">✓</span>
+                        )}
+                      </div>
+                      <button
+                        onClick={() => setEditingParticipant(participant)}
+                        className="flex-shrink-0 px-3 py-1 text-xs bg-blue-500 hover:bg-blue-600 text-white rounded font-medium transition-colors"
+                      >
+                        Editar
+                      </button>
                     </div>
                   ))}
                 </div>
@@ -219,6 +242,15 @@ function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults,
           )}
         </div>
       </div>
+
+      {/* Edit Participant Modal */}
+      {editingParticipant && (
+        <EditParticipantModal
+          participant={editingParticipant}
+          onClose={() => setEditingParticipant(null)}
+          onSave={handleSaveParticipant}
+        />
+      )}
     </div>
   )
 }

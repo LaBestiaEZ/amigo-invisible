@@ -353,6 +353,28 @@ function App() {
     }
   }
 
+  const editParticipant = async ({ id, email, preferences }) => {
+    try {
+      const { error } = await supabase
+        .from('room_participants')
+        .update({ 
+          email: email,
+          preferences: preferences || null
+        })
+        .eq('id', id)
+
+      if (error) throw error
+
+      // Recargar lista de participantes
+      await loadParticipants(currentRoom.id)
+      
+      console.log('✅ Participante actualizado correctamente')
+    } catch (error) {
+      console.error('❌ Error actualizando participante:', error)
+      throw error
+    }
+  }
+
   const performDraw = async () => {
     if (participants.length < 2) {
       alert('Se necesitan al menos 2 participantes')
@@ -439,7 +461,8 @@ function App() {
       const emailAssignments = givers.map((giver, index) => ({
         giverName: giver.name,
         giverEmail: giver.email,
-        receiverName: receivers[index].name
+        receiverName: receivers[index].name,
+        receiverPreferences: receivers[index].preferences || null
       }))
 
       // Enviar todos los emails usando el servicio de Resend
@@ -581,6 +604,7 @@ VITE_SUPABASE_ANON_KEY=tu-clave-anon-key
           onGoBack={goBack}
           onViewResults={handleViewResults}
           onRemoveParticipant={removeParticipant}
+          onEditParticipant={editParticipant}
         />
       )}
 

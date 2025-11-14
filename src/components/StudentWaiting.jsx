@@ -79,10 +79,10 @@ function StudentWaiting({ participant, room, onLeave, supabase }) {
 
       console.log('✅ Asignación encontrada:', assignmentData)
 
-      // Ahora obtener el nombre del receiver
-      const { data: receiverData, error: receiverError } = await supabase
+      // Ahora obtener el nombre y preferencias del receiver
+      const { data: receiverData, error: receiverError} = await supabase
         .from('room_participants')
-        .select('name')
+        .select('name, preferences')
         .eq('id', assignmentData.receiver_id)
         .single()
 
@@ -92,7 +92,10 @@ function StudentWaiting({ participant, room, onLeave, supabase }) {
       }
 
       console.log('✅ Receptor encontrado:', receiverData)
-      setAssignment({ receiver_name: receiverData.name })
+      setAssignment({ 
+        receiver_name: receiverData.name,
+        receiver_preferences: receiverData.preferences
+      })
     } catch (err) {
       console.error('❌ Error general:', err)
     } finally {
@@ -198,6 +201,14 @@ function StudentWaiting({ participant, room, onLeave, supabase }) {
                     <div className="text-6xl mb-3">🎅</div>
                     <div className="text-3xl font-bold text-purple-800 dark:text-purple-300">{assignment.receiver_name}</div>
                   </div>
+                  
+                  {assignment.receiver_preferences && (
+                    <div className="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-lg text-left">
+                      <p className="font-semibold text-blue-800 dark:text-blue-300 mb-2">🎁 Sus gustos/preferencias:</p>
+                      <p className="text-blue-700 dark:text-blue-400 whitespace-pre-wrap">{assignment.receiver_preferences}</p>
+                    </div>
+                  )}
+                  
                   <div className="p-4 bg-yellow-100 dark:bg-yellow-900/30 border border-yellow-300 dark:border-yellow-700 rounded-lg">
                     <p className="text-yellow-800 dark:text-yellow-300">🤫 ¡Recuerda mantenerlo en secreto!</p>
                   </div>

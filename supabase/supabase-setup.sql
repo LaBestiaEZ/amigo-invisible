@@ -22,6 +22,7 @@ CREATE TABLE room_participants (
   room_id UUID REFERENCES rooms(id) ON DELETE CASCADE,
   name TEXT NOT NULL,
   email TEXT NOT NULL,
+  preferences TEXT,
   joined_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   UNIQUE(room_id, email)
 );
@@ -76,6 +77,17 @@ WITH CHECK (true);
 -- Solo el profesor de la sala puede eliminar participantes
 CREATE POLICY "Only room teacher can delete participants" 
 ON room_participants FOR DELETE 
+USING (
+  EXISTS (
+    SELECT 1 FROM rooms 
+    WHERE rooms.id = room_participants.room_id 
+    AND rooms.teacher_id = auth.uid()
+  )
+);
+
+-- Solo el profesor de la sala puede actualizar participantes
+CREATE POLICY "Only room teacher can update participants" 
+ON room_participants FOR UPDATE 
 USING (
   EXISTS (
     SELECT 1 FROM rooms 

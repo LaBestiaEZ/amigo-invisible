@@ -4,7 +4,7 @@ import { supabase } from './supabase'
  * Envía un email a un participante con su amigo invisible asignado
  * Usa Supabase Edge Function para evitar problemas de CORS
  */
-export const sendSecretSantaEmail = async (giverName, giverEmail, receiverName, roomName) => {
+export const sendSecretSantaEmail = async (giverName, giverEmail, receiverName, roomName, receiverPreferences = null) => {
   try {
     // Llamar a la Edge Function de Supabase que maneja el envío con Resend
     const { data, error } = await supabase.functions.invoke('send-secret-santa-email', {
@@ -12,7 +12,8 @@ export const sendSecretSantaEmail = async (giverName, giverEmail, receiverName, 
         giverName,
         giverEmail,
         receiverName,
-        roomName
+        roomName,
+        receiverPreferences
       }
     })
 
@@ -63,7 +64,8 @@ export const sendBulkSecretSantaEmails = async (assignments, roomName) => {
       assignment.giverName,
       assignment.giverEmail,
       assignment.receiverName,
-      roomName
+      roomName,
+      assignment.receiverPreferences
     )
     
     results.push({

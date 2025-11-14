@@ -13,7 +13,7 @@ serve(async (req) => {
   }
 
   try {
-    const { giverName, giverEmail, receiverName, roomName } = await req.json()
+    const { giverName, giverEmail, receiverName, roomName, receiverPreferences } = await req.json()
 
     // Verificar que tenemos todos los datos
     if (!giverName || !giverEmail || !receiverName || !roomName) {
@@ -57,6 +57,12 @@ serve(async (req) => {
             <div style="font-size: 2.5em; font-weight: bold; margin-bottom: 10px;">🎁</div>
             <div style="font-size: 1.8em; font-weight: bold; letter-spacing: 2px;">${receiverName}</div>
           </div>
+          ${receiverPreferences ? `
+          <div style="background: rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 20px; margin: 20px 0; text-align: left;">
+            <p style="font-size: 1em; margin: 0 0 10px; font-weight: bold;">🎁 Sus gustos/preferencias:</p>
+            <p style="font-size: 0.95em; margin: 0; white-space: pre-wrap;">${receiverPreferences}</p>
+          </div>
+          ` : ''}
           <p style="font-size: 0.9em; opacity: 0.9; margin-top: 30px;">
             Sala: ${roomName}<br>
             ¡Recuerda mantenerlo en secreto! 🤫
