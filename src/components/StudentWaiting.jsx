@@ -5,6 +5,9 @@ function StudentWaiting({ participant, room, onLeave, supabase }) {
   const [dots, setDots] = useState('')
   const [assignment, setAssignment] = useState(null)
   const [loadingAssignment, setLoadingAssignment] = useState(false)
+  const [preferences, setPreferences] = useState(participant.preferences || '')
+  const [savingPreferences, setSavingPreferences] = useState(false)
+  const [showPreferencesSuccess, setShowPreferencesSuccess] = useState(false)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -103,6 +106,31 @@ function StudentWaiting({ participant, room, onLeave, supabase }) {
     }
   }
 
+  const savePreferences = async () => {
+    setSavingPreferences(true)
+    try {
+      const { error } = await supabase
+        .from('room_participants')
+        .update({ preferences })
+        .eq('id', participant.id)
+
+      if (error) {
+        console.error('Error al guardar preferencias:', error)
+        alert('Error al guardar preferencias')
+        return
+      }
+
+      HapticFeedback.success()
+      setShowPreferencesSuccess(true)
+      setTimeout(() => setShowPreferencesSuccess(false), 3000)
+    } catch (err) {
+      console.error('Error:', err)
+      alert('Error al guardar preferencias')
+    } finally {
+      setSavingPreferences(false)
+    }
+  }
+
   return (
     <div className="min-h-screen min-h-[100svh] min-h-[100dvh] bg-gradient-to-br from-purple-500 to-purple-700 dark:from-gray-900 dark:to-gray-800 p-4 overflow-y-auto">
       <div className="max-w-2xl mx-auto my-auto">
@@ -160,6 +188,38 @@ function StudentWaiting({ participant, room, onLeave, supabase }) {
               Con este link podrás ver tu resultado cuando quieras
             </small>
           </div>
+
+          {/* Preferences Section */}
+          {room.status === 'waiting' && (
+            <div className="mb-8 p-4 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg">
+              <p className="font-semibold text-purple-800 dark:text-purple-300 mb-3">🎁 Mis gustos/preferencias (opcional):</p>
+              <p className="text-sm text-purple-700 dark:text-purple-400 mb-3">
+                Ayuda a quien te toque a elegir un mejor regalo. Puedes poner: hobbies, colores favoritos, cosas que te gustan, etc.
+              </p>
+              <textarea
+                value={preferences}
+                onChange={(e) => setPreferences(e.target.value)}
+                placeholder="Ej: Me gusta leer, el color azul, la música rock..."
+                className="w-full px-3 py-2 mb-3 bg-white dark:bg-gray-800 border border-purple-300 dark:border-purple-700 rounded text-gray-800 dark:text-white min-h-[100px] resize-y"
+                maxLength={500}
+              />
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={savePreferences}
+                  disabled={savingPreferences}
+                  className="flex-1 bg-purple-500 hover:bg-purple-600 disabled:bg-purple-300 text-white font-semibold py-2 rounded-lg transition-colors"
+                >
+                  {savingPreferences ? 'Guardando...' : '💾 Guardar preferencias'}
+                </button>
+                {showPreferencesSuccess && (
+                  <div className="text-green-600 dark:text-green-400 font-semibold">✓ Guardado</div>
+                )}
+              </div>
+              <small className="block mt-2 text-xs text-purple-700 dark:text-purple-400">
+                {preferences.length}/500 caracteres
+              </small>
+            </div>
+          )}
 
           {/* Waiting Status */}
           {room.status === 'waiting' && (

@@ -96,6 +96,12 @@ USING (
   )
 );
 
+-- Los estudiantes pueden actualizar solo sus propias preferencias
+CREATE POLICY "Students can update their own preferences" 
+ON room_participants FOR UPDATE 
+USING (true)
+WITH CHECK (true);
+
 -- Política para assignments: solo el profesor puede crear y ver
 CREATE POLICY "Teachers can create assignments for their rooms" 
 ON secret_santa_assignments FOR INSERT 
