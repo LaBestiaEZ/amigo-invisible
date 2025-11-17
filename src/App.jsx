@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { supabase } from './lib/supabase'
 import { sendBulkSecretSantaEmails } from './lib/emailService'
 import HomePage from './components/HomePage'
@@ -22,6 +22,12 @@ function App() {
   const [supabaseConfigured, setSupabaseConfigured] = useState(true)
   const [showResultsModal, setShowResultsModal] = useState(false)
   const [resultsRoomId, setResultsRoomId] = useState(null)
+  
+  // Ref para mantener el valor actual de view sin recrear la suscripción
+  const viewRef = useRef(view)
+  useEffect(() => {
+    viewRef.current = view
+  }, [view])
 
   // Verificar configuración de Supabase
   useEffect(() => {
@@ -61,7 +67,8 @@ function App() {
 
     // Escuchar cambios de autenticación
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      console.log('🔔 onAuthStateChange disparado:', { event, hasSession: !!session, currentView: view })
+      const currentView = viewRef.current
+      console.log('🔔 onAuthStateChange disparado:', { event, hasSession: !!session, currentView })
       
       setUser(session?.user ?? null)
       
@@ -72,18 +79,18 @@ function App() {
         // Solo redirigir al dashboard si:
         // 1. Es un SIGN_IN nuevo (no una revalidación)
         // 2. O si no estamos en ninguna vista activa
-        if (event === 'SIGNED_IN' && view === 'teacher-auth') {
+        if (event === 'SIGNED_IN' && currentView === 'teacher-auth') {
           // Login exitoso desde formulario -> ir a dashboard
           console.log('✅ Login exitoso, yendo a dashboard')
           setView('teacher-dashboard')
-        } else if (view !== 'teacher-room' && view !== 'student' && view !== 'teacher-dashboard') {
+        } else if (currentView !== 'teacher-room' && currentView !== 'student' && currentView !== 'teacher-dashboard' && currentView !== 'student-waiting') {
           // Estamos en home o auth -> ir a dashboard
           console.log('✅ Vista no activa, yendo a dashboard')
           setView('teacher-dashboard')
         } else {
-          console.log('✅ Vista activa detectada, NO redirigiendo. Vista actual:', view)
+          console.log('✅ Vista activa detectada, NO redirigiendo. Vista actual:', currentView)
         }
-        // Si estamos en 'teacher-room', 'student' o 'teacher-dashboard' -> NO hacer nada, solo recargar datos
+        // Si estamos en 'teacher-room', 'student', 'student-waiting' o 'teacher-dashboard' -> NO hacer nada, solo recargar datos
       } else {
         // Sesión cerrada o inválida
         console.log('❌ Sin sesión, volviendo a home')
@@ -97,7 +104,7 @@ function App() {
     })
 
     return () => subscription.unsubscribe()
-  }, [view]) // Añadir view como dependencia para que el callback tenga el valor actual
+  }, []) // Volver a dependencias vacías, usar viewRef para acceder al valor actual
 
   // Suscribirse a cambios en tiempo real de participantes
   useEffect(() => {
