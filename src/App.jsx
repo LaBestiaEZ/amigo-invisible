@@ -60,17 +60,32 @@ function App() {
     })
 
     // Escuchar cambios de autenticación
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       setUser(session?.user ?? null)
+      
       if (session?.user) {
+        // Usuario autenticado - recargar sus salas
         loadTeacherRooms(session.user.id)
-        setView('teacher-dashboard')
+        
+        // Solo redirigir al dashboard si:
+        // 1. Es un SIGN_IN nuevo (no una revalidación)
+        // 2. O si no estamos en ninguna vista activa
+        if (event === 'SIGNED_IN' && view === 'teacher-auth') {
+          // Login exitoso desde formulario -> ir a dashboard
+          setView('teacher-dashboard')
+        } else if (view !== 'teacher' && view !== 'student' && view !== 'teacher-dashboard') {
+          // Estamos en home o auth -> ir a dashboard
+          setView('teacher-dashboard')
+        }
+        // Si estamos en 'teacher', 'student' o 'teacher-dashboard' -> NO hacer nada, solo recargar datos
       } else {
+        // Sesión cerrada o inválida
         // Si se cierra sesión, verificar si hay código en URL
         const urlParams = new URLSearchParams(window.location.search)
         const code = urlParams.get('code')
         setView(code ? 'student' : 'home')
         setTeacherRooms([])
+        setCurrentRoom(null)
       }
     })
 
