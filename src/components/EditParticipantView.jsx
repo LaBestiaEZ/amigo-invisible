@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-function EditParticipantModal({ participant, participants, onClose, onSave }) {
+function EditParticipantView({ participant, participants, onClose, onSave }) {
   const [email, setEmail] = useState(participant?.email || '')
   const [preferences, setPreferences] = useState(participant?.preferences || '')
   const [restrictions, setRestrictions] = useState(participant?.restrictions || [])
@@ -40,31 +40,32 @@ function EditParticipantModal({ participant, participants, onClose, onSave }) {
   const otherParticipants = participants.filter(p => p.id !== participant.id)
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in" onClick={onClose}>
-      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl max-w-md w-full p-6 animate-fade-in" onClick={(e) => e.stopPropagation()}>
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold text-gray-800 dark:text-white">Editar Participante</h2>
-          <button 
-            onClick={onClose}
-            className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 text-2xl"
-          >
-            ×
-          </button>
-        </div>
-
-        <div className="mb-4 p-3 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
-          <p className="text-sm text-purple-800 dark:text-purple-300">
-            <strong>Nombre:</strong> {participant?.name}
-          </p>
-        </div>
-
-        {error && (
-          <div className="mb-4 p-3 bg-red-100 dark:bg-red-900/30 border border-red-400 dark:border-red-700 text-red-700 dark:text-red-300 rounded-lg text-sm">
-            {error}
+    <div className="min-h-screen min-h-[100svh] min-h-[100dvh] bg-gradient-to-br from-purple-500 to-purple-700 dark:from-gray-900 dark:to-gray-800 overflow-y-auto">
+      <div className="max-w-2xl mx-auto px-4 py-6">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 animate-fade-in">
+          <div className="flex items-center gap-3 mb-6">
+            <button 
+              onClick={onClose}
+              className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 text-2xl"
+            >
+              ← 
+            </button>
+            <h2 className="text-xl font-bold text-gray-800 dark:text-white">Editar Participante</h2>
           </div>
-        )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="mb-4 p-3 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
+            <p className="text-sm text-purple-800 dark:text-purple-300">
+              <strong>Nombre:</strong> {participant?.name}
+            </p>
+          </div>
+
+          {error && (
+            <div className="mb-4 p-3 bg-red-100 dark:bg-red-900/30 border border-red-400 dark:border-red-700 text-red-700 dark:text-red-300 rounded-lg text-sm">
+              {error}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               📧 Email
@@ -154,10 +155,11 @@ function EditParticipantModal({ participant, participants, onClose, onSave }) {
               {loading ? 'Guardando...' : 'Guardar'}
             </button>
           </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   )
 }
 
-export default EditParticipantModal
+export default EditParticipantView

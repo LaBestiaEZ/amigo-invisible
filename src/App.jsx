@@ -7,7 +7,7 @@ import TeacherDashboard from './components/TeacherDashboard'
 import TeacherView from './components/TeacherView'
 import StudentView from './components/StudentView'
 import StudentWaiting from './components/StudentWaiting'
-import ResultsModal from './components/ResultsModal'
+import ResultsView from './components/ResultsView'
 import DarkModeToggle from './components/DarkModeToggle'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -68,7 +68,7 @@ function App() {
     // Escuchar cambios de autenticación
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       const currentView = viewRef.current
-      console.log('🔔 onAuthStateChange disparado:', { event, hasSession: !!session, currentView })
+      // console.log('🔔 onAuthStateChange disparado:', { event, hasSession: !!session, currentView })
       
       setUser(session?.user ?? null)
       
@@ -81,19 +81,19 @@ function App() {
         // 2. O si no estamos en ninguna vista activa
         if (event === 'SIGNED_IN' && currentView === 'teacher-auth') {
           // Login exitoso desde formulario -> ir a dashboard
-          console.log('✅ Login exitoso, yendo a dashboard')
+          // console.log('✅ Login exitoso, yendo a dashboard')
           setView('teacher-dashboard')
         } else if (currentView !== 'teacher-room' && currentView !== 'student' && currentView !== 'teacher-dashboard' && currentView !== 'student-waiting') {
           // Estamos en home o auth -> ir a dashboard
-          console.log('✅ Vista no activa, yendo a dashboard')
+          // console.log('✅ Vista no activa, yendo a dashboard')
           setView('teacher-dashboard')
         } else {
-          console.log('✅ Vista activa detectada, NO redirigiendo. Vista actual:', currentView)
+          // console.log('✅ Vista activa detectada, NO redirigiendo. Vista actual:', currentView)
         }
         // Si estamos en 'teacher-room', 'student', 'student-waiting' o 'teacher-dashboard' -> NO hacer nada, solo recargar datos
       } else {
         // Sesión cerrada o inválida
-        console.log('❌ Sin sesión, volviendo a home')
+        // console.log('❌ Sin sesión, volviendo a home')
         // Si se cierra sesión, verificar si hay código en URL
         const urlParams = new URLSearchParams(window.location.search)
         const code = urlParams.get('code')
@@ -704,7 +704,7 @@ VITE_SUPABASE_ANON_KEY=tu-clave-anon-key
       )}
 
       {showResultsModal && resultsRoomId && (
-        <ResultsModal 
+        <ResultsView 
           roomId={resultsRoomId}
           roomName={currentRoom?.name || 'Sala'}
           onClose={handleCloseResults}

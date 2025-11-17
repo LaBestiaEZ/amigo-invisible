@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { QRCodeSVG } from 'qrcode.react'
 import { HapticFeedback } from '../lib/haptic'
-import EditParticipantModal from './EditParticipantModal'
+import EditParticipantView from './EditParticipantView'
 
 function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults, onRemoveParticipant, onEditParticipant }) {
   const [roomUrl, setRoomUrl] = useState('')
@@ -245,7 +245,7 @@ function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults,
 
       {/* Edit Participant Modal */}
       {editingParticipant && (
-        <EditParticipantModal
+        <EditParticipantView
           participant={editingParticipant}
           participants={participants}
           onClose={() => setEditingParticipant(null)}

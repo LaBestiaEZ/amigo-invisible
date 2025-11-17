@@ -3,7 +3,7 @@ import { supabase } from '../lib/supabase'
 import { SwipeDetector } from '../lib/swipe'
 import { HapticFeedback } from '../lib/haptic'
 
-function ResultsModal({ roomId, roomName, onClose }) {
+function ResultsView({ roomId, roomName, onClose }) {
   const [assignments, setAssignments] = useState([])
   const [loading, setLoading] = useState(true)
   const modalRef = useRef(null)
@@ -70,25 +70,25 @@ function ResultsModal({ roomId, roomName, onClose }) {
   }
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in" onClick={onClose}>
-      <div 
-        className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col"
-        ref={modalRef} 
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
-          <h2 className="text-2xl font-bold text-gray-800 dark:text-white">📊 Resultados del Sorteo</h2>
-          <button 
-            onClick={onClose}
-            className="w-10 h-10 flex items-center justify-center text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors text-xl"
-          >
-            ✕
-          </button>
-        </div>
+    <div className="min-h-screen min-h-[100svh] min-h-[100dvh] bg-gradient-to-br from-purple-500 to-purple-700 dark:from-gray-900 dark:to-gray-800 overflow-y-auto">
+      <div className="max-w-7xl mx-auto px-4 py-6">
+        <div 
+          className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden"
+          ref={modalRef}
+        >
+          {/* Header */}
+          <div className="flex items-center gap-3 p-6 border-b border-gray-200 dark:border-gray-700">
+            <button 
+              onClick={onClose}
+              className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 text-2xl"
+            >
+              ←
+            </button>
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white">📊 Resultados del Sorteo</h2>
+          </div>
 
-        {/* Body */}
-        <div className="flex-1 overflow-y-auto p-6">
+          {/* Body */}
+          <div className="p-6">
           {/* Info */}
           <div className="mb-6 p-4 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg">
             <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-2">{roomName}</h3>
@@ -168,10 +168,11 @@ function ResultsModal({ roomId, roomName, onClose }) {
               </div>
             </>
           )}
+          </div>
         </div>
       </div>
     </div>
   )
 }
 
-export default ResultsModal
+export default ResultsView
