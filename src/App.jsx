@@ -97,7 +97,7 @@ function App() {
     })
 
     return () => subscription.unsubscribe()
-  }, [])
+  }, [view]) // Añadir view como dependencia para que el callback tenga el valor actual
 
   // Suscribirse a cambios en tiempo real de participantes
   useEffect(() => {
