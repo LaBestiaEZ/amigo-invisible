@@ -12,7 +12,7 @@ import DarkModeToggle from './components/DarkModeToggle'
 import { v4 as uuidv4 } from 'uuid'
 
 function App() {
-  const [view, setView] = useState('home') // home, teacher-auth, teacher-dashboard, teacher-room, student, student-waiting
+  const [view, setView] = useState('home') // home, teacher-auth, teacher-dashboard, teacher-room, student, student-waiting, results
   const [user, setUser] = useState(null)
   const [currentRoom, setCurrentRoom] = useState(null)
   const [teacherRooms, setTeacherRooms] = useState([])
@@ -20,7 +20,6 @@ function App() {
   const [currentParticipant, setCurrentParticipant] = useState(null)
   const [loading, setLoading] = useState(true)
   const [supabaseConfigured, setSupabaseConfigured] = useState(true)
-  const [showResultsModal, setShowResultsModal] = useState(false)
   const [resultsRoomId, setResultsRoomId] = useState(null)
   
   // Ref para mantener el valor actual de view sin recrear la suscripción
@@ -562,15 +561,21 @@ function App() {
   }
 
   const goBack = () => {
-    if (view === 'teacher-room') {
+    if (view === 'results') {
+      setView('teacher-room')
+      setResultsRoomId(null)
+    } else if (view === 'teacher-room') {
       setView('teacher-dashboard')
       loadTeacherRooms(user.id)
     } else {
       setView('home')
     }
-    setCurrentRoom(null)
-    setParticipants([])
-    setCurrentParticipant(null)
+    
+    if (view !== 'results') {
+      setCurrentRoom(null)
+      setParticipants([])
+      setCurrentParticipant(null)
+    }
   }
 
   const openRoom = async (room) => {
@@ -603,11 +608,11 @@ function App() {
 
   const handleViewResults = (roomId) => {
     setResultsRoomId(roomId || currentRoom.id)
-    setShowResultsModal(true)
+    setView('results')
   }
 
   const handleCloseResults = () => {
-    setShowResultsModal(false)
+    setView('teacher-room')
     setResultsRoomId(null)
   }
 
@@ -703,7 +708,7 @@ VITE_SUPABASE_ANON_KEY=tu-clave-anon-key
         />
       )}
 
-      {showResultsModal && resultsRoomId && (
+      {view === 'results' && resultsRoomId && (
         <ResultsView 
           roomId={resultsRoomId}
           roomName={currentRoom?.name || 'Sala'}
