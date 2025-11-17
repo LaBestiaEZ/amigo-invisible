@@ -73,11 +73,11 @@ function App() {
         if (event === 'SIGNED_IN' && view === 'teacher-auth') {
           // Login exitoso desde formulario -> ir a dashboard
           setView('teacher-dashboard')
-        } else if (view !== 'teacher' && view !== 'student' && view !== 'teacher-dashboard') {
+        } else if (view !== 'teacher-room' && view !== 'student' && view !== 'teacher-dashboard') {
           // Estamos en home o auth -> ir a dashboard
           setView('teacher-dashboard')
         }
-        // Si estamos en 'teacher', 'student' o 'teacher-dashboard' -> NO hacer nada, solo recargar datos
+        // Si estamos en 'teacher-room', 'student' o 'teacher-dashboard' -> NO hacer nada, solo recargar datos
       } else {
         // Sesión cerrada o inválida
         // Si se cierra sesión, verificar si hay código en URL
