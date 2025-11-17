@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { QRCodeSVG } from 'qrcode.react'
 import { HapticFeedback } from '../lib/haptic'
 import EditParticipantView from './EditParticipantView'
+import { supabase } from '../lib/supabase'
 
 function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults, onRemoveParticipant, onEditParticipant }) {
   const [roomUrl, setRoomUrl] = useState('')
@@ -58,6 +59,23 @@ function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults,
         onSave={handleSaveParticipant}
       />
     )
+  }
+
+  const toggleAvoidPreviousMatches = async () => {
+    try {
+      const newValue = !room.avoid_previous_matches
+      const { error } = await supabase
+        .from('rooms')
+        .update({ avoid_previous_matches: newValue })
+        .eq('id', room.id)
+
+      if (error) throw error
+      HapticFeedback.success()
+    } catch (error) {
+      console.error('Error actualizando configuración:', error)
+      HapticFeedback.error()
+      alert('Error al actualizar la configuración')
+    }
   }
 
   // Función para ocultar parcialmente el email
@@ -213,15 +231,37 @@ function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults,
 
           {/* Actions */}
           {participants.length >= 2 && room.status === 'waiting' && (
-            <button 
-              onClick={() => {
-                HapticFeedback.heavy()
-                onStartDraw()
-              }}
-              className="w-full mt-6 bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 text-white font-bold py-4 rounded-lg text-lg transition-colors shadow-lg hover:shadow-xl"
-            >
-              🎲 Realizar Sorteo ({participants.length} participantes)
-            </button>
+            <>
+              {/* Opción de evitar asignaciones previas */}
+              <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg border border-gray-200 dark:border-gray-600">
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={room.avoid_previous_matches || false}
+                    onChange={toggleAvoidPreviousMatches}
+                    className="mt-1 w-5 h-5 text-purple-600 rounded focus:ring-purple-500"
+                  />
+                  <div>
+                    <div className="font-medium text-gray-800 dark:text-white">
+                      🔄 Evitar repetir asignaciones anteriores
+                    </div>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                      Nadie le regalará a la misma persona que en sorteos previos de tus salas completadas
+                    </p>
+                  </div>
+                </label>
+              </div>
+
+              <button 
+                onClick={() => {
+                  HapticFeedback.heavy()
+                  onStartDraw()
+                }}
+                className="w-full mt-6 bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 text-white font-bold py-4 rounded-lg text-lg transition-colors shadow-lg hover:shadow-xl"
+              >
+                🎲 Realizar Sorteo ({participants.length} participantes)
+              </button>
+            </>
           )}
 
           {participants.length > 0 && participants.length < 2 && (

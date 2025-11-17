@@ -12,6 +12,7 @@ CREATE TABLE rooms (
   teacher_name TEXT,
   teacher_email TEXT,
   status TEXT DEFAULT 'waiting', -- waiting, drawing, completed
+  avoid_previous_matches BOOLEAN DEFAULT false, -- Evitar repetir asignaciones de sorteos anteriores
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );

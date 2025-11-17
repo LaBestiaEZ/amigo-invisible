@@ -4,6 +4,7 @@ function TeacherDashboard({ user, rooms, onCreateRoom, onOpenRoom, onDeleteRoom,
   const [showCreateForm, setShowCreateForm] = useState(false)
   const [roomName, setRoomName] = useState('')
   const [loading, setLoading] = useState(false)
+  const [statusFilter, setStatusFilter] = useState('waiting') // 'all', 'waiting', 'completed'
 
   const handleCreateRoom = async (e) => {
     e.preventDefault()
@@ -38,6 +39,14 @@ function TeacherDashboard({ user, rooms, onCreateRoom, onOpenRoom, onDeleteRoom,
       minute: '2-digit'
     })
   }
+
+  // Filtrar salas según el estado seleccionado
+  const filteredRooms = rooms.filter(room => {
+    if (statusFilter === 'all') return true
+    if (statusFilter === 'waiting') return room.status === 'waiting'
+    if (statusFilter === 'completed') return room.status === 'completed'
+    return true
+  })
 
   return (
     <div className="min-h-screen min-h-[100svh] min-h-[100dvh] bg-gradient-to-br from-purple-500 to-purple-700 dark:from-gray-900 dark:to-gray-800 overflow-y-auto">
@@ -116,6 +125,45 @@ function TeacherDashboard({ user, rooms, onCreateRoom, onOpenRoom, onDeleteRoom,
           </button>
         </div>
 
+        {/* Filter Bar */}
+        <div className="mb-4 sm:mb-6 bg-white/10 dark:bg-white/5 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-white/20">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+            <span className="text-sm font-medium text-white">Filtrar por estado:</span>
+            <div className="flex gap-2 flex-wrap">
+              <button
+                onClick={() => setStatusFilter('waiting')}
+                className={`px-4 py-2 rounded-lg font-medium transition-all text-sm ${
+                  statusFilter === 'waiting'
+                    ? 'bg-yellow-500 text-white shadow-lg scale-105'
+                    : 'bg-white/20 text-white hover:bg-white/30'
+                }`}
+              >
+                ⏳ En Espera ({rooms.filter(r => r.status === 'waiting').length})
+              </button>
+              <button
+                onClick={() => setStatusFilter('completed')}
+                className={`px-4 py-2 rounded-lg font-medium transition-all text-sm ${
+                  statusFilter === 'completed'
+                    ? 'bg-green-500 text-white shadow-lg scale-105'
+                    : 'bg-white/20 text-white hover:bg-white/30'
+                }`}
+              >
+                ✓ Completadas ({rooms.filter(r => r.status === 'completed').length})
+              </button>
+              <button
+                onClick={() => setStatusFilter('all')}
+                className={`px-4 py-2 rounded-lg font-medium transition-all text-sm ${
+                  statusFilter === 'all'
+                    ? 'bg-purple-500 text-white shadow-lg scale-105'
+                    : 'bg-white/20 text-white hover:bg-white/30'
+                }`}
+              >
+                📚 Todas ({rooms.length})
+              </button>
+            </div>
+          </div>
+        </div>
+
         {/* Create Form */}
         {showCreateForm && (
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-4 sm:p-6 mb-4 sm:mb-6 animate-fade-in">
@@ -160,10 +208,21 @@ function TeacherDashboard({ user, rooms, onCreateRoom, onOpenRoom, onDeleteRoom,
               ➕ Nueva Sala
             </button>
           </div>
+        ) : filteredRooms.length === 0 ? (
+          /* No results for filter */
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 sm:p-12 text-center">
+            <div className="text-5xl sm:text-7xl mb-3 sm:mb-4">🔍</div>
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white mb-2">
+              No hay salas {statusFilter === 'waiting' ? 'en espera' : statusFilter === 'completed' ? 'completadas' : ''}
+            </h3>
+            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 px-4">
+              Prueba cambiando el filtro para ver otras salas
+            </p>
+          </div>
         ) : (
           /* Rooms Grid */
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {rooms.map((room) => (
+            {filteredRooms.map((room) => (
               <div key={room.id} className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-4 sm:p-6 hover:shadow-xl transition-shadow">
                 {/* Card Header */}
                 <div className="flex items-start justify-between mb-3 sm:mb-4 gap-2">

@@ -422,8 +422,14 @@ function App() {
         .update({ status: 'drawing' })
         .eq('id', currentRoom.id)
 
+      // Obtener sorteos anteriores si la opción está activada
+      let previousAssignments = []
+      if (currentRoom.avoid_previous_matches) {
+        previousAssignments = await getPreviousAssignments()
+      }
+
       // Algoritmo mejorado de sorteo con restricciones
-      const shuffled = generateValidAssignments(participants)
+      const shuffled = generateValidAssignments(participants, previousAssignments)
       
       if (!shuffled) {
         throw new Error('No se pudo generar un sorteo válido con las restricciones actuales. Intenta modificar las restricciones.')
@@ -476,8 +482,48 @@ function App() {
     }
   }
 
-  // Algoritmo mejorado que evita regalos mutuos y respeta restricciones
-  const generateValidAssignments = (participants) => {
+  // Obtener asignaciones previas del mismo profesor
+  const getPreviousAssignments = async () => {
+    try {
+      // Buscar todas las salas completadas del profesor
+      const { data: completedRooms, error: roomsError } = await supabase
+        .from('rooms')
+        .select('id')
+        .eq('teacher_id', user.id)
+        .eq('status', 'completed')
+        .neq('id', currentRoom.id) // Excluir sala actual
+
+      if (roomsError) throw roomsError
+      if (!completedRooms || completedRooms.length === 0) return []
+
+      const roomIds = completedRooms.map(r => r.id)
+
+      // Obtener todas las asignaciones previas con información de participantes
+      const { data: assignments, error: assignmentsError } = await supabase
+        .from('secret_santa_assignments')
+        .select(`
+          giver_id,
+          receiver_id,
+          giver:room_participants!giver_id(email),
+          receiver:room_participants!receiver_id(email)
+        `)
+        .in('room_id', roomIds)
+
+      if (assignmentsError) throw assignmentsError
+
+      // Crear mapa de asignaciones previas por email (más confiable que por ID)
+      return (assignments || []).map(a => ({
+        giverEmail: a.giver?.email,
+        receiverEmail: a.receiver?.email
+      })).filter(a => a.giverEmail && a.receiverEmail)
+    } catch (error) {
+      console.error('Error obteniendo sorteos previos:', error)
+      return []
+    }
+  }
+
+  // Algoritmo mejorado que evita regalos mutuos, respeta restricciones y sorteos previos
+  const generateValidAssignments = (participants, previousAssignments = []) => {
     const maxAttempts = 1000
     
     for (let attempt = 0; attempt < maxAttempts; attempt++) {
@@ -516,6 +562,17 @@ function App() {
         // Regla 3: Respetar restricciones
         if (giver.restrictions && Array.isArray(giver.restrictions)) {
           if (giver.restrictions.includes(receiver.id)) {
+            isValid = false
+            break
+          }
+        }
+
+        // Regla 4: Evitar asignaciones previas (si hay sorteos anteriores)
+        if (previousAssignments.length > 0) {
+          const hadThisAssignmentBefore = previousAssignments.some(
+            prev => prev.giverEmail === giver.email && prev.receiverEmail === receiver.email
+          )
+          if (hadThisAssignmentBefore) {
             isValid = false
             break
           }
