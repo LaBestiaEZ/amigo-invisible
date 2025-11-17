@@ -14,18 +14,6 @@ function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults,
     setRoomUrl(url)
   }, [room.code])
 
-  // Si estamos editando un participante, mostrar solo esa vista
-  if (editingParticipant) {
-    return (
-      <EditParticipantView
-        participant={editingParticipant}
-        participants={participants}
-        onClose={() => setEditingParticipant(null)}
-        onSave={handleSaveParticipant}
-      />
-    )
-  }
-
   const handleRemoveParticipant = async (participant) => {
     if (room.status !== 'waiting') {
       HapticFeedback.warning()
@@ -58,6 +46,18 @@ function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults,
       HapticFeedback.error()
       throw error
     }
+  }
+
+  // Si estamos editando un participante, mostrar solo esa vista
+  if (editingParticipant) {
+    return (
+      <EditParticipantView
+        participant={editingParticipant}
+        participants={participants}
+        onClose={() => setEditingParticipant(null)}
+        onSave={handleSaveParticipant}
+      />
+    )
   }
 
   // Función para ocultar parcialmente el email
