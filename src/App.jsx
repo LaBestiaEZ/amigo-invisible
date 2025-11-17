@@ -61,6 +61,8 @@ function App() {
 
     // Escuchar cambios de autenticación
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      console.log('🔔 onAuthStateChange disparado:', { event, hasSession: !!session, currentView: view })
+      
       setUser(session?.user ?? null)
       
       if (session?.user) {
@@ -72,14 +74,19 @@ function App() {
         // 2. O si no estamos en ninguna vista activa
         if (event === 'SIGNED_IN' && view === 'teacher-auth') {
           // Login exitoso desde formulario -> ir a dashboard
+          console.log('✅ Login exitoso, yendo a dashboard')
           setView('teacher-dashboard')
         } else if (view !== 'teacher-room' && view !== 'student' && view !== 'teacher-dashboard') {
           // Estamos en home o auth -> ir a dashboard
+          console.log('✅ Vista no activa, yendo a dashboard')
           setView('teacher-dashboard')
+        } else {
+          console.log('✅ Vista activa detectada, NO redirigiendo. Vista actual:', view)
         }
         // Si estamos en 'teacher-room', 'student' o 'teacher-dashboard' -> NO hacer nada, solo recargar datos
       } else {
         // Sesión cerrada o inválida
+        console.log('❌ Sin sesión, volviendo a home')
         // Si se cierra sesión, verificar si hay código en URL
         const urlParams = new URLSearchParams(window.location.search)
         const code = urlParams.get('code')
