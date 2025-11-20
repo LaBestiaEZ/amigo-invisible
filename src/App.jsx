@@ -21,6 +21,7 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [supabaseConfigured, setSupabaseConfigured] = useState(true)
   const [resultsRoomId, setResultsRoomId] = useState(null)
+  const [isNewJoin, setIsNewJoin] = useState(false)
   
   // Ref para mantener el valor actual de view sin recrear la suscripción
   const viewRef = useRef(view)
@@ -304,6 +305,7 @@ function App() {
 
       setCurrentRoom(room)
       setCurrentParticipant(participant)
+      setIsNewJoin(true)
       setView('student-waiting')
       await loadParticipants(room.id)
 
@@ -351,6 +353,7 @@ function App() {
 
       setCurrentRoom(room)
       setCurrentParticipant(participant)
+      setIsNewJoin(false)
       setView('student-waiting')
       await loadParticipants(room.id)
       
@@ -433,6 +436,8 @@ function App() {
       
       if (!shuffled) {
         throw new Error('No se pudo generar un sorteo válido con las restricciones actuales. Intenta modificar las restricciones.')
+        room.status = 'waiting'
+      
       }
 
       // Guardar asignaciones
@@ -762,6 +767,7 @@ VITE_SUPABASE_ANON_KEY=tu-clave-anon-key
           room={currentRoom}
           onLeave={goBack}
           supabase={supabase}
+          isNewJoin={isNewJoin}
         />
       )}
 

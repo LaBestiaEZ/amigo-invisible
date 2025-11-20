@@ -117,38 +117,40 @@ function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults,
   return (
     <div className="min-h-screen min-h-[100svh] min-h-[100dvh] bg-gradient-to-br from-purple-500 to-purple-700 dark:from-gray-900 dark:to-gray-800 overflow-y-auto">
       {/* Header compacto: Título + Código + QR + Botón */}
-      <div className="bg-white dark:bg-gray-800 shadow-md">
+      <div className="bg-gradient-to-r from-purple-600 to-purple-800 dark:from-gray-800 dark:to-gray-900 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-2 sm:gap-4">
-          {/* Título de la sala */}
-          <div className="flex-shrink-0 min-w-0">
-            <h1 className="text-base sm:text-xl font-bold text-gray-800 dark:text-white truncate">{room.name}</h1>
-            <p className="text-xs text-gray-600 dark:text-gray-400 hidden sm:block">Organizador/a: {room.teacher_name}</p>
-          </div>
+         
           
+         {/* Botón Atrás */}
+          <button 
+            onClick={onGoBack}
+            className="px-4 py-2 bg-white hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-white rounded-lg transition-colors font-medium"
+          >
+            ← Volver
+          </button>
+
           {/* Código de sala - visible siempre */}
           <div className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 sm:py-2 bg-purple-50 dark:bg-purple-900/20 border border-purple-300 dark:border-purple-700 rounded-lg">
             <span className="text-xs font-medium text-purple-700 dark:text-purple-300 hidden sm:inline">Código:</span>
             <span className="text-base sm:text-xl font-bold text-purple-600 dark:text-purple-400 tracking-wider font-mono">{room.code}</span>
+            {/* QR Code - visible siempre, más grande */}
+            <div className="p-1.5 sm:p-2 bg-white  rounded-lg border border-gray-200 dark:border-gray-600">
+              <QRCodeSVG 
+                value={roomUrl} 
+                size={50}
+                className="sm:w-20 sm:h-20"
+                level="H"
+                includeMargin={false}
+              />
+            </div>
           </div>
 
-          {/* QR Code - visible siempre, más grande */}
-          <div className="p-1.5 sm:p-2 bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
-            <QRCodeSVG 
-              value={roomUrl} 
-              size={50}
-              className="sm:w-20 sm:h-20"
-              level="H"
-              includeMargin={false}
-            />
+          {/* Título de la sala */}
+          <div className="flex-shrink-0 min-w-0">
+            <h1 className="text-base sm:text-xl font-bold text-white dark:text-white truncate hidden sm:block">{room.name}</h1>
+            <p className="text-xs text-white dark:text-gray-400 hidden sm:block">Organizador/a: {room.teacher_name}</p>
           </div>
 
-          {/* Botón Atrás */}
-          <button 
-            onClick={onGoBack}
-            className="flex-shrink-0 px-3 sm:px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg font-medium transition-colors text-xs sm:text-sm"
-          >
-            ← Atrás
-          </button>
         </div>
       </div>
 
@@ -251,16 +253,23 @@ function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults,
                   </div>
                 </label>
               </div>
-
+               <div className="mt-6 p-6 bg-green-50 dark:bg-green-900/20 border-2 border-green-300 dark:border-green-700 rounded-xl text-center">
+              <div className="text-6xl mb-3">🎉</div>
+              <h3 className="text-xl font-bold text-green-800 dark:text-green-300 mb-2">¿Quieres realizar el sorteo?</h3>
+              <p className="text-green-700 dark:text-green-400 mb-4">
+                Pulsa el botón para asignar los amigos invisibles y enviar los emails automáticamente
+              </p>
               <button 
                 onClick={() => {
                   HapticFeedback.heavy()
                   onStartDraw()
                 }}
-                className="w-full mt-6 bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 text-white font-bold py-4 rounded-lg text-lg transition-colors shadow-lg hover:shadow-xl"
+                className="px-6 py-3 bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 text-white font-semibold rounded-lg transition-colors"
               >
                 🎲 Realizar Sorteo ({participants.length} participantes)
               </button>
+            </div>
+             
             </>
           )}
 
@@ -295,8 +304,7 @@ function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults,
         </div>
       </div>
 
-      {/* Edit Participant Modal */}
-      {/* Ya no se renderiza aquí, se maneja con return anticipado arriba */}
+      
     </div>
   )
 }
