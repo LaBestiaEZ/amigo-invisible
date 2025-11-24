@@ -153,6 +153,23 @@ function EditParticipantView({ participant, participants, onClose, onSave, onRem
             </div>
           )}
 
+          {/* Botón de expulsar */}
+          {onRemove && (
+            <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+              <button
+                type="button"
+                onClick={handleRemove}
+                disabled={loading}
+                className="w-full px-4 py-2 bg-red-600 hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-600 text-white rounded-lg font-medium transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+              >
+                🚪 Expulsar de la sala
+              </button>
+              <p className="mt-2 text-xs text-center text-gray-500 dark:text-gray-400">
+                El participante podrá volver a unirse con el código de la sala
+              </p>
+            </div>
+          )}
+
           <div className="flex gap-3 pt-2">
             <button
               type="button"
@@ -175,22 +192,7 @@ function EditParticipantView({ participant, participants, onClose, onSave, onRem
           </div>
           </form>
 
-          {/* Botón de expulsar (separado del form) */}
-          {onRemove && (
-            <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
-              <button
-                type="button"
-                onClick={handleRemove}
-                disabled={loading}
-                className="w-full px-4 py-2 bg-red-600 hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-600 text-white rounded-lg font-medium transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
-              >
-                🚪 Expulsar de la sala
-              </button>
-              <p className="mt-2 text-xs text-center text-gray-500 dark:text-gray-400">
-                El participante podrá volver a unirse con el código de la sala
-              </p>
-            </div>
-          )}
+          
         </div>
       </div>
     </div>
