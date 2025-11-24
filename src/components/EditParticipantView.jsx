@@ -155,7 +155,7 @@ function EditParticipantView({ participant, participants, onClose, onSave, onRem
 
           {/* Botón de expulsar */}
           {onRemove && (
-            <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+            <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 🚪 Expulsar de la sala
               </label>
@@ -167,31 +167,34 @@ function EditParticipantView({ participant, participants, onClose, onSave, onRem
               >
                 Expulsar
               </button>
-              <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+              <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
                 El participante podrá volver a unirse con el código de la sala
               </p>
             </div>
           )}
 
-          <div className="flex gap-3 pt-2">
-            <button
-              type="button"
-              onClick={onClose}
-              disabled={loading}
-              className="flex-1 px-4 py-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-white rounded-lg font-medium transition-colors disabled:opacity-50"
-            >
-              Cancelar
-            </button>
-            <button
-              type="submit"
-              disabled={loading}
-              className="flex-1 px-4 py-2 bg-purple-600 hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-600 text-white rounded-lg font-medium transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
-            >
-              {loading && (
-                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-              )}
-              {loading ? 'Guardando...' : 'Guardar'}
-            </button>
+          {/* Espaciador y botones de acción */}
+          <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+            <div className="flex gap-3">
+              <button
+                type="button"
+                onClick={onClose}
+                disabled={loading}
+                className="flex-1 px-4 py-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-white rounded-lg font-medium transition-colors disabled:opacity-50"
+              >
+                Cancelar
+              </button>
+              <button
+                type="submit"
+                disabled={loading}
+                className="flex-1 px-4 py-2 bg-purple-600 hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-600 text-white rounded-lg font-medium transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+              >
+                {loading && (
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                )}
+                {loading ? 'Guardando...' : 'Guardar'}
+              </button>
+            </div>
           </div>
           </form>
 
