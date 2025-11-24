@@ -8,21 +8,21 @@
 
   html {
     height: 100%;
-    /* Color sólido para esquinas/overscroll - tono medio del gradiente */
-    background-color: #9333ea; /* purple-600 - punto medio entre purple-500 y purple-700 */
+    /* Color de las esquinas - coincide con el borde del gradiente radial (purple-700) */
+    background-color: #7e22ce;
   }
 
   body {
     min-height: 100vh;
-    /* Color de fondo sólido que se camufla con el gradiente */
-    background-color: #9333ea; /* purple-600 */
+    /* Mismo color que las esquinas del gradiente radial */
+    background-color: #7e22ce;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.5;
   }
 
-  /* Color oscuro para esquinas/overscroll en modo oscuro */
+  /* Color oscuro para esquinas - coincide con el borde del gradiente radial oscuro (gray-900) */
   .dark html, .dark body {
-    background-color: #1a202c; /* Tono medio entre gray-900 y gray-800 */
+    background-color: #111827;
   }
 }
 
@@ -73,5 +73,15 @@
     padding-bottom: max(1rem, env(safe-area-inset-bottom));
     padding-left: max(1rem, env(safe-area-inset-left));
     padding-right: max(1rem, env(safe-area-inset-right));
+  }
+
+  /* Gradiente radial para modo claro - centro más claro, esquinas más oscuras */
+  .bg-radial-purple {
+    background: radial-gradient(ellipse at center, #a855f7 0%, #7e22ce 50%, #7e22ce 100%);
+  }
+
+  /* Gradiente radial para modo oscuro - centro más claro, esquinas más oscuras */
+  .bg-radial-dark {
+    background: radial-gradient(ellipse at center, #1f2937 0%, #111827 70%, #111827 100%);
   }
 }
