@@ -8,37 +8,21 @@
 
   html {
     height: 100%;
-    /* Color base en claro: blanco para esquinas y overscroll */
-    background-color: #ffffff;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    /* Color base en claro: morado para esquinas y overscroll (coincide con PageLayout) */
+    background-color: #a855f7; /* purple-500 */
   }
 
   body {
     min-height: 100vh;
-    /* Fondo sólido en claro */
-    background-color: #ffffff;
+    /* Fondo sólido que coincide con PageLayout */
+    background-color: #a855f7; /* purple-500 en claro */
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.5;
   }
 
-  body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    z-index: -1;
-  }
-
-  .dark body::before {
-    background: #1a202c;
-  }
-
-  /* Colores sólidos para esquinas/overscroll en modo oscuro de la app (.dark en html) */
+  /* Colores sólidos para esquinas/overscroll en modo oscuro (coincide con PageLayout dark) */
   .dark html, .dark body {
-    background-color: #141c2b;
+    background-color: #111827; /* gray-900 */
   }
 }
 

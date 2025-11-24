@@ -10,14 +10,14 @@
     
     <!-- PWA Meta Tags -->
     <!-- Safari/iOS: theme-color por esquema -->
-    <!-- Light: blanco puro para integrarse con esquinas claras -->
-    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-    <!-- Dark: #141c2b para coincidir con las esquinas en modo oscuro -->
-    <meta name="theme-color" content="#141c2b" media="(prefers-color-scheme: dark)" />
+    <!-- Light: morado (purple-500) para coincidir con PageLayout -->
+    <meta name="theme-color" content="#a855f7" media="(prefers-color-scheme: light)" />
+    <!-- Dark: gray-900 para coincidir con PageLayout dark -->
+    <meta name="theme-color" content="#111827" media="(prefers-color-scheme: dark)" />
     <!-- Fallback general; será sobrescrito dinámicamente por JS si existe el meta con id="theme-color-dynamic" -->
-    <meta name="theme-color" content="#141c2b" />
+    <meta name="theme-color" content="#111827" />
     <!-- Meta dinámico (sin media) que actualizamos desde JS al alternar modo oscuro/claro -->
-    <meta name="theme-color" id="theme-color-dynamic" content="#ffffff" />
+    <meta name="theme-color" id="theme-color-dynamic" content="#a855f7" />
     <meta name="mobile-web-app-capable" content="yes" />
     
   
@@ -35,16 +35,17 @@
         
         if (shouldBeDark) {
           document.documentElement.classList.add('dark');
-          // Actualizar theme-color para navegadores
+          // Actualizar theme-color para navegadores (gray-900)
           const metaDynamic = document.getElementById('theme-color-dynamic');
           if (metaDynamic) {
-            metaDynamic.setAttribute('content', '#141c2b');
+            metaDynamic.setAttribute('content', '#111827');
           }
         } else {
           document.documentElement.classList.remove('dark');
+          // Actualizar theme-color para navegadores (purple-500)
           const metaDynamic = document.getElementById('theme-color-dynamic');
           if (metaDynamic) {
-            metaDynamic.setAttribute('content', '#ffffff');
+            metaDynamic.setAttribute('content', '#a855f7');
           }
         }
       })();
