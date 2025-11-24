@@ -239,16 +239,24 @@ function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults,
           {participants.length >= 2 && room.status === 'waiting' && (
             <>
               {/* Opción de evitar asignaciones previas */}
-              <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg border border-gray-200 dark:border-gray-600">
-                <label className="flex items-start gap-3 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={room.avoid_previous_matches || false}
-                    onChange={toggleAvoidPreviousMatches}
-                    className="mt-1 w-5 h-5 text-purple-600 rounded focus:ring-purple-500"
-                  />
-                  <div>
-                    <div className="font-medium text-gray-800 dark:text-white">
+              <div className="mt-6 p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg border border-purple-200 dark:border-purple-700">
+                <label className="flex items-start gap-3 cursor-pointer group">
+                  <div className="relative flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={room.avoid_previous_matches || false}
+                      onChange={toggleAvoidPreviousMatches}
+                      className="w-5 h-5 rounded border-2 border-purple-400 dark:border-purple-500 
+                               text-purple-600 dark:text-purple-400
+                               focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-400 focus:ring-offset-0
+                               bg-white dark:bg-gray-800
+                               checked:bg-purple-600 dark:checked:bg-purple-500 
+                               checked:border-purple-600 dark:checked:border-purple-500
+                               cursor-pointer transition-colors"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <div className="font-semibold text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
                       🔄 Evitar repetir asignaciones anteriores
                     </div>
                     <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">

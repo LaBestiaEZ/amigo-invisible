@@ -107,8 +107,8 @@ function ResultsView({ roomId, roomName, onClose }) {
             </div>
           ) : (
             <>
-              {/* Table */}
-              <div className="overflow-x-auto mb-6 rounded-lg border border-gray-200 dark:border-gray-700">
+              {/* Desktop: Table */}
+              <div className="hidden md:block overflow-x-auto mb-6 rounded-lg border border-gray-200 dark:border-gray-700">
                 <table className="w-full">
                   <thead className="bg-gray-100 dark:bg-gray-700">
                     <tr>
@@ -153,17 +153,60 @@ function ResultsView({ roomId, roomName, onClose }) {
                 </table>
               </div>
 
+              {/* Mobile: Cards */}
+              <div className="md:hidden space-y-3 mb-6">
+                {assignments.map((assignment, index) => (
+                  <div 
+                    key={assignment.id} 
+                    className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4 border border-gray-200 dark:border-gray-600"
+                  >
+                    {/* Número */}
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-sm font-bold text-gray-500 dark:text-gray-400">#{index + 1}</span>
+                      {assignment.email_sent ? (
+                        <span className="inline-block px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 text-xs font-semibold rounded-full">
+                          ✓ Enviado
+                        </span>
+                      ) : (
+                        <span className="inline-block px-2 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 text-xs font-semibold rounded-full">
+                          ⏳ Pendiente
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Quien regala */}
+                    <div className="mb-3">
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Quien regala:</p>
+                      <p className="font-semibold text-gray-900 dark:text-white">{assignment.giver.name}</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">{assignment.giver.email}</p>
+                    </div>
+
+                    {/* Flecha */}
+                    <div className="text-center text-purple-500 dark:text-purple-400 text-xl font-bold my-2">
+                      ↓
+                    </div>
+
+                    {/* A quien regala */}
+                    <div>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">A quien regala:</p>
+                      <p className="font-semibold text-gray-900 dark:text-white">{assignment.receiver.name}</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">{assignment.receiver.email}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
               {/* Actions */}
-              <div className="flex gap-3 justify-end">
+              <div className="flex flex-col sm:flex-row gap-3 justify-end">
                 <button 
                   onClick={downloadResults}
-                  className="px-6 py-3 bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 text-white font-semibold rounded-lg transition-colors"
+                  className="w-full sm:w-auto px-6 py-3 bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 text-white font-semibold rounded-lg transition-colors"
                 >
                   💾 Descargar CSV
                 </button>
                 <button 
                   onClick={onClose}
-                  className="px-6 py-3 bg-gray-500 hover:bg-gray-600 dark:bg-gray-600 dark:hover:bg-gray-700 text-white font-semibold rounded-lg transition-colors"
+                  className="w-full sm:w-auto px-6 py-3 bg-gray-500 hover:bg-gray-600 dark:bg-gray-600 dark:hover:bg-gray-700 text-white font-semibold rounded-lg transition-colors"
                 >
                   Cerrar
                 </button>
