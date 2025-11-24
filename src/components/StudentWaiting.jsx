@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { HapticFeedback } from '../lib/haptic'
+import LoadingSpinner from './LoadingSpinner'
 
 function StudentWaiting({ participant, room, onLeave, supabase, isNewJoin = false }) {
   const [dots, setDots] = useState('')
@@ -252,7 +253,9 @@ function StudentWaiting({ participant, room, onLeave, supabase, isNewJoin = fals
           {/* Drawing Status */}
           {room.status === 'drawing' && (
             <div className="text-center py-8">
-              <div className="w-16 h-16 mx-auto mb-4 border-4 border-green-500 border-t-transparent rounded-full animate-spin"></div>
+              <div className="flex justify-center mb-4">
+                <LoadingSpinner size="large" color="green" />
+              </div>
               <p className="text-lg font-semibold text-gray-800 dark:text-white mb-2">¡El sorteo está en proceso!</p>
               <small className="text-gray-600 dark:text-gray-400">Revisa tu email en unos momentos...</small>
             </div>
@@ -266,7 +269,9 @@ function StudentWaiting({ participant, room, onLeave, supabase, isNewJoin = fals
               
               {loadingAssignment ? (
                 <div className="py-4">
-                  <div className="w-12 h-12 mx-auto mb-3 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
+                  <div className="flex justify-center mb-3">
+                    <LoadingSpinner size="medium" color="purple" />
+                  </div>
                   <p className="text-gray-600 dark:text-gray-400">Cargando tu resultado...</p>
                 </div>
               ) : assignment ? (
@@ -287,7 +292,7 @@ function StudentWaiting({ participant, room, onLeave, supabase, isNewJoin = fals
                  {/*<div className="p-4 bg-yellow-100 dark:bg-yellow-900/30 border border-yellow-300 dark:border-yellow-700 rounded-lg">
                     <p className="text-yellow-800 dark:text-yellow-300">🤫 ¡Recuerda mantenerlo en secreto!</p>
                   </div>*/}
-                  
+
                   <div className="text-sm text-gray-600 dark:text-gray-400">
                     <small>También hemos enviado esta información a:</small>
                     <p className="font-medium text-gray-800 dark:text-white mt-1">{participant.email}</p>

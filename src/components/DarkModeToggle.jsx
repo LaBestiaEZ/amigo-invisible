@@ -14,7 +14,34 @@ function DarkModeToggle() {
   useEffect(() => {
     // Aplicar dark mode inmediatamente al montar
     applyDarkMode(isDark)
-  }, [])
+    
+    // Escuchar cambios en la preferencia del sistema
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+    
+    const handleChange = (e) => {
+      // Solo aplicar si el usuario no ha guardado una preferencia manual
+      const savedMode = localStorage.getItem('darkMode')
+      if (savedMode === null) {
+        setIsDark(e.matches)
+        applyDarkMode(e.matches)
+      }
+    }
+    
+    // Usar addEventListener si está disponible, sino addListener (compatibilidad Safari antiguo)
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener('change', handleChange)
+    } else if (mediaQuery.addListener) {
+      mediaQuery.addListener(handleChange)
+    }
+    
+    return () => {
+      if (mediaQuery.removeEventListener) {
+        mediaQuery.removeEventListener('change', handleChange)
+      } else if (mediaQuery.removeListener) {
+        mediaQuery.removeListener(handleChange)
+      }
+    }
+  }, [isDark])
 
   const applyDarkMode = (isDarkMode) => {
     if (isDarkMode) {

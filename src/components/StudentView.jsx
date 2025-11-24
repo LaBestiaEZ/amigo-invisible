@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { HapticFeedback } from '../lib/haptic'
+import LoadingSpinner from './LoadingSpinner'
 
 function StudentView({ onJoinRoom, initialCode = '', onLeave, supabase }) {
   const [code, setCode] = useState(initialCode)
@@ -128,9 +129,7 @@ function StudentView({ onJoinRoom, initialCode = '', onLeave, supabase }) {
               disabled={loading}
               className="w-full bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 text-white font-semibold py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg transition-colors text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
-              {loading && (
-                <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-              )}
+              {loading && <LoadingSpinner size="small" color="white" />}
               {loading ? 'Verificando...' : 'Continuar →'}
             </button>
           </form>
@@ -189,9 +188,7 @@ function StudentView({ onJoinRoom, initialCode = '', onLeave, supabase }) {
                 disabled={loading}
                 className="w-full bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 text-white font-semibold py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm sm:text-base"
               >
-                {loading && (
-                  <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                )}
+                {loading && <LoadingSpinner size="small" color="white" />}
                 {loading ? 'Uniéndose...' : '🎁 Unirse a la sala'}
               </button>
             </form>

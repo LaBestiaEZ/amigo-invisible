@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import LoadingSpinner from './LoadingSpinner'
 
 function TeacherAuth({ onLogin, onRegister, onBack}) {
   const [isLogin, setIsLogin] = useState(true)
@@ -114,9 +115,7 @@ function TeacherAuth({ onLogin, onRegister, onBack}) {
             disabled={loading}
             className="w-full bg-purple-600 hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
-            {loading && (
-              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-            )}
+            {loading && <LoadingSpinner size="small" color="white" />}
             {loading ? (isLogin ? 'Iniciando sesión...' : 'Creando cuenta...') : (isLogin ? 'Iniciar Sesión' : 'Crear Cuenta')}
           </button>
         </form>

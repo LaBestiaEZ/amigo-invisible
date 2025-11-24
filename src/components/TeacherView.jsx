@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { QRCodeSVG } from 'qrcode.react'
 import { HapticFeedback } from '../lib/haptic'
 import EditParticipantView from './EditParticipantView'
+import LoadingSpinner from './LoadingSpinner'
 import { supabase } from '../lib/supabase'
 
 function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults, onRemoveParticipant, onEditParticipant }) {
@@ -283,7 +284,9 @@ function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults,
 
           {room.status === 'drawing' && (
             <div className="mt-6 text-center py-8">
-              <div className="w-16 h-16 mx-auto mb-4 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
+              <div className="flex justify-center mb-4">
+                <LoadingSpinner size="large" color="purple" />
+              </div>
               <p className="text-gray-700 dark:text-gray-300">Realizando sorteo y enviando emails...</p>
             </div>
           )}

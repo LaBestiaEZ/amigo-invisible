@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react'
 import { supabase } from '../lib/supabase'
 import { SwipeDetector } from '../lib/swipe'
 import { HapticFeedback } from '../lib/haptic'
+import LoadingSpinner from './LoadingSpinner'
 
 function ResultsView({ roomId, roomName, onClose }) {
   const [assignments, setAssignments] = useState([])
@@ -100,8 +101,8 @@ function ResultsView({ roomId, roomName, onClose }) {
 
           {loading ? (
             <div className="flex flex-col items-center justify-center py-12">
-              <div className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mb-4"></div>
-              <p className="text-gray-600 dark:text-gray-400">Cargando resultados...</p>
+              <LoadingSpinner size="large" color="purple" />
+              <p className="text-gray-600 dark:text-gray-400 mt-4">Cargando resultados...</p>
             </div>
           ) : (
             <>

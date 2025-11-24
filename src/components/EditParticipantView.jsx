@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import LoadingSpinner from './LoadingSpinner'
 
 function EditParticipantView({ participant, participants, onClose, onSave, onRemove, roomStatus }) {
   const [email, setEmail] = useState(participant?.email || '')
@@ -188,9 +189,7 @@ function EditParticipantView({ participant, participants, onClose, onSave, onRem
                 disabled={loading}
                 className="flex-1 px-4 py-2 bg-purple-600 hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-600 text-white rounded-lg font-medium transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
               >
-                {loading && (
-                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                )}
+                {loading && <LoadingSpinner size="small" color="white" />}
                 {loading ? 'Guardando...' : 'Guardar'}
               </button>
             </div>
