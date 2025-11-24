@@ -287,10 +287,10 @@ function StudentWaiting({ participant, room, onLeave, supabase, isNewJoin = fals
                   <div className="p-4 bg-yellow-100 dark:bg-yellow-900/30 border border-yellow-300 dark:border-yellow-700 rounded-lg">
                     <p className="text-yellow-800 dark:text-yellow-300">🤫 ¡Recuerda mantenerlo en secreto!</p>
                   </div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">
+                 {/*<div className="text-sm text-gray-600 dark:text-gray-400">
                     <small>También hemos enviado esta información a:</small>
                     <p className="font-medium text-gray-800 dark:text-white mt-1">{participant.email}</p>
-                  </div>
+                  </div>*/} 
                 </div>
               ) : (
                 <div className="p-6 bg-gray-100 dark:bg-gray-700 rounded-lg">
