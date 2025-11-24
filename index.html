@@ -10,14 +10,14 @@
     
     <!-- PWA Meta Tags -->
     <!-- Safari/iOS: theme-color por esquema -->
-    <!-- Light: morado (purple-500) para coincidir con PageLayout -->
-    <meta name="theme-color" content="#a855f7" media="(prefers-color-scheme: light)" />
-    <!-- Dark: gray-900 para coincidir con PageLayout dark -->
-    <meta name="theme-color" content="#111827" media="(prefers-color-scheme: dark)" />
+    <!-- Light: color medio entre purple-500 y purple-700 -->
+    <meta name="theme-color" content="#9333ea" media="(prefers-color-scheme: light)" />
+    <!-- Dark: color medio entre gray-900 y gray-800 -->
+    <meta name="theme-color" content="#1a202c" media="(prefers-color-scheme: dark)" />
     <!-- Fallback general; será sobrescrito dinámicamente por JS si existe el meta con id="theme-color-dynamic" -->
-    <meta name="theme-color" content="#111827" />
+    <meta name="theme-color" content="#1a202c" />
     <!-- Meta dinámico (sin media) que actualizamos desde JS al alternar modo oscuro/claro -->
-    <meta name="theme-color" id="theme-color-dynamic" content="#a855f7" />
+    <meta name="theme-color" id="theme-color-dynamic" content="#9333ea" />
     <meta name="mobile-web-app-capable" content="yes" />
     
   
@@ -35,17 +35,17 @@
         
         if (shouldBeDark) {
           document.documentElement.classList.add('dark');
-          // Actualizar theme-color para navegadores (gray-900)
+          // Actualizar theme-color para navegadores (color medio del gradiente oscuro)
           const metaDynamic = document.getElementById('theme-color-dynamic');
           if (metaDynamic) {
-            metaDynamic.setAttribute('content', '#111827');
+            metaDynamic.setAttribute('content', '#1a202c');
           }
         } else {
           document.documentElement.classList.remove('dark');
-          // Actualizar theme-color para navegadores (purple-500)
+          // Actualizar theme-color para navegadores (color medio del gradiente claro)
           const metaDynamic = document.getElementById('theme-color-dynamic');
           if (metaDynamic) {
-            metaDynamic.setAttribute('content', '#a855f7');
+            metaDynamic.setAttribute('content', '#9333ea');
           }
         }
       })();
