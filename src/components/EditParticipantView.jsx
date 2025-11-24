@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-function EditParticipantView({ participant, participants, onClose, onSave }) {
+function EditParticipantView({ participant, participants, onClose, onSave, onRemove }) {
   const [email, setEmail] = useState(participant?.email || '')
   const [preferences, setPreferences] = useState(participant?.preferences || '')
   const [restrictions, setRestrictions] = useState(participant?.restrictions || [])
@@ -33,6 +33,24 @@ function EditParticipantView({ participant, participants, onClose, onSave }) {
     } catch (err) {
       setError(err.message || 'Error al guardar cambios')
       setLoading(false)
+    }
+  }
+
+  const handleRemove = async () => {
+    const confirmRemove = window.confirm(
+      `¿Expulsar a ${participant.name} de la sala?\n\nEsta persona podrá volver a unirse con el código de la sala.`
+    )
+
+    if (confirmRemove) {
+      setLoading(true)
+      setError('')
+      try {
+        await onRemove(participant.id)
+        onClose()
+      } catch (err) {
+        setError(err.message || 'Error al expulsar participante')
+        setLoading(false)
+      }
     }
   }
 
@@ -156,6 +174,23 @@ function EditParticipantView({ participant, participants, onClose, onSave }) {
             </button>
           </div>
           </form>
+
+          {/* Botón de expulsar (separado del form) */}
+          {onRemove && (
+            <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+              <button
+                type="button"
+                onClick={handleRemove}
+                disabled={loading}
+                className="w-full px-4 py-2 bg-red-600 hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-600 text-white rounded-lg font-medium transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+              >
+                🚪 Expulsar de la sala
+              </button>
+              <p className="mt-2 text-xs text-center text-gray-500 dark:text-gray-400">
+                El participante podrá volver a unirse con el código de la sala
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>
