@@ -42,7 +42,7 @@ function EditParticipantView({ participant, participants, onClose, onSave, onRem
     setLoading(true)
     setError('')
     try {
-      await onRemove(participant.id)
+      await onRemove(participant)
       onClose()
     } catch (err) {
       setError(err.message || 'Error al expulsar participante')
