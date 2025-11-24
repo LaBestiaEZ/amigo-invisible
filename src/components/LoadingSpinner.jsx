@@ -6,7 +6,8 @@ function LoadingSpinner({ size = 'medium', color = 'purple' }) {
   }
 
   const colors = {
-    purple: 'border-purple-500 dark:border-purple-400',
+    // Ajustado a los colores del nuevo gradiente radial
+    purple: 'border-purple-700 dark:border-gray-700',
     green: 'border-green-500 dark:border-green-400',
     white: 'border-white dark:border-white'
   }
