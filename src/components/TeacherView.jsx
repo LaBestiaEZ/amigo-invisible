@@ -58,6 +58,7 @@ function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults,
         onClose={() => setEditingParticipant(null)}
         onSave={handleSaveParticipant}
         onRemove={handleRemoveParticipant}
+        roomStatus={room.status}
       />
     )
   }
