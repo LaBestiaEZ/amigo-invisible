@@ -25,6 +25,30 @@
     
     <title>Amigo Invisible - Instituto</title>
     <meta name="description" content="Organiza tu amigo invisible estilo Kahoot para tu instituto" />
+    
+    <!-- Script para evitar flash de modo claro/oscuro -->
+    <script>
+      (function() {
+        const savedMode = localStorage.getItem('darkMode');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const shouldBeDark = savedMode !== null ? savedMode === 'true' : prefersDark;
+        
+        if (shouldBeDark) {
+          document.documentElement.classList.add('dark');
+          // Actualizar theme-color para navegadores
+          const metaDynamic = document.getElementById('theme-color-dynamic');
+          if (metaDynamic) {
+            metaDynamic.setAttribute('content', '#141c2b');
+          }
+        } else {
+          document.documentElement.classList.remove('dark');
+          const metaDynamic = document.getElementById('theme-color-dynamic');
+          if (metaDynamic) {
+            metaDynamic.setAttribute('content', '#ffffff');
+          }
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

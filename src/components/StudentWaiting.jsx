@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { HapticFeedback } from '../lib/haptic'
 import LoadingSpinner from './LoadingSpinner'
+import PageLayout from './PageLayout'
 
 function StudentWaiting({ participant, room, onLeave, supabase, isNewJoin = false }) {
   const [dots, setDots] = useState('')
@@ -154,7 +155,7 @@ function StudentWaiting({ participant, room, onLeave, supabase, isNewJoin = fals
         </div>
       )}
 
-      <div className="min-h-screen min-h-[100svh] min-h-[100dvh] bg-gradient-to-br from-purple-500 to-purple-700 dark:from-gray-900 dark:to-gray-800 p-4 overflow-y-auto">
+      <PageLayout className="p-4">
         <div className="max-w-2xl mx-auto my-auto">
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 animate-fade-in">
             {/* Leave Button */}
@@ -308,8 +309,8 @@ function StudentWaiting({ participant, room, onLeave, supabase, isNewJoin = fals
             </div>
           )}
         </div>
-      </div>
-    </div>
+        </div>
+      </PageLayout>
     </>
   )
 }

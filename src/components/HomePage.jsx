@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import PageLayout from './PageLayout'
 
 function HomePage({ onCreateRoom, onJoinAsStudent }) {
   const [showCreateForm, setShowCreateForm] = useState(false)
@@ -18,7 +19,7 @@ function HomePage({ onCreateRoom, onJoinAsStudent }) {
   }
 
   return (
-    <div className="min-h-screen min-h-[100svh] min-h-[100dvh] bg-gradient-to-br from-purple-500 to-purple-700 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <PageLayout centered className="p-3 sm:p-4">
       <div className="w-full max-w-4xl animate-fade-in my-auto">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">
@@ -61,7 +62,7 @@ function HomePage({ onCreateRoom, onJoinAsStudent }) {
           <p className="text-sm sm:text-base text-purple-100 dark:text-gray-400">✨ Sistema interactivo de amigo invisible con códigos QR</p>
         </div>
       </div>
-    </div>
+    </PageLayout>
   )
 }
 

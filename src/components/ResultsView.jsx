@@ -3,6 +3,7 @@ import { supabase } from '../lib/supabase'
 import { SwipeDetector } from '../lib/swipe'
 import { HapticFeedback } from '../lib/haptic'
 import LoadingSpinner from './LoadingSpinner'
+import PageLayout from './PageLayout'
 
 function ResultsView({ roomId, roomName, onClose }) {
   const [assignments, setAssignments] = useState([])
@@ -71,7 +72,7 @@ function ResultsView({ roomId, roomName, onClose }) {
   }
 
   return (
-    <div className="min-h-screen min-h-[100svh] min-h-[100dvh] bg-gradient-to-br from-purple-500 to-purple-700 dark:from-gray-900 dark:to-gray-800 overflow-y-auto">
+    <PageLayout>
       <div className="max-w-7xl mx-auto px-4 py-6">
         <div 
           className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden"
@@ -172,7 +173,7 @@ function ResultsView({ roomId, roomName, onClose }) {
           </div>
         </div>
       </div>
-    </div>
+    </PageLayout>
   )
 }
 

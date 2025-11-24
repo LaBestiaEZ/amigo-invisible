@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import LoadingSpinner from './LoadingSpinner'
+import PageLayout from './PageLayout'
 
 function TeacherAuth({ onLogin, onRegister, onBack}) {
   const [isLogin, setIsLogin] = useState(true)
@@ -30,7 +31,7 @@ function TeacherAuth({ onLogin, onRegister, onBack}) {
   }
 
   return (
-    <div className="min-h-screen min-h-[100svh] min-h-[100dvh] bg-gradient-to-br from-purple-500 to-purple-700 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4 overflow-y-auto">
+    <PageLayout centered className="p-4">
       <div className="w-full max-w-md bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 animate-fade-in my-auto">
         {/* Header */}
         <div className="mb-8">
@@ -150,7 +151,7 @@ function TeacherAuth({ onLogin, onRegister, onBack}) {
           <p>🔒 Tu cuenta te permite gestionar múltiples sorteos y recuperar tus salas</p>
         </div>
       </div>
-    </div>
+    </PageLayout>
   )
 }
 

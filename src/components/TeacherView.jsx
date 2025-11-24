@@ -3,6 +3,7 @@ import { QRCodeSVG } from 'qrcode.react'
 import { HapticFeedback } from '../lib/haptic'
 import EditParticipantView from './EditParticipantView'
 import LoadingSpinner from './LoadingSpinner'
+import PageLayout from './PageLayout'
 import { supabase } from '../lib/supabase'
 
 function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults, onRemoveParticipant, onEditParticipant }) {
@@ -118,7 +119,7 @@ function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults,
   }
 
   return (
-    <div className="min-h-screen min-h-[100svh] min-h-[100dvh] bg-gradient-to-br from-purple-500 to-purple-700 dark:from-gray-900 dark:to-gray-800 overflow-y-auto">
+    <PageLayout>
       {/* Header compacto: Título + Código + QR + Botón */}
       <div className="bg-gradient-to-r from-purple-600 to-purple-800 dark:from-gray-800 dark:to-gray-900 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-2 sm:gap-4">
@@ -310,7 +311,7 @@ function TeacherView({ room, participants, onStartDraw, onGoBack, onViewResults,
       </div>
 
       
-    </div>
+    </PageLayout>
   )
 }
 

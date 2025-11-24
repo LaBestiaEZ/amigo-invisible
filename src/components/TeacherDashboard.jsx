@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import PageLayout from './PageLayout'
 
 function TeacherDashboard({ user, rooms, onCreateRoom, onOpenRoom, onDeleteRoom, onLogout }) {
   const [showCreateForm, setShowCreateForm] = useState(false)
@@ -49,7 +50,7 @@ function TeacherDashboard({ user, rooms, onCreateRoom, onOpenRoom, onDeleteRoom,
   })
 
   return (
-    <div className="min-h-screen min-h-[100svh] min-h-[100dvh] bg-gradient-to-br from-purple-500 to-purple-700 dark:from-gray-900 dark:to-gray-800 overflow-y-auto">
+    <PageLayout>
       {/* Header Mejorado */}
       <div className="bg-gradient-to-r from-purple-600 to-purple-800 dark:from-gray-800 dark:to-gray-900 shadow-lg">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-6">
@@ -274,7 +275,7 @@ function TeacherDashboard({ user, rooms, onCreateRoom, onOpenRoom, onDeleteRoom,
           </div>
         )}
       </div>
-    </div>
+    </PageLayout>
   )
 }
 

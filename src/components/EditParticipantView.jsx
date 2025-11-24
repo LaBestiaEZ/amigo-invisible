@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import LoadingSpinner from './LoadingSpinner'
+import PageLayout from './PageLayout'
 
 function EditParticipantView({ participant, participants, onClose, onSave, onRemove, roomStatus }) {
   const [email, setEmail] = useState(participant?.email || '')
@@ -55,7 +56,7 @@ function EditParticipantView({ participant, participants, onClose, onSave, onRem
   const otherParticipants = participants.filter(p => p.id !== participant.id)
 
   return (
-    <div className="min-h-screen min-h-[100svh] min-h-[100dvh] bg-gradient-to-br from-purple-500 to-purple-700 dark:from-gray-900 dark:to-gray-800 overflow-y-auto">
+    <PageLayout>
       <div className="max-w-2xl mx-auto px-4 py-6">
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 animate-fade-in">
           <div className="flex items-center gap-3 mb-6">
@@ -199,7 +200,7 @@ function EditParticipantView({ participant, participants, onClose, onSave, onRem
           
         </div>
       </div>
-    </div>
+    </PageLayout>
   )
 }
 

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { HapticFeedback } from '../lib/haptic'
 import LoadingSpinner from './LoadingSpinner'
+import PageLayout from './PageLayout'
 
 function StudentView({ onJoinRoom, initialCode = '', onLeave, supabase }) {
   const [code, setCode] = useState(initialCode)
@@ -79,7 +80,7 @@ function StudentView({ onJoinRoom, initialCode = '', onLeave, supabase }) {
   }
 
   return (
-    <div className="min-h-screen min-h-[100svh] min-h-[100dvh] bg-gradient-to-br from-purple-500 to-purple-700 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <PageLayout centered className="p-3 sm:p-4">
       <div className="w-full max-w-md bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 sm:p-8 animate-fade-in my-auto">
         {/* Header */}
         <div className="mb-6 sm:mb-8">
@@ -200,7 +201,7 @@ function StudentView({ onJoinRoom, initialCode = '', onLeave, supabase }) {
           <p>Escanea el QR del organizador o ingresa el código de la sala</p>
         </div>
       </div>
-    </div>
+    </PageLayout>
   )
 }
 
