@@ -462,23 +462,28 @@ function App() {
         const emailSent = emailResults[i]?.emailSent || false
         const assignmentId = assignment.id
         
-        console.log(`Actualizando asignación ${assignmentId}: email_sent = ${emailSent}`)
+        console.log(`📝 Intentando actualizar asignación ${assignmentId}: email_sent = ${emailSent}`)
         
-        const { error: updateError } = await supabase
+        const { data: updateData, error: updateError } = await supabase
           .from('secret_santa_assignments')
           .update({ email_sent: emailSent })
           .eq('id', assignmentId)
+          .select()
         
         if (updateError) {
-          console.error(`Error actualizando email_sent para asignación ${assignmentId}:`, updateError)
+          console.error(`❌ Error actualizando email_sent para asignación ${assignmentId}:`, updateError)
+        } else if (updateData && updateData.length > 0) {
+          console.log(`✅ Asignación ${assignmentId} actualizada correctamente:`, updateData[0].email_sent)
+        } else {
+          console.warn(`⚠️ Update sin error pero sin datos devueltos para ${assignmentId}`)
         }
         
-        return { assignmentId, emailSent, success: !updateError }
+        return { assignmentId, emailSent, success: !updateError, data: updateData }
       })
       
       // Esperar a que todas las actualizaciones se completen
       const updateResults = await Promise.all(updatePromises)
-      console.log('✅ Actualizaciones completadas:', updateResults)
+      console.log('📊 Resumen de actualizaciones:', updateResults)
 
       // Marcar como completado
       await supabase
