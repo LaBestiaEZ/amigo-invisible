@@ -440,32 +440,38 @@ function App() {
       
       }
 
-      // Guardar asignaciones
+      // Guardar asignaciones y obtener los IDs insertados
       const assignments = participants.map((giver, index) => ({
         room_id: currentRoom.id,
         giver_id: giver.id,
         receiver_id: shuffled[index].id
       }))
 
-      const { error } = await supabase
+      const { data: insertedAssignments, error } = await supabase
         .from('secret_santa_assignments')
         .insert(assignments)
+        .select()
 
       if (error) throw error
 
       // Enviar emails usando Resend y actualizar el estado en la BD
       const emailResults = await sendEmails(participants, shuffled)
       
-      // Actualizar el campo email_sent en las asignaciones
-      for (let i = 0; i < participants.length; i++) {
+      // Actualizar el campo email_sent en las asignaciones usando el ID
+      for (let i = 0; i < insertedAssignments.length; i++) {
         const emailSent = emailResults[i]?.emailSent || false
+        const assignmentId = insertedAssignments[i].id
         
-        await supabase
+        console.log(`Actualizando asignación ${assignmentId}: email_sent = ${emailSent}`)
+        
+        const { error: updateError } = await supabase
           .from('secret_santa_assignments')
           .update({ email_sent: emailSent })
-          .eq('room_id', currentRoom.id)
-          .eq('giver_id', participants[i].id)
-          .eq('receiver_id', shuffled[i].id)
+          .eq('id', assignmentId)
+        
+        if (updateError) {
+          console.error(`Error actualizando email_sent para asignación ${assignmentId}:`, updateError)
+        }
       }
 
       // Marcar como completado
