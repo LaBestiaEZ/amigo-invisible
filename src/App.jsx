@@ -458,9 +458,9 @@ function App() {
       const emailResults = await sendEmails(participants, shuffled)
       
       // Actualizar el campo email_sent en las asignaciones usando el ID
-      for (let i = 0; i < insertedAssignments.length; i++) {
+      const updatePromises = insertedAssignments.map(async (assignment, i) => {
         const emailSent = emailResults[i]?.emailSent || false
-        const assignmentId = insertedAssignments[i].id
+        const assignmentId = assignment.id
         
         console.log(`Actualizando asignación ${assignmentId}: email_sent = ${emailSent}`)
         
@@ -472,13 +472,22 @@ function App() {
         if (updateError) {
           console.error(`Error actualizando email_sent para asignación ${assignmentId}:`, updateError)
         }
-      }
+        
+        return { assignmentId, emailSent, success: !updateError }
+      })
+      
+      // Esperar a que todas las actualizaciones se completen
+      const updateResults = await Promise.all(updatePromises)
+      console.log('✅ Actualizaciones completadas:', updateResults)
 
       // Marcar como completado
       await supabase
         .from('rooms')
         .update({ status: 'completed' })
         .eq('id', currentRoom.id)
+      
+      // Pequeña pausa para asegurar que la BD esté sincronizada
+      await new Promise(resolve => setTimeout(resolve, 500))
 
       alert('¡Sorteo completado! Los emails han sido enviados.')
     } catch (error) {
